@@ -15,19 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_05745804118F4BC2AB3136008B4F6A54"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3664A332F1E444038AC8E80C1BD251FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5B0C7DCC84E8C918189FC89244DA06B2"
+        "MsmKey" = "8:_59243E41F4729033B1ABA01B82516987"
         "OwnerKey" = "8:_3664A332F1E444038AC8E80C1BD251FA"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,13 +81,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D86D0DB89C13486DD09DA5149A169D99"
-        "OwnerKey" = "8:_5B0C7DCC84E8C918189FC89244DA06B2"
+        "MsmKey" = "8:_BAD2E61132834A57896D3F606D61DBB1"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D86D0DB89C13486DD09DA5149A169D99"
+        "MsmKey" = "8:_D20D4E616381B58EB82E23E4674A7ECF"
+        "OwnerKey" = "8:_59243E41F4729033B1ABA01B82516987"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D20D4E616381B58EB82E23E4674A7ECF"
         "OwnerKey" = "8:_3664A332F1E444038AC8E80C1BD251FA"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -106,13 +106,13 @@
         "Entry"
         {
         "MsmKey" = "8:_E9780D0286943208AD023C1C24A53392"
-        "OwnerKey" = "8:_D86D0DB89C13486DD09DA5149A169D99"
+        "OwnerKey" = "8:_D20D4E616381B58EB82E23E4674A7ECF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E9780D0286943208AD023C1C24A53392"
-        "OwnerKey" = "8:_5B0C7DCC84E8C918189FC89244DA06B2"
+        "OwnerKey" = "8:_59243E41F4729033B1ABA01B82516987"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,13 +124,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_95CA3C4A1423DE8F594F048F432F9CE7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3664A332F1E444038AC8E80C1BD251FA"
+        "OwnerKey" = "8:_B94F461DD3364BBDC2319B734A3F93A3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,19 +136,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B94F461DD3364BBDC2319B734A3F93A3"
+        "OwnerKey" = "8:_3664A332F1E444038AC8E80C1BD251FA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5B0C7DCC84E8C918189FC89244DA06B2"
+        "OwnerKey" = "8:_59243E41F4729033B1ABA01B82516987"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D86D0DB89C13486DD09DA5149A169D99"
+        "OwnerKey" = "8:_D20D4E616381B58EB82E23E4674A7ECF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -173,6 +167,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_75B208E7AFBD4B51E898AB0FA1E59497"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_95CA3C4A1423DE8F594F048F432F9CE7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -295,34 +295,14 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05745804118F4BC2AB3136008B4F6A54"
-            {
-            "SourcePath" = "8:..\\Sql\\pos.sql"
-            "TargetName" = "8:pos.sql"
-            "Tag" = "8:"
-            "Folder" = "8:_55EE04BFF3FB47F5ABDAF08179A904DC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5B0C7DCC84E8C918189FC89244DA06B2"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_59243E41F4729033B1ABA01B82516987"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:BL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5B0C7DCC84E8C918189FC89244DA06B2"
+                    "_59243E41F4729033B1ABA01B82516987"
                     {
                     "Name" = "8:BL.dll"
                     "Attributes" = "3:512"
@@ -521,14 +501,34 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D86D0DB89C13486DD09DA5149A169D99"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAD2E61132834A57896D3F606D61DBB1"
+            {
+            "SourcePath" = "8:..\\Sql\\pos_desktop.sql"
+            "TargetName" = "8:pos_desktop.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_55EE04BFF3FB47F5ABDAF08179A904DC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D20D4E616381B58EB82E23E4674A7ECF"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D86D0DB89C13486DD09DA5149A169D99"
+                    "_D20D4E616381B58EB82E23E4674A7ECF"
                     {
                     "Name" = "8:DAL.dll"
                     "Attributes" = "3:512"
