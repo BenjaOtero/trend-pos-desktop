@@ -22,3 +22,11 @@ C:\Trend\POS-desktop\CustomActions\obj\Debug\GenerateResource.read.1.tlog
 C:\Trend\POS-desktop\CustomActions\obj\Debug\GenerateResource.write.1.tlog
 C:\Trend\POS-desktop\CustomActions\obj\Debug\CustomActions.dll
 C:\Trend\POS-desktop\CustomActions\obj\Debug\CustomActions.pdb
+C:\Trend\POS-desktop\trunk\CustomActions\bin\Debug\CustomActions.dll
+C:\Trend\POS-desktop\trunk\CustomActions\bin\Debug\CustomActions.pdb
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\ResolveAssemblyReference.cache
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\CustomActions.Installer1.resources
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\GenerateResource.read.1.tlog
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\GenerateResource.write.1.tlog
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\CustomActions.dll
+C:\Trend\POS-desktop\trunk\CustomActions\obj\Debug\CustomActions.pdb

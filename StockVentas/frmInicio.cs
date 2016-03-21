@@ -77,10 +77,15 @@ namespace StockVentas
                 label1.Text = "Actualizando base de datos . . .";
                 try
                 {
-                    string fechaExport = BL.DatosPosBLL.GetFechaExport();
-                    BL.DatosPosBLL.ExportAll();
+                    string fechaExport = BL.DatosPosBLL.GetFechaExport();                    
                     idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_" + fechaExport + ".sql.gz";
-                    ExportarDatos(idRazonSocial);
+                    if(!File.Exists(@"c:\windows\temp\" + idRazonSocial))
+                    {
+                        BL.DatosPosBLL.ExportAll();
+                        Utilitarios.ExportarDatos(idRazonSocial);
+                    }
+                    
+                    
                     //   ds = BL.Utilitarios.ActualizarBD(); cambiar actualizarDatosToolStripMenuItem_Click de frmPrincipal
                     try
                     {
@@ -278,108 +283,6 @@ namespace StockVentas
             } while (n > 1);
 
             Application.Exit();
-        }
-
-        private void ExportarDatos(string idRazonSocial)
-        {
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\export.bat"); // creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt pos_desktop exportar_fondo_caja exportar_tesoreria_movimientos exportar_ventas exportar_ventas_detalle | gzip > c:\windows\temp\" + idRazonSocial);
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\export.bat", true)) // escribo el archivo .bat
-            {
-                outfile.Write(sb.ToString());
-            }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\export.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(ExportarDatos_Exited);
-            process.Start();
-            process.WaitForExit();
-        }
-
-        private void ExportarDatos_Exited(object sender, System.EventArgs e)
-        {
-            UploadDatosPos(@"c:\windows\temp\" + idRazonSocial, idRazonSocial);
-            if (File.Exists("c:\\Windows\\Temp\\export.bat")) File.Delete("c:\\Windows\\Temp\\export.bat");
-            Cursor = Cursors.Arrow;
-        }
-
-        public static void UploadDatosPos(string nombreLocal, string nombreServidor)
-        {
-            string ftpServerIP;
-            string ftpUserID;
-            string ftpPassword;
-
-            /*  ftpServerIP = "trendsistemas.com/datos";
-              ftpUserID = "benja@trendsistemas.com";
-              ftpPassword = "8953#AFjn";*/
-
-            // FTP local
-            ftpServerIP = "127.0.0.1:22";
-            ftpUserID = "Benja";
-            ftpPassword = "8953#AFjn";
-
-            FileInfo fileInf = new FileInfo(nombreLocal);
-            FtpWebRequest reqFTP;
-
-            // Create FtpWebRequest object from the Uri provided
-            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + "/" + nombreServidor));
-
-            // Provide the WebPermission Credintials
-            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-
-            // By default KeepAlive is true, where the control connection is not closed
-            // after a command is executed.
-            reqFTP.KeepAlive = false;
-
-            // Specify the command to be executed.
-            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
-
-            // Specify the data transfer type.
-            reqFTP.UseBinary = true;
-
-            // Notify the server about the size of the uploaded file
-            reqFTP.ContentLength = fileInf.Length;
-
-            // The buffer size is set to 2kb
-            int buffLength = 2048;
-            byte[] buff = new byte[buffLength];
-            int contentLen;
-
-            // Opens a file stream (System.IO.FileStream) to read the file to be uploaded
-            FileStream fs = fileInf.OpenRead();
-
-            try
-            {
-                // Stream to which the file to be upload is written
-                Stream strm = reqFTP.GetRequestStream();
-
-                // Read from the file stream 2kb at a time
-                contentLen = fs.Read(buff, 0, buffLength);
-
-                // Till Stream content ends
-                while (contentLen != 0)
-                {
-                    // Write Content from the file stream to the FTP Upload Stream
-                    strm.Write(buff, 0, contentLen);
-                    contentLen = fs.Read(buff, 0, buffLength);
-                }
-
-                // Close the file stream and the Request Stream
-                strm.Close();
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Upload Error");
-            }
         }
 
     }

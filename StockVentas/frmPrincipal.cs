@@ -167,7 +167,6 @@ namespace StockVentas
                         file.Write(fileData, 0, fileData.Length);
                         file.Close();
                     }
-                    MessageBox.Show("Download Complete");
                 }
             }
             catch (WebException)
@@ -195,9 +194,9 @@ namespace StockVentas
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine(@"gzip -d C:\Windows\Temp\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz");
+            sb.AppendLine(@"gzip -d C:\Windows\Temp\datos.sql.gz");
 
-            sb.AppendLine(@"mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < C:\Windows\Temp\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql");
+            sb.AppendLine(@"mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < C:\Windows\Temp\datos.sql");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {
                 outfile.Write(sb.ToString());
@@ -215,8 +214,8 @@ namespace StockVentas
         private void RestaurarDatos_Exited(object sender, System.EventArgs e)
         {
             if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
-            if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql");
-            if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
         }
 
     }
