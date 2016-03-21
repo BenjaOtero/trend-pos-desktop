@@ -154,20 +154,27 @@ namespace StockVentas
             string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
             string ftpPassword = "8953#AFjn";
             string ftpUserID = "Benja";
-
             string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-            using (WebClient request = new WebClient())
+            try
             {
-                request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                byte[] fileData = request.DownloadData(ftpfullpath);
-
-                using (FileStream file = File.Create(inputfilepath))
+                using (WebClient request = new WebClient())
                 {
-                    file.Write(fileData, 0, fileData.Length);
-                    file.Close();
+                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                    byte[] fileData = request.DownloadData(ftpfullpath);
+
+                    using (FileStream file = File.Create(inputfilepath))
+                    {
+                        file.Write(fileData, 0, fileData.Length);
+                        file.Close();
+                    }
+                    MessageBox.Show("Download Complete");
                 }
-                MessageBox.Show("Download Complete");
             }
+            catch (WebException)
+            {
+                MessageBox.Show("Se produjo un error en la comunicacion con el servidor remoto", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void RestaurarDatos()
@@ -188,8 +195,9 @@ namespace StockVentas
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine(@"gzip -d C:\Windows\Temp\datos.sql.gz");
-            sb.AppendLine(@"mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < C:\Windows\Temp\datos.sql");
+            sb.AppendLine(@"gzip -d C:\Windows\Temp\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz");
+
+            sb.AppendLine(@"mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < C:\Windows\Temp\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {
                 outfile.Write(sb.ToString());
@@ -207,8 +215,8 @@ namespace StockVentas
         private void RestaurarDatos_Exited(object sender, System.EventArgs e)
         {
             if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
-            if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
-            if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz");
         }
 
     }
