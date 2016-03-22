@@ -224,6 +224,7 @@ namespace BL
         {
             UploadDatosPos(@"c:\windows\temp\" + idRazonSocial, idRazonSocial);
             if (File.Exists("c:\\Windows\\Temp\\export.bat")) File.Delete("c:\\Windows\\Temp\\export.bat");
+            if (File.Exists(@"c:\windows\temp\" + idRazonSocial)) File.Delete(@"c:\windows\temp\" + idRazonSocial);
         }
 
         public static void UploadDatosPos(string nombreLocal, string nombreServidor)

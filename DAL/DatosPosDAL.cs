@@ -55,13 +55,40 @@ namespace DAL
             string fecha = string.Empty;
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
-            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_Exportar_Get_Fecha", SqlConnection1);
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_Exportar_Get_Fecha_Export", SqlConnection1);
             SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
             SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter1.Fill(tblFecha);
             fecha = tblFecha.Rows[0][0].ToString();
             SqlConnection1.Close();
             return fecha;
+        }
+
+        public static DataTable GetFechaSubidos(string fechaSubida)
+        {
+            DataTable tblFecha = new DataTable();
+            string fecha = string.Empty;
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_Exportar_Get_Fecha_Subidos", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.Parameters.AddWithValue("p_fecha", fechaSubida);
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter1.Fill(tblFecha);         
+            SqlConnection1.Close();
+            return tblFecha;
+        }
+
+        public static void InsertFechaSubidos(string fechaSubida, DataTable tblFecha)
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlInsertCommand1 = new MySqlCommand("Exportar_Subidos_Insertar", SqlConnection1);
+            SqlDataAdapter1.InsertCommand = SqlInsertCommand1;
+            SqlInsertCommand1.Parameters.AddWithValue("p_fecha", fechaSubida);
+            SqlInsertCommand1.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter1.Update(tblFecha);
+            SqlConnection1.Close();
         }
 
         public static void DeleteAll(Int16 existenClientesFallidas)

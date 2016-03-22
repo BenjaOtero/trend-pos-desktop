@@ -77,12 +77,20 @@ namespace StockVentas
                 label1.Text = "Actualizando base de datos . . .";
                 try
                 {
-                    string fechaExport = BL.DatosPosBLL.GetFechaExport();                    
-                    idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_" + fechaExport + ".sql.gz";
-                    if(!File.Exists(@"c:\windows\temp\" + idRazonSocial))
+                    string fechaExport = BL.DatosPosBLL.GetFechaExport(); // obtengo la fecha de los movimientos a exportar
+                    DataTable tblFecha = BL.DatosPosBLL.GetFechaSubidos(fechaExport); // consulto la tabla exportar_subidos para saber si ya se exportaron los movimientos
+                    string fechaSubida;
+                    if (tblFecha.Rows.Count > 0) fechaSubida = string.Empty; // los movimientos ya se exportaron
+                    else fechaSubida = null;
+                    if (fechaSubida == null)
                     {
+                        idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_" + fechaExport + ".sql.gz";
                         BL.DatosPosBLL.ExportAll();
                         Utilitarios.ExportarDatos(idRazonSocial);
+                        DataRow row = tblFecha.NewRow();
+                        row["FechaSUB"] = fechaExport;
+                        tblFecha.Rows.Add(row);
+                        BL.DatosPosBLL.InsertFechaSubidos(fechaExport, tblFecha);
                     }
                     
                     

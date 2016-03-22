@@ -34,6 +34,17 @@ namespace BL
             return fecha;
         }
 
+        public static DataTable GetFechaSubidos(string fechaSubida)
+        {
+            DataTable tblFecha = DAL.DatosPosDAL.GetFechaSubidos(fechaSubida);
+            return tblFecha;
+        }
+
+        public static void InsertFechaSubidos(string fechaSubida, DataTable tblFecha)
+        {
+            DAL.DatosPosDAL.InsertFechaSubidos(fechaSubida, tblFecha);
+        }
+
         public static void DeleteAll(Int16 existenClientesFallidas)
         {
             DAL.DatosPosDAL.DeleteAll(existenClientesFallidas);
