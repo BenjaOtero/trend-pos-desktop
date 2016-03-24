@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+
 
 
 namespace DAL
@@ -28,6 +30,19 @@ namespace DAL
             SqlDataAdapter1.Fill(ds, "Pc");
             SqlConnection1.Close();
             return ds.Tables[0];
+        }
+
+        public static int GetId()
+        {
+            SqlConnection1 = DALBase.GetConnection();
+            SqlDataAdapter1 = new MySqlDataAdapter();
+            SqlSelectCommand1 = new MySqlCommand("Pcs_Listar", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataTable tbl = new DataTable();
+            SqlDataAdapter1.Fill(tbl);
+            SqlConnection1.Close();
+            return Convert.ToInt32(tbl.Rows[0][0]);
         }
 
     }

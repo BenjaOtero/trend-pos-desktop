@@ -84,7 +84,8 @@ namespace StockVentas
                     else fechaSubida = null;
                     if (fechaSubida == null)
                     {
-                        idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_" + fechaExport + ".sql.gz";
+                        string pc = BL.PcsBLL.GetId().ToString();
+                        idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc +"_" + fechaExport + ".sql.gz";
                         BL.DatosPosBLL.ExportAll();
                         Utilitarios.ExportarDatos(idRazonSocial);
                         DataRow row = tblFecha.NewRow();

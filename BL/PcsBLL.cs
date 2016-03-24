@@ -24,5 +24,11 @@ namespace BL
             return dt;
         }
 
+        public static int GetId()
+        {
+            int pc = DAL.PcsDAL.GetId();
+            return pc;
+        }
+
     }
 }
