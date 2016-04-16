@@ -6,6 +6,7 @@
 -borrar ventas desde frmArqueo borra cualquier venta
 -al abrir frmClientes desde ventas, si busco un cliente y lo encuentra no actualiza el cliente en frmVentas
 -informe lotes tarjetas no funciona
+-Arreglar fondo caja POS
 
 
 
