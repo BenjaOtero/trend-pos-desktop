@@ -32,10 +32,15 @@ namespace StockVentas
 
         private void frmTesoreriaMov_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
             this.MaximizeBox = false;
+            this.KeyPreview = true;
+            dateTimePicker1.TabStop = false;
+            lstPc.TabStop = false;
+            lstLocales.TabStop = false;
             tblLocales = BL.LocalesBLL.CrearDataset();
             viewLocal = new DataView(tblLocales);
             viewLocal.RowFilter = "IdLocalLOC = '13'";  // Local 13 es Jesus Maria
@@ -50,8 +55,6 @@ namespace StockVentas
             lstPc.ValueMember = "IdPC";
             lstPc.DisplayMember = "Detalle";
             lstPc.DataSource = viewPc; 
-            this.lstLocales.SelectedValueChanged += new System.EventHandler(this.lstLocales_SelectedValueChanged);
-
             dsTesoreriaMov = BL.TesoreriaMovimientosBLL.CrearDataset();
             tblTesoreriaMov = dsTesoreriaMov.Tables[0];
             viewTesoreria = new DataView(tblTesoreriaMov);            
@@ -84,6 +87,9 @@ namespace StockVentas
             txtDetalle.DataBindings.Add("Text", rowView, "DetalleTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.DataBindings.Add("Text", rowView, "ImporteTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.KeyPress += new KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);
+            txtDetalle.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
+            txtImporte.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
+            
         }
 
         private void frmTesoreriaMov_Shown(object sender, EventArgs e)
@@ -121,18 +127,10 @@ namespace StockVentas
             Close();
         }
 
-        private void lstLocales_SelectedValueChanged(object sender, EventArgs e)
+        private void frmTesoreriaMov_KeyDown(object sender, KeyEventArgs e)
         {
-            string local = lstLocales.SelectedValue.ToString();
-            viewPc = new DataView(tblPcs);
-            viewPc.RowFilter = "IdLocalPC = '" + local + "'";
-            viewPc.Sort = "Detalle ASC";
-            lstPc.ValueMember = "IdPC";
-            lstPc.DisplayMember = "Detalle";
-            lstPc.DataSource = viewPc;
+            if (e.KeyCode == Keys.Escape) this.Close();
         }
-
-
 
     }
 }

@@ -50,9 +50,9 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(41, 13);
+            this.btnAceptar.Location = new System.Drawing.Point(41, 15);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(112, 26);
+            this.btnAceptar.Size = new System.Drawing.Size(112, 32);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Grabar";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             this.txtDetalle.Location = new System.Drawing.Point(85, 250);
             this.txtDetalle.Name = "txtDetalle";
             this.txtDetalle.Size = new System.Drawing.Size(212, 20);
-            this.txtDetalle.TabIndex = 2;
+            this.txtDetalle.TabIndex = 0;
             // 
             // label2
             // 
@@ -122,7 +122,7 @@
             this.txtImporte.Location = new System.Drawing.Point(85, 279);
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(212, 20);
-            this.txtImporte.TabIndex = 3;
+            this.txtImporte.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -130,15 +130,15 @@
             this.groupBox1.Controls.Add(this.btnAceptar);
             this.groupBox1.Location = new System.Drawing.Point(12, 317);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(313, 48);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.Size = new System.Drawing.Size(313, 61);
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(171, 13);
+            this.btnSalir.Location = new System.Drawing.Point(171, 15);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(112, 26);
+            this.btnSalir.Size = new System.Drawing.Size(112, 32);
             this.btnSalir.TabIndex = 1;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -211,14 +211,14 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(313, 311);
-            this.groupBox2.TabIndex = 37;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
             // frmTesoreriaMov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 373);
+            this.ClientSize = new System.Drawing.Size(338, 390);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -230,6 +230,7 @@
             this.Text = "Movimientos de tesorería";
             this.Load += new System.EventHandler(this.frmTesoreriaMov_Load);
             this.Shown += new System.EventHandler(this.frmTesoreriaMov_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmTesoreriaMov_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

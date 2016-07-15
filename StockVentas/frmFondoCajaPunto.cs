@@ -27,8 +27,11 @@ namespace StockVentas
 
         private void frmFondoCaja_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
+            dateTimePicker1.TabStop = false;
+            cmbLocal.TabStop = false;
             #region comboLocal
 
             tblLocales = new DataTable();
@@ -78,6 +81,7 @@ namespace StockVentas
             txtImporte.DataBindings.Add("Text", rowView, "ImporteFONP", false, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.Focus();
             txtImporte.KeyPress += new KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);
+            txtImporte.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -100,6 +104,11 @@ namespace StockVentas
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void frmFondoCajaPunto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) this.Close();
         }
 
     }

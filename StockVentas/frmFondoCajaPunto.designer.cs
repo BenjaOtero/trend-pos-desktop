@@ -89,7 +89,7 @@
             this.txtImporte.Location = new System.Drawing.Point(71, 92);
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(200, 20);
-            this.txtImporte.TabIndex = 2;
+            this.txtImporte.TabIndex = 1;
             // 
             // cmbLocal
             // 
@@ -97,7 +97,7 @@
             this.cmbLocal.Location = new System.Drawing.Point(71, 65);
             this.cmbLocal.Name = "cmbLocal";
             this.cmbLocal.Size = new System.Drawing.Size(200, 21);
-            this.cmbLocal.TabIndex = 1;
+            this.cmbLocal.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -106,7 +106,7 @@
             this.groupBox1.Location = new System.Drawing.Point(15, 120);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 50);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // btnSalir
@@ -114,7 +114,7 @@
             this.btnSalir.Location = new System.Drawing.Point(133, 14);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 26);
-            this.btnSalir.TabIndex = 0;
+            this.btnSalir.TabIndex = 1;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -166,12 +166,14 @@
             this.Controls.Add(this.txtImporte);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(25, 25);
             this.MaximizeBox = false;
             this.Name = "frmFondoCajaPunto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Fondo de caja";
             this.Load += new System.EventHandler(this.frmFondoCaja_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmFondoCajaPunto_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

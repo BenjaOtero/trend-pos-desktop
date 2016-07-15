@@ -69,7 +69,7 @@ namespace StockVentas
 
         private void frmVentas_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.CenterToScreen();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -78,13 +78,13 @@ namespace StockVentas
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ControlBox = true;
             this.MaximizeBox = false;
-            this.CancelButton = btnSalir;
-            btnSalir.Visible = false;
+            this.KeyPreview = true;
             dateTimePicker1.Visible = false;
             lblFecha.Text = DateTime.Today.ToLongDateString();
             lblTotal.ForeColor = System.Drawing.Color.DarkRed;
             ToolTip tooltip = new ToolTip();
             tooltip.SetToolTip(btnClientes, "Agregar nuevo cliente");
+            btnClientes.TabStop = false;
             dsForaneos = BL.VentasBLL.CrearDatasetForaneos();
             tblLocales = dsForaneos.Tables[3];
             tblPcs = dsForaneos.Tables[4];
@@ -235,6 +235,7 @@ namespace StockVentas
             txtArticulo.Enter += new System.EventHandler(Utilitarios.SelTextoTextBox);
             txtCantidad.Enter += new System.EventHandler(Utilitarios.SelTextoTextBox);
             txtPrecio.Enter += new System.EventHandler(Utilitarios.SelTextoTextBox);
+            cmbCliente.KeyDown += new System.Windows.Forms.KeyEventHandler(Utilitarios.EnterTab);
             txtArticulo.KeyDown += new System.Windows.Forms.KeyEventHandler(Utilitarios.EnterTab);
             txtCantidad.KeyDown += new System.Windows.Forms.KeyEventHandler(Utilitarios.EnterTab);
             txtPrecio.KeyDown += new System.Windows.Forms.KeyEventHandler(Utilitarios.EnterTab);
@@ -478,34 +479,42 @@ namespace StockVentas
             Cursor.Current = Cursors.WaitCursor;
             if (tblVentasDetalle.GetChanges() != null)
             {
-                DataTable tblActual = new DataTable();
-                tblActual.Columns.Add("Id", typeof(int));
-                tblActual.Columns.Add("Accion", typeof(string));
+                DialogResult respuesta = MessageBox.Show("¿Actualizar base de datos?", "Trend Sistemas", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (respuesta)
+                {
+                    case DialogResult.Yes:
+                        DataTable tblActual = new DataTable();
+                        tblActual.Columns.Add("Id", typeof(int));
+                        tblActual.Columns.Add("Accion", typeof(string));
 
-                //agrego el RowState de las filas por si falla la insercion / modificacion / borrado en el servidor remoto poder
-                //guardar dicha informacion en la tabla local 'VentasDetalleFallidas'
-                foreach (DataRowView row in viewDetalle)
-                {
-                    DataRow rowActual = tblActual.NewRow();
-                    rowActual["Id"] = row["IdDVEN"];
-                    rowActual["Accion"] = row.Row.RowState.ToString();
-                    tblActual.Rows.Add(rowActual);
+                        //agrego el RowState de las filas por si falla la insercion / modificacion / borrado en el servidor remoto poder
+                        //guardar dicha informacion en la tabla local 'VentasDetalleFallidas'
+                        foreach (DataRowView row in viewDetalle)
+                        {
+                            DataRow rowActual = tblActual.NewRow();
+                            rowActual["Id"] = row["IdDVEN"];
+                            rowActual["Accion"] = row.Row.RowState.ToString();
+                            tblActual.Rows.Add(rowActual);
+                        }
+                        rowView.EndEdit();
+                        bool grabarFallidas = false;
+                        if (PK == "") //registro nuevo
+                        {
+                            BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, grabarFallidas);
+                        }
+                        else
+                        {
+                            BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, viewDetalleOriginal, tblActual, grabarFallidas);
+                            this.DialogResult = DialogResult.OK;
+                        }
+                        break;
+                    case DialogResult.No:
+                        tblVentas.RejectChanges();
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
                 }
-                rowView.EndEdit();
-                bool grabarFallidas = false;
-                if (PK == "") //registro nuevo
-                {
-                    BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, grabarFallidas);
-                }
-                else
-                {
-                    BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, viewDetalleOriginal, tblActual, grabarFallidas);
-                    this.DialogResult = DialogResult.OK;
-                }
-            }
-            else
-            {
-                tblVentas.RejectChanges();
             }
             Cursor.Current = Cursors.Arrow;
         }
@@ -680,9 +689,9 @@ namespace StockVentas
             return validar;
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void frmVentas_KeyDown(object sender, KeyEventArgs e)
         {
-            this.Close();
+            if (e.KeyCode == Keys.Escape) this.Close();
         }
 
     }

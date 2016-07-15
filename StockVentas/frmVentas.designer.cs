@@ -34,7 +34,6 @@
             this.btnClientes = new System.Windows.Forms.Button();
             this.lblCosto = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblNro = new System.Windows.Forms.Label();
@@ -89,7 +88,6 @@
             this.grpInicial.Controls.Add(this.btnClientes);
             this.grpInicial.Controls.Add(this.lblCosto);
             this.grpInicial.Controls.Add(this.lblTotal);
-            this.grpInicial.Controls.Add(this.btnSalir);
             this.grpInicial.Controls.Add(this.txtCosto);
             this.grpInicial.Controls.Add(this.label5);
             this.grpInicial.Controls.Add(this.lblNro);
@@ -136,17 +134,6 @@
             this.lblTotal.Size = new System.Drawing.Size(36, 18);
             this.lblTotal.TabIndex = 19;
             this.lblTotal.Text = "total";
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSalir.Location = new System.Drawing.Point(417, 10);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(133, 29);
-            this.btnSalir.TabIndex = 6;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // txtCosto
             // 
@@ -542,7 +529,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(914, 564);
             this.ControlBox = false;
             this.Controls.Add(this.grpBotonera);
@@ -558,6 +544,7 @@
             this.Activated += new System.EventHandler(this.frmVentas_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVentas_FormClosing);
             this.Load += new System.EventHandler(this.frmVentas_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmVentas_KeyDown);
             this.grpInicial.ResumeLayout(false);
             this.grpInicial.PerformLayout();
             this.grpABM.ResumeLayout(false);
@@ -613,7 +600,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.Button btnClientes;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.GroupBox grpBotonera;
         private System.Windows.Forms.Button btnArticulos;
         private System.Windows.Forms.Button btnBorrar;

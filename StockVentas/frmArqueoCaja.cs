@@ -84,6 +84,7 @@ namespace StockVentas
 
         private void dgvVentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            int PK = Convert.ToInt32(dgvVentas.CurrentRow.Cells["IdVentaVEN"].Value.ToString());
             if (dtPicker.Value.Date != DateTime.Today) return;
             if (e.RowIndex < 0) return;
             if (e.ColumnIndex == dgvVentas.Columns["Editar"].Index)
@@ -99,7 +100,6 @@ namespace StockVentas
                         MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    int PK = Convert.ToInt32(dgvVentas.CurrentRow.Cells["IdVentaVEN"].Value.ToString());
                     viewVentas = new DataView(tblVentas);
                     viewVentas.RowFilter = "[IdVentaVEN] = '" + PK + "'";
                     foreach (DataRowView row in viewVentas)
