@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fallidas.cs" />
     <Compile Include="customDgvw.cs">
       <SubType>Component</SubType>
     </Compile>

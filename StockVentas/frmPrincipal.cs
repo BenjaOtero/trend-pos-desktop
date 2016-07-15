@@ -33,7 +33,6 @@ namespace StockVentas
                 }
             }
             this.instanciaInicio = instanciaInicio;
-            Fallidas fllds = new Fallidas();
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
