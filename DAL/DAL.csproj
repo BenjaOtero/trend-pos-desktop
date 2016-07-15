@@ -53,7 +53,6 @@
     <Compile Include="ArticulosDAL.cs" />
     <Compile Include="ClientesDAL.cs" />
     <Compile Include="DatosPosDAL.cs" />
-    <Compile Include="FallidasDAL.cs" />
     <Compile Include="FormasPagoDAL.cs" />
     <Compile Include="LocalesDAL.cs" />
     <Compile Include="DALBase.cs" />

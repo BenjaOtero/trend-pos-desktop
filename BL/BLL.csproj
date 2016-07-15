@@ -50,9 +50,6 @@
     <Compile Include="ArticulosBLL.cs" />
     <Compile Include="ClientesBLL.cs" />
     <Compile Include="DatosPosBLL.cs" />
-    <Compile Include="FallidasBLL.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="FondoCajaBLL.cs" />
     <Compile Include="FormasPagoBLL.cs" />
     <Compile Include="LocalesBLL.cs">

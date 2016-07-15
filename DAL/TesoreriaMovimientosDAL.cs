@@ -87,14 +87,7 @@ namespace DAL
         public static void BorrarByPK(int PK, bool borrarRemotas)
         {
             MySqlConnection SqlConnection1;
-            if (borrarRemotas != true)
-            {
-                SqlConnection1 = DALBase.GetConnection();
-            }
-            else
-            {
-                SqlConnection1 = DALBase.GetRemoteConnection();
-            }
+            SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
             MySqlCommand SqlDeleteCommand1 = new MySqlCommand("TesoreriaMov_Borrar", SqlConnection1);

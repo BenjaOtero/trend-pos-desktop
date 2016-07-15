@@ -93,31 +93,6 @@ namespace BL
             return dt;
         }
 
-        // borrar ventas fallidas
-        public static void BorrarByPK(DataTable tbl, ref int? codigoError)
-        {
-            try
-            {
-                DAL.VentasDAL.BorrarByPK(tbl);
-                //borro los registros de la tabla VentasFallidas que hacen referencia a las ventas que no se borraron 
-                BL.FallidasBLL.BorrarVentasFallidasByAccion("Deleted");
-            }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1042) //no se pudo abrir la conexion por falta de internet
-                {
-                    codigoError = 1042;
-                }
-                else
-                {
-                    codigoError = ex.Number;
-                }
-            }
-            catch (TimeoutException)
-            {
-            }
-        }
-
         public static DataSet GetLotesTarjetas(int idPc)
         {
             DataSet dt = DAL.VentasDAL.GetLotesTarjetas(idPc);
