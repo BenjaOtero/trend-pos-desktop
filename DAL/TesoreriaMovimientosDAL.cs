@@ -44,14 +44,7 @@ namespace DAL
         public static void GrabarDB(DataSet dt, bool grabarFallidas)
         {
             MySqlConnection SqlConnection1;
-            if (grabarFallidas == false)
-            {
-                SqlConnection1 = DALBase.GetConnection();
-            }
-            else
-            {
-                SqlConnection1 = DALBase.GetRemoteConnection();
-            }
+            SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter da = AdaptadorABM(SqlConnection1);
             da.Update(dt, "TesoreriaMovimientos");
             SqlConnection1.Close();
@@ -109,24 +102,6 @@ namespace DAL
             SqlDeleteCommand1.Parameters.AddWithValue("p_id", PK);
             SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
             SqlDeleteCommand1.ExecuteNonQuery();
-            SqlConnection1.Close();
-        }
-
-        public static void BorrarByPK(DataTable tbl)
-        {
-            MySqlConnection SqlConnection1 = DALBase.GetRemoteConnection();
-            int PK;
-            SqlConnection1.Open();
-            foreach (DataRow row in tbl.Rows)
-            {
-                PK = Convert.ToInt32(row[0].ToString());
-                MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
-                MySqlCommand SqlDeleteCommand1 = new MySqlCommand("TesoreriaMov_Borrar", SqlConnection1);
-                SqlDataAdapter1.DeleteCommand = SqlDeleteCommand1;
-                SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
-                SqlDeleteCommand1.Parameters.AddWithValue("p_id", PK);
-                SqlDeleteCommand1.ExecuteNonQuery();
-            }
             SqlConnection1.Close();
         }
 
