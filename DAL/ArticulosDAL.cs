@@ -79,7 +79,6 @@ namespace DAL
             SqlInsertCommand1.Parameters.Add("p_activoWeb", MySqlDbType.Int32, 1, "ActivoWebART");
             SqlInsertCommand1.Parameters.Add("p_nuevo", MySqlDbType.Int32, 1, "NuevoART");
             SqlInsertCommand1.CommandType = CommandType.StoredProcedure;
-
             return SqlDataAdapter1;
         }
 

@@ -79,20 +79,6 @@ namespace DAL
             return SqlDataAdapter1;
         }
 
-        public static DataSet GetByPk(int idMov)
-        {
-            MySqlConnection SqlConnection1 = DALBase.GetConnection();
-            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter(); ;
-            MySqlCommand SqlSelectCommand1 = new MySqlCommand("FondoCaja_GetByPk", SqlConnection1);
-            SqlSelectCommand1.Parameters.AddWithValue("p_id", idMov);
-            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;   
-            DataSet dt = new DataSet();
-            SqlDataAdapter1.Fill(dt);
-            SqlConnection1.Close();
-            return dt;
-        }
-
     }
 
 }
