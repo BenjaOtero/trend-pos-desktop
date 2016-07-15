@@ -121,7 +121,8 @@ namespace StockVentas
                 MessageBox.Show("No se puede modificar el registro porque es un registro propio del sistema.", "Trend Gestión",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
-            } 
+            }
+            if (gvwDatos.Rows.Count == 0) return;
             SetStateForm(FormState.edicion);
         }
 
@@ -145,14 +146,11 @@ namespace StockVentas
         {
             try
             {
-                if (ValidarFormulario())
-                {
-                    bindingSource1.EndEdit();
-                    bindingSource1.Position = 0;
-                    bindingSource1.Sort = "ApellidoCLI";
-                    SetStateForm(FormState.inicial);
-                    bindingSource1.RemoveFilter();
-                }
+                bindingSource1.EndEdit();
+                bindingSource1.Position = 0;
+                bindingSource1.Sort = "ApellidoCLI";
+                SetStateForm(FormState.inicial);
+                bindingSource1.RemoveFilter();
             }
             catch (ConstraintException)
             {
@@ -176,18 +174,14 @@ namespace StockVentas
 
         private void frmClientes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ValidarFormulario())
+            tblClientes.RowChanging -= new DataRowChangeEventHandler(Row_Changing);
+            bindingSource1.EndEdit();
+            if (tblClientes.GetChanges() != null)
             {
-                tblClientes.RowChanging -= new DataRowChangeEventHandler(Row_Changing);
-                bindingSource1.EndEdit();
-                if (tblClientes.GetChanges() != null)
-                {
-                    BL.ClientesBLL.GrabarDB(dsClientes, tblFallidas, ref codigoError, false);
-                }
-                bindingSource1.RemoveFilter();
-                if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
+                BL.ClientesBLL.GrabarDB(dsClientes, tblFallidas, ref codigoError, false);
             }
-            else e.Cancel = true;
+            bindingSource1.RemoveFilter();
+            if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
         }
 
         private void Row_Deleting(object sender, DataRowChangeEventArgs e)
@@ -242,28 +236,6 @@ namespace StockVentas
         private void grpCampos_Enter(object sender, EventArgs e)
         {
 
-        }
-
-        private bool ValidarFormulario()
-        {
-            if (string.IsNullOrEmpty(txtNombreCLI.Text))
-            {
-                this.errorProvider1.SetError(txtNombreCLI, "Debe escribir un nombre.");
-                txtNombreCLI.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtApellidoCLI.Text))
-            {
-                this.errorProvider1.SetError(txtApellidoCLI, "Debe escribir un apellido.");
-                txtApellidoCLI.Focus();
-                return false;
-            }
-            if (!IsValidEmail(txtCorreoCLI.Text))
-            {
-                this.errorProvider1.SetError(txtCorreoCLI, "Verifique la dirección de correo electrónico.");
-                return false;
-            }
-            return true;
         }
 
         private void ValidarCampos(object sender, CancelEventArgs e)
@@ -351,9 +323,7 @@ namespace StockVentas
             {
                 gvwDatos.Enabled = true;
                 txtIdClienteCLI.ReadOnly = true;
-                txtIdClienteCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtRazonSocialCLI.ReadOnly = true;
-                txtRazonSocialCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtNombreCLI.ReadOnly = true;
                 txtNombreCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtApellidoCLI.ReadOnly = true;

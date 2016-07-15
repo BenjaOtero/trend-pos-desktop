@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpInicial = new System.Windows.Forms.GroupBox();
             this.btnClientes = new System.Windows.Forms.Button();
             this.lblCosto = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -68,43 +68,43 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBotonera = new System.Windows.Forms.GroupBox();
             this.btnArticulos = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnCancelEdit = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.dgvDatos = new StockVentas.customDgvw();
-            this.groupBox1.SuspendLayout();
+            this.grpInicial.SuspendLayout();
             this.grpABM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpBotonera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grpInicial
             // 
-            this.groupBox1.Controls.Add(this.btnClientes);
-            this.groupBox1.Controls.Add(this.lblCosto);
-            this.groupBox1.Controls.Add(this.lblTotal);
-            this.groupBox1.Controls.Add(this.btnSalir);
-            this.groupBox1.Controls.Add(this.txtCosto);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.lblNro);
-            this.groupBox1.Controls.Add(this.cmbCliente);
-            this.groupBox1.Controls.Add(this.cmbLocal);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.lblFecha);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(890, 105);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
+            this.grpInicial.Controls.Add(this.btnClientes);
+            this.grpInicial.Controls.Add(this.lblCosto);
+            this.grpInicial.Controls.Add(this.lblTotal);
+            this.grpInicial.Controls.Add(this.btnSalir);
+            this.grpInicial.Controls.Add(this.txtCosto);
+            this.grpInicial.Controls.Add(this.label5);
+            this.grpInicial.Controls.Add(this.lblNro);
+            this.grpInicial.Controls.Add(this.cmbCliente);
+            this.grpInicial.Controls.Add(this.cmbLocal);
+            this.grpInicial.Controls.Add(this.dateTimePicker1);
+            this.grpInicial.Controls.Add(this.label4);
+            this.grpInicial.Controls.Add(this.label3);
+            this.grpInicial.Controls.Add(this.lblFecha);
+            this.grpInicial.Controls.Add(this.label1);
+            this.grpInicial.Location = new System.Drawing.Point(12, 4);
+            this.grpInicial.Name = "grpInicial";
+            this.grpInicial.Size = new System.Drawing.Size(890, 105);
+            this.grpInicial.TabIndex = 0;
+            this.grpInicial.TabStop = false;
             // 
             // btnClientes
             // 
@@ -182,7 +182,7 @@
             this.cmbCliente.Location = new System.Drawing.Point(137, 72);
             this.cmbCliente.Name = "cmbCliente";
             this.cmbCliente.Size = new System.Drawing.Size(201, 21);
-            this.cmbCliente.TabIndex = 3;
+            this.cmbCliente.TabIndex = 1;
             // 
             // cmbLocal
             // 
@@ -190,7 +190,7 @@
             this.cmbLocal.Location = new System.Drawing.Point(137, 40);
             this.cmbLocal.Name = "cmbLocal";
             this.cmbLocal.Size = new System.Drawing.Size(201, 21);
-            this.cmbLocal.TabIndex = 2;
+            this.cmbLocal.TabIndex = 0;
             // 
             // dateTimePicker1
             // 
@@ -259,7 +259,7 @@
             this.grpABM.Location = new System.Drawing.Point(12, 110);
             this.grpABM.Name = "grpABM";
             this.grpABM.Size = new System.Drawing.Size(890, 63);
-            this.grpABM.TabIndex = 6;
+            this.grpABM.TabIndex = 1;
             this.grpABM.TabStop = false;
             // 
             // chkDev
@@ -465,18 +465,18 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // groupBox2
+            // grpBotonera
             // 
-            this.groupBox2.Controls.Add(this.btnArticulos);
-            this.groupBox2.Controls.Add(this.btnBorrar);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.btnCancelEdit);
-            this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Location = new System.Drawing.Point(12, 174);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(890, 50);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
+            this.grpBotonera.Controls.Add(this.btnArticulos);
+            this.grpBotonera.Controls.Add(this.btnBorrar);
+            this.grpBotonera.Controls.Add(this.button2);
+            this.grpBotonera.Controls.Add(this.btnCancelEdit);
+            this.grpBotonera.Controls.Add(this.btnEditar);
+            this.grpBotonera.Location = new System.Drawing.Point(12, 174);
+            this.grpBotonera.Name = "grpBotonera";
+            this.grpBotonera.Size = new System.Drawing.Size(890, 50);
+            this.grpBotonera.TabIndex = 2;
+            this.grpBotonera.TabStop = false;
             // 
             // btnArticulos
             // 
@@ -484,7 +484,7 @@
             this.btnArticulos.Location = new System.Drawing.Point(630, 14);
             this.btnArticulos.Name = "btnArticulos";
             this.btnArticulos.Size = new System.Drawing.Size(114, 29);
-            this.btnArticulos.TabIndex = 15;
+            this.btnArticulos.TabIndex = 4;
             this.btnArticulos.Text = "Articulos";
             this.btnArticulos.UseVisualStyleBackColor = true;
             this.btnArticulos.Click += new System.EventHandler(this.btnArticulos_Click);
@@ -494,7 +494,7 @@
             this.btnBorrar.Location = new System.Drawing.Point(509, 14);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(114, 29);
-            this.btnBorrar.TabIndex = 13;
+            this.btnBorrar.TabIndex = 3;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
@@ -504,7 +504,7 @@
             this.button2.Location = new System.Drawing.Point(146, 14);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 29);
-            this.button2.TabIndex = 10;
+            this.button2.TabIndex = 0;
             this.button2.Text = "Grabar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnGrabar_Click);
@@ -514,7 +514,7 @@
             this.btnCancelEdit.Location = new System.Drawing.Point(388, 14);
             this.btnCancelEdit.Name = "btnCancelEdit";
             this.btnCancelEdit.Size = new System.Drawing.Size(114, 29);
-            this.btnCancelEdit.TabIndex = 11;
+            this.btnCancelEdit.TabIndex = 2;
             this.btnCancelEdit.Text = "Cancelar edición";
             this.btnCancelEdit.UseVisualStyleBackColor = true;
             this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
@@ -524,7 +524,7 @@
             this.btnEditar.Location = new System.Drawing.Point(267, 14);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(114, 29);
-            this.btnEditar.TabIndex = 12;
+            this.btnEditar.TabIndex = 1;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
@@ -545,11 +545,11 @@
             this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(914, 564);
             this.ControlBox = false;
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBotonera);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.grpABM);
             this.Controls.Add(this.dgvDatos);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpInicial);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Location = new System.Drawing.Point(30, 30);
             this.Name = "frmVentas";
@@ -558,15 +558,15 @@
             this.Activated += new System.EventHandler(this.frmVentas_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVentas_FormClosing);
             this.Load += new System.EventHandler(this.frmVentas_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpInicial.ResumeLayout(false);
+            this.grpInicial.PerformLayout();
             this.grpABM.ResumeLayout(false);
             this.grpABM.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.grpBotonera.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -576,7 +576,7 @@
         #endregion
 
         private customDgvw dgvDatos;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpInicial;
         private System.Windows.Forms.GroupBox grpABM;
         private System.Windows.Forms.CheckBox chkDev;
         private System.Windows.Forms.ComboBox cmbForma;
@@ -614,7 +614,7 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBotonera;
         private System.Windows.Forms.Button btnArticulos;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button button2;

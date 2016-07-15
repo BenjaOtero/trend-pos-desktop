@@ -112,7 +112,6 @@ namespace StockVentas
             cmbForma.DataSource = tblFormasPago;
             cmbForma.SelectedValue = -1;
             cmbForma.BackColor = Color.White;
-
             AutoCompleteStringCollection formasColection = new AutoCompleteStringCollection();
             foreach (DataRow row in tblFormasPago.Rows)
             {
@@ -121,10 +120,12 @@ namespace StockVentas
             cmbForma.AutoCompleteCustomSource = formasColection;
             cmbForma.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbForma.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-
             lblCosto.Visible = false;
             txtCosto.Visible = false;
+            grpInicial.CausesValidation = false;
+            grpBotonera.CausesValidation = false;
+            cmbCliente.CausesValidation = false;
+            btnClientes.CausesValidation = false;
             btnEditar.CausesValidation = false;
             btnBorrar.CausesValidation = false;
             btnArticulos.CausesValidation = false; 
@@ -242,12 +243,6 @@ namespace StockVentas
             chkDev.KeyDown += new System.Windows.Forms.KeyEventHandler(Utilitarios.EnterTab);
         //    tblVentasDetalle.ColumnChanged += new DataColumnChangeEventHandler(HabilitarGrabar);
             SetStateForm(FormState.insercion);
-            DialogResult respuesta = MessageBox.Show("SOLICITAR DATOS CLIENTE", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            if (respuesta == DialogResult.OK)
-            {
-                frmClientes newMDIChild = new frmClientes();
-                newMDIChild.ShowDialog();
-            }
         }
 
         private void frmVentas_Activated(object sender, EventArgs e)
@@ -281,7 +276,8 @@ namespace StockVentas
 
         private void txtArticulo_Validating(object sender, CancelEventArgs e)
         {
-           if (string.IsNullOrEmpty(txtArticulo.Text)) return;
+            if (string.IsNullOrEmpty(txtArticulo.Text)) e.Cancel = true;
+            if (string.IsNullOrEmpty(txtArticulo.Text)) return;
             if (articuloOld == txtArticulo.Text) return;
             DataRow[] foundRow = tblArticulos.Select("IdArticuloART = '" + txtArticulo.Text + "'");
             if (foundRow.Length == 0)
@@ -597,7 +593,7 @@ namespace StockVentas
             AutoCompleteStringCollection clientesColection = new AutoCompleteStringCollection();
             foreach (DataRow row in tblClientes.Rows)
             {
-                clientesColection.Add(Convert.ToString(row["RazonSocialCLI"]));
+                clientesColection.Add(Convert.ToString(row["NombreCompletoCLI"]));
             }
             cmbCliente.AutoCompleteCustomSource = clientesColection;
             cmbCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

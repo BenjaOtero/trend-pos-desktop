@@ -35,21 +35,7 @@ namespace BL
         {
             try
             {
-                if (grabarFallidas == false)
-                {
-                    DataSet dsRemoto;
-                    dsRemoto = dt.GetChanges();
-                    DAL.ClientesDAL.GrabarDB(dt, grabarFallidas);
-                    lock (_sync)
-                    {
-                        Thread t = new Thread(() => ThreadSaveEnRemoteServer(dsRemoto, tblFallidas));
-                        t.Start();
-                    }
-                }
-                else
-                {
-                    DAL.ClientesDAL.GrabarDB(dt, grabarFallidas);
-                }
+                DAL.ClientesDAL.GrabarDB(dt, grabarFallidas);
             }
             catch (MySqlException ex)
             {
@@ -63,26 +49,6 @@ namespace BL
                     dt.RejectChanges();
                     codigoError = ex.Number;
                 }
-            }
-        }
-
-        //Despues de grabar localmente utilizo un hilo secundario para grabar remotamente
-        public static void ThreadSaveEnRemoteServer(DataSet dsRemoto, DataTable tblFallidas)
-        {
-            try
-            {
-                DAL.ClientesDAL.GrabarDB(dsRemoto, true);
-            }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1042 || ex.Number == 0) //no se pudo abrir la conexion por falta de internet o timeout expired
-                {
-                    ThreadSaveEnClientesFallidas(tblFallidas);
-                }
-            }
-            catch (TimeoutException)
-            {
-                ThreadSaveEnClientesFallidas(tblFallidas);
             }
         }
 
