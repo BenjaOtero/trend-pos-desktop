@@ -34,7 +34,7 @@ namespace StockVentas
 
         private void frmArticulos_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.CenterToScreen();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             tablaOrigen = BL.ArticulosBLL.CrearDataset();
@@ -63,9 +63,15 @@ namespace StockVentas
             gvwDatos.Columns["ImagenColorART"].Visible = false;
             gvwDatos.Columns["NuevoART"].Visible = false;
             gvwDatos.Columns["IdAliculotaIvaART"].Visible = false;
+            gvwDatos.Columns["IdGeneroART"].Visible = false;
             gvwDatos.Sort(gvwDatos.Columns["DescripcionART"], ListSortDirection.Ascending);
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             btnAceptar.Enabled = false;
+        }
+
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -116,7 +122,7 @@ namespace StockVentas
         private void gvwDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnAceptar.PerformClick();
-        }
+        }        
 
     }
 }

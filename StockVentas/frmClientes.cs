@@ -356,6 +356,7 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                tblClientes.ColumnChanged -= new DataColumnChangeEventHandler(HabilitarGrabar);                
             }
             if (state == FormState.insercion)
             {
@@ -394,6 +395,7 @@ namespace StockVentas
                 btnSalir.Enabled = false;
                 txtNombreCLI.Focus();
                 AddEventosValidacion();
+                tblClientes.ColumnChanged += new DataColumnChangeEventHandler(HabilitarGrabar);                
             }
             if (state == FormState.edicion)
             {
@@ -420,8 +422,16 @@ namespace StockVentas
                 btnSalir.Enabled = false;
                 txtNombreCLI.Focus();
                 AddEventosValidacion();
+                tblClientes.ColumnChanged += new DataColumnChangeEventHandler(HabilitarGrabar);                
             }
         }
 
+        private void HabilitarGrabar(object sender, EventArgs e)
+        {
+            if (btnGrabar.Enabled == false)
+            {
+                btnGrabar.Enabled = true;
+            }
+        }
     }
 }

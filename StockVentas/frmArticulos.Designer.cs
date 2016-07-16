@@ -116,6 +116,7 @@
             this.txtParametros.Name = "txtParametros";
             this.txtParametros.Size = new System.Drawing.Size(188, 20);
             this.txtParametros.TabIndex = 7;
+            this.txtParametros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtParametros_KeyDown);
             // 
             // groupBox3
             // 

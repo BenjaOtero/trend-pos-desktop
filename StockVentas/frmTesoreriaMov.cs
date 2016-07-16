@@ -54,7 +54,9 @@ namespace StockVentas
             viewPc.Sort = "Detalle ASC";
             lstPc.ValueMember = "IdPC";
             lstPc.DisplayMember = "Detalle";
-            lstPc.DataSource = viewPc; 
+            lstPc.DataSource = viewPc;
+
+            txtImporte.Text = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:C2}", txtImporte);
             dsTesoreriaMov = BL.TesoreriaMovimientosBLL.CrearDataset();
             tblTesoreriaMov = dsTesoreriaMov.Tables[0];
             viewTesoreria = new DataView(tblTesoreriaMov);            
@@ -64,7 +66,6 @@ namespace StockVentas
                 int clave = rand.Next(1, 2000000000);
                 lblClave.Text = clave.ToString();
                 lblClave.ForeColor = System.Drawing.Color.DarkRed;
-
                 viewTesoreria.RowStateFilter = DataViewRowState.Added;
                 rowView = viewTesoreria.AddNew();
                 rowView["IdMovTESM"] = clave.ToString();
@@ -82,10 +83,10 @@ namespace StockVentas
                 rowView = viewTesoreria[0];
                 txtDetalle.Focus();
             }
-            dateTimePicker1.DataBindings.Add("Text", rowView, "FechaTESM", false, DataSourceUpdateMode.OnPropertyChanged);
+           dateTimePicker1.DataBindings.Add("Text", rowView, "FechaTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             lstPc.DataBindings.Add("SelectedValue", rowView, "IdPcTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             txtDetalle.DataBindings.Add("Text", rowView, "DetalleTESM", false, DataSourceUpdateMode.OnPropertyChanged);
-            txtImporte.DataBindings.Add("Text", rowView, "ImporteTESM", false, DataSourceUpdateMode.OnPropertyChanged);
+            txtImporte.DataBindings.Add("Text", rowView, "ImporteTESM", true, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.KeyPress += new KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);
             txtDetalle.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
             txtImporte.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);

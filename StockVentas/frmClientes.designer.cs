@@ -32,6 +32,12 @@
             System.Windows.Forms.Label label14;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientes));
             this.grpCampos = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtProvinciaCLI = new System.Windows.Forms.TextBox();
+            this.txtLocalidadCLI = new System.Windows.Forms.TextBox();
+            this.txtDireccionCLI = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -77,12 +83,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtProvinciaCLI = new System.Windows.Forms.TextBox();
-            this.txtLocalidadCLI = new System.Windows.Forms.TextBox();
-            this.txtDireccionCLI = new System.Windows.Forms.TextBox();
             label14 = new System.Windows.Forms.Label();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
@@ -135,6 +135,63 @@
             this.grpCampos.TabIndex = 0;
             this.grpCampos.TabStop = false;
             this.grpCampos.Enter += new System.EventHandler(this.grpCampos_Enter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label9.Location = new System.Drawing.Point(10, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 15);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Provincia";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label8.Location = new System.Drawing.Point(10, 149);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 15);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "Localidad";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label5.Location = new System.Drawing.Point(10, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 15);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Dirección";
+            // 
+            // txtProvinciaCLI
+            // 
+            this.txtProvinciaCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProvinciaCLI.Location = new System.Drawing.Point(90, 175);
+            this.txtProvinciaCLI.Name = "txtProvinciaCLI";
+            this.txtProvinciaCLI.Size = new System.Drawing.Size(295, 20);
+            this.txtProvinciaCLI.TabIndex = 6;
+            // 
+            // txtLocalidadCLI
+            // 
+            this.txtLocalidadCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLocalidadCLI.Location = new System.Drawing.Point(90, 149);
+            this.txtLocalidadCLI.Name = "txtLocalidadCLI";
+            this.txtLocalidadCLI.Size = new System.Drawing.Size(295, 20);
+            this.txtLocalidadCLI.TabIndex = 5;
+            // 
+            // txtDireccionCLI
+            // 
+            this.txtDireccionCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDireccionCLI.Location = new System.Drawing.Point(90, 123);
+            this.txtDireccionCLI.Name = "txtDireccionCLI";
+            this.txtDireccionCLI.Size = new System.Drawing.Size(295, 20);
+            this.txtDireccionCLI.TabIndex = 4;
             // 
             // label6
             // 
@@ -567,63 +624,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label9.Location = new System.Drawing.Point(10, 175);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 15);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Provincia";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label8.Location = new System.Drawing.Point(10, 149);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 15);
-            this.label8.TabIndex = 32;
-            this.label8.Text = "Localidad";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label5.Location = new System.Drawing.Point(10, 123);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 15);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "Dirección";
-            // 
-            // txtProvinciaCLI
-            // 
-            this.txtProvinciaCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProvinciaCLI.Location = new System.Drawing.Point(90, 175);
-            this.txtProvinciaCLI.Name = "txtProvinciaCLI";
-            this.txtProvinciaCLI.Size = new System.Drawing.Size(295, 20);
-            this.txtProvinciaCLI.TabIndex = 6;
-            // 
-            // txtLocalidadCLI
-            // 
-            this.txtLocalidadCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLocalidadCLI.Location = new System.Drawing.Point(90, 149);
-            this.txtLocalidadCLI.Name = "txtLocalidadCLI";
-            this.txtLocalidadCLI.Size = new System.Drawing.Size(295, 20);
-            this.txtLocalidadCLI.TabIndex = 5;
-            // 
-            // txtDireccionCLI
-            // 
-            this.txtDireccionCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDireccionCLI.Location = new System.Drawing.Point(90, 123);
-            this.txtDireccionCLI.Name = "txtDireccionCLI";
-            this.txtDireccionCLI.Size = new System.Drawing.Size(295, 20);
-            this.txtDireccionCLI.TabIndex = 4;
             // 
             // frmClientes
             // 

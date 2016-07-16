@@ -133,6 +133,7 @@ namespace StockVentas
         {
             if (dtPicker.Value.Date != DateTime.Today) return;
             if (e.RowIndex < 0) return;
+            int PK = Convert.ToInt32(dgvTesoreria.CurrentRow.Cells["IdMovTESM"].Value.ToString());
             if (e.ColumnIndex == dgvTesoreria.Columns["Editar"].Index)
             {
                 frmTesoreriaMov frm = new frmTesoreriaMov();
@@ -147,8 +148,7 @@ namespace StockVentas
                 if (MessageBox.Show("¿Desea borrar este registro?", "Trend",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-                    int PK = Convert.ToInt32(dgvTesoreria.CurrentRow.Cells["IdMovTESM"].Value.ToString());
+                    Cursor.Current = Cursors.WaitCursor;                    
                     BL.TesoreriaMovimientosBLL.BorrarByPK(PK, ref codigoError, false);
                     if (codigoError != null)
                     {

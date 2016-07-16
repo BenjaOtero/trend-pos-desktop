@@ -78,7 +78,7 @@ namespace StockVentas
             lblClave.DataBindings.Add("Text", rowView, "IdFondoFONP", false, DataSourceUpdateMode.OnPropertyChanged);
             dateTimePicker1.DataBindings.Add("Text", rowView, "FechaFONP", false, DataSourceUpdateMode.OnPropertyChanged);
             cmbLocal.DataBindings.Add("SelectedValue", rowView, "IdPcFONP", false, DataSourceUpdateMode.OnPropertyChanged);
-            txtImporte.DataBindings.Add("Text", rowView, "ImporteFONP", false, DataSourceUpdateMode.OnPropertyChanged);
+            txtImporte.DataBindings.Add("Text", rowView, "ImporteFONP", true, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.Focus();
             txtImporte.KeyPress += new KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);
             txtImporte.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);

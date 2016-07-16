@@ -50,9 +50,9 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(41, 15);
+            this.btnAceptar.Location = new System.Drawing.Point(10, 15);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(112, 32);
+            this.btnAceptar.Size = new System.Drawing.Size(138, 32);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Grabar";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(171, 15);
+            this.btnSalir.Location = new System.Drawing.Point(164, 15);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(112, 32);
+            this.btnSalir.Size = new System.Drawing.Size(138, 32);
             this.btnSalir.TabIndex = 1;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;

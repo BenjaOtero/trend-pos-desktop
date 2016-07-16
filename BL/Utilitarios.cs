@@ -145,7 +145,7 @@ namespace BL
         public static void AddEventosABM(Control grpCampos, ref Button btnGrabar, ref DataTable tbl)
         {
             tblTabla = tbl;
-            tblTabla.ColumnChanged += new DataColumnChangeEventHandler(HabilitarGrabar);
+         //   tblTabla.ColumnChanged += new DataColumnChangeEventHandler(HabilitarGrabar);
             grabar = btnGrabar;
             foreach (Control ctl in grpCampos.Controls)
             {
@@ -153,7 +153,7 @@ namespace BL
                 {
                     ctl.Enter += new System.EventHandler(SelTextoTextBox);
                     ctl.KeyDown += new System.Windows.Forms.KeyEventHandler(EnterTab);
-                    ctl.TextChanged += new System.EventHandler(HabilitarGrabar);
+                //    ctl.TextChanged += new System.EventHandler(HabilitarGrabar);
                 }
             }
         }
