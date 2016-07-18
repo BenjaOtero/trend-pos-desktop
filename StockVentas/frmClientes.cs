@@ -38,6 +38,11 @@ namespace StockVentas
             this.instanciaVentas = instanciaVentas;
         }
 
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
+        }
+
         private void frmClientes_Load(object sender, EventArgs e)
         {
             System.Drawing.Icon ico = Properties.Resources.icono_app;
@@ -325,29 +330,17 @@ namespace StockVentas
                 txtIdClienteCLI.ReadOnly = true;
                 txtRazonSocialCLI.ReadOnly = true;
                 txtNombreCLI.ReadOnly = true;
-                txtNombreCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtApellidoCLI.ReadOnly = true;
-                txtApellidoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtCUIT.ReadOnly = true;
-                txtCUIT.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtDireccionCLI.ReadOnly = true;
-                txtDireccionCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtLocalidadCLI.ReadOnly = true;
-                txtLocalidadCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtProvinciaCLI.ReadOnly = true;
-                txtProvinciaCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtTransporteCLI.ReadOnly = true;
-                txtTransporteCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtContactoCLI.ReadOnly = true;
-                txtContactoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtTelefonoCLI.ReadOnly = true;
-                txtTelefonoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtMovilCLI.ReadOnly = true;
-                txtMovilCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtCorreoCLI.ReadOnly = true;
-                txtCorreoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtFechaNacCLI.ReadOnly = true;
-                txtFechaNacCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;
@@ -356,7 +349,8 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
-                tblClientes.ColumnChanged -= new DataColumnChangeEventHandler(HabilitarGrabar);                
+                tblClientes.ColumnChanged -= new DataColumnChangeEventHandler(HabilitarGrabar);
+                txtParametros.Focus();
             }
             if (state == FormState.insercion)
             {
@@ -433,5 +427,6 @@ namespace StockVentas
                 btnGrabar.Enabled = true;
             }
         }
+
     }
 }
