@@ -45,9 +45,9 @@ namespace BL
             DAL.DatosPosDAL.InsertFechaSubidos(fechaSubida, tblFecha);
         }
 
-        public static void DeleteAll(Int16 existenClientesFallidas)
+        public static void DeleteAll()
         {
-            DAL.DatosPosDAL.DeleteAll(existenClientesFallidas);
+            DAL.DatosPosDAL.DeleteAll();
         }
 
     }

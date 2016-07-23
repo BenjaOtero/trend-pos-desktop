@@ -92,10 +92,8 @@ namespace StockVentas
                         row["FechaSUB"] = fechaExport;
                         tblFecha.Rows.Add(row);
                         BL.DatosPosBLL.InsertFechaSubidos(fechaExport, tblFecha);
-                    }
-                    
-                    
-                    //   ds = BL.Utilitarios.ActualizarBD(); cambiar actualizarDatosToolStripMenuItem_Click de frmPrincipal
+                    }                                        
+                    //    BL.Utilitarios.ActualizarBD();
                     try
                     {
                         AgregarFondoCaja();

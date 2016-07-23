@@ -133,8 +133,9 @@ namespace StockVentas
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            DownloadFileFTP();
-            RestaurarDatos();
+            BL.Utilitarios.ActualizarBD();
+           // DownloadFileFTP();
+            //RestaurarDatos();
             Cursor.Current = Cursors.Arrow;
         }
 

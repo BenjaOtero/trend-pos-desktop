@@ -91,13 +91,12 @@ namespace DAL
             SqlConnection1.Close();
         }
 
-        public static void DeleteAll(Int16 existenClientesFallidas)
+        public static void DeleteAll()
         {
             SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
             SqlDataAdapter1 = new MySqlDataAdapter();
             SqlDeleteCommand1 = new MySqlCommand("DatosPos_Borrar", SqlConnection1);
-            SqlDeleteCommand1.Parameters.AddWithValue("p_existe", existenClientesFallidas);
             SqlDataAdapter1.DeleteCommand = SqlDeleteCommand1;
             SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
             SqlDeleteCommand1.ExecuteNonQuery();
