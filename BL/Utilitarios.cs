@@ -324,24 +324,17 @@ namespace BL
             string ftpPassword = "8953#AFjn";
             string ftpUserID = "Benja";
             string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-            try
+            using (WebClient request = new WebClient())
             {
-                using (WebClient request = new WebClient())
-                {
-                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                    byte[] fileData = request.DownloadData(ftpfullpath);
+                request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                byte[] fileData = request.DownloadData(ftpfullpath);
 
-                    using (FileStream file = File.Create(inputfilepath))
-                    {
-                        file.Write(fileData, 0, fileData.Length);
-                        file.Close();
-                    }
+                using (FileStream file = File.Create(inputfilepath))
+                {
+                    file.Write(fileData, 0, fileData.Length);
+                    file.Close();
                 }
                 descargado = true;
-            }
-            catch (WebException)
-            {
-                MessageBox.Show("Se produjo un error en la comunicacion con el servidor remoto", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return descargado;
         }
@@ -376,8 +369,8 @@ namespace BL
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
             process.Exited += new EventHandler(RestaurarDatos_Exited);
-        //    process.Start();
-         //   process.WaitForExit();
+            process.Start();
+            process.WaitForExit();
         }
 
         private static void RestaurarDatos_Exited(object sender, System.EventArgs e)

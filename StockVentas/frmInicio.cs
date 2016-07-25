@@ -93,7 +93,7 @@ namespace StockVentas
                         tblFecha.Rows.Add(row);
                         BL.DatosPosBLL.InsertFechaSubidos(fechaExport, tblFecha);
                     }                                        
-                    //    BL.Utilitarios.ActualizarBD();
+                        BL.Utilitarios.ActualizarBD();
                     try
                     {
                         AgregarFondoCaja();
@@ -115,6 +115,15 @@ namespace StockVentas
                         ConfigurarMySQL();
                       //  ds = BL.Utilitarios.ActualizarBD(); 
                     }
+                }
+                catch (WebException)
+                {
+                    //invoca al hilo principal através de un delegado
+                    this.Invoke((Action)delegate
+                    {
+                        string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
+                        MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
                 }
                 catch (Exception)
                 {
