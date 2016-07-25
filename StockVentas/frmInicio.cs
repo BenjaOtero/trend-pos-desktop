@@ -31,6 +31,7 @@ namespace StockVentas
         public bool cerrando = false;
         private int? codigoError = null;
         string idRazonSocial;
+        bool seExportaronDatos = false;
 
         public frmInicio()
         {
@@ -77,23 +78,8 @@ namespace StockVentas
                 label1.Text = "Actualizando base de datos . . .";
                 try
                 {
-                    string fechaExport = BL.DatosPosBLL.GetFechaExport(); // obtengo la fecha de los movimientos a exportar
-                    DataTable tblFecha = BL.DatosPosBLL.GetFechaSubidos(fechaExport); // consulto la tabla exportar_subidos para saber si ya se exportaron los movimientos
-                    string fechaSubida;
-                    if (tblFecha.Rows.Count > 0) fechaSubida = string.Empty; // los movimientos ya se exportaron
-                    else fechaSubida = null;
-                    if (fechaSubida == null)
-                    {
-                        string pc = BL.PcsBLL.GetId().ToString();
-                        idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc +"_" + fechaExport + ".sql.gz";
-                        BL.DatosPosBLL.ExportAll();
-                        Utilitarios.ExportarDatos(idRazonSocial);
-                        DataRow row = tblFecha.NewRow();
-                        row["FechaSUB"] = fechaExport;
-                        tblFecha.Rows.Add(row);
-                        BL.DatosPosBLL.InsertFechaSubidos(fechaExport, tblFecha);
-                    }                                        
-                        BL.Utilitarios.ActualizarBD();
+                                      
+                    BL.Utilitarios.ActualizarBD();
                     try
                     {
                         AgregarFondoCaja();
@@ -298,6 +284,32 @@ namespace StockVentas
                 if (n > 1) Thread.Sleep(5000);                
             } while (n > 1);
 
+            Application.Exit();
+        }
+
+        private void frmInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (seExportaronDatos) return;
+            e.Cancel = true;
+            this.Visible = true;
+            label1.Text = "Exportando datos. . .";
+            backgroundWorker1.RunWorkerAsync();
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
+            string pc = BL.PcsBLL.GetId().ToString();
+            idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fechaExport + ".sql.gz";
+            BL.DatosPosBLL.ExportAll();
+            Utilitarios.ExportarDatos(idRazonSocial);
+
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            seExportaronDatos = true;
             Application.Exit();
         }
 
