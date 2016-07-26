@@ -26,7 +26,6 @@ namespace StockVentas
         DataTable tblEfectivo;
         DataTable tblTarjeta;
         DataView viewVentas;
-        public int idLocal;
         public string nombreLocal;
         public int idPc;
         private int? codigoError = null;
@@ -68,8 +67,17 @@ namespace StockVentas
             this.StartPosition = FormStartPosition.CenterScreen;
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
-            lblLocal.Text = "Jesus Maria";
-            lblFecha.Text = dtPicker.Value.ToLongDateString();
+            DataTable tblLocales = tblLocales = BL.LocalesBLL.CrearDataset();
+            lblLocal.Text = tblLocales.Rows[0]["NombreLOC"].ToString();
+            txtFecha.ReadOnly = true;
+            txtFecha.BackColor = System.Drawing.SystemColors.Control;
+            txtFecha.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtFecha.Text = "Fecha";
+            txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            txtFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            txtFecha.ForeColor = System.Drawing.SystemColors.Highlight;
+            txtFecha.Text = dtPicker.Value.ToLongDateString();
+            
         }
 
         private void frmArqueoCajaAdmin_Activated(object sender, EventArgs e)
@@ -139,7 +147,6 @@ namespace StockVentas
                 frmTesoreriaMov frm = new frmTesoreriaMov();
                 frm.FormClosed += editTesoreria_FormClosed;
                 frm.PK = dgvTesoreria.CurrentRow.Cells["IdMovTESM"].Value.ToString();
-                frm.idLocal = idLocal;
                 frm.idPc = idPc;
                 frm.Show();               
             }
@@ -224,11 +231,9 @@ namespace StockVentas
         public void CargarDatos()
         {
             Cursor.Current = Cursors.WaitCursor;
-            idPc = 1;
-            idLocal = 13;
-       //     strFechaDesde = DateTime.Today.ToString("yyyy-MM-dd 00:00:00"); //fecha string para mysql
+            DataTable tblPcs = BL.PcsBLL.CrearDataset();
+            idPc = (int)tblPcs.Rows[0]["IdPC"];
             strFechaDesde = dtPicker.Value.ToString("yyyy-MM-dd 00:00:00"); //fecha string para mysql
-
             strFechaHasta = dtPicker.Value.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
             dt = BL.VentasBLL.CrearDatasetArqueo(strFechaDesde, strFechaHasta, idPc, ref codigoError);
             if (dt == null)

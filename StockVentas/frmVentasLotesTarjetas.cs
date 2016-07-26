@@ -22,7 +22,7 @@ namespace StockVentas
             this.Icon = ico;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            textBox1.Text = DateTime.Today.ToLongDateString();
+            txtFecha.Text = DateTime.Today.ToLongDateString();
             DataSet dt = BL.VentasBLL.GetLotesTarjetas();
             dataGridView1.DataSource = dt.Tables[0];
             dataGridView1.Columns["DescripcionFOR"].HeaderText = "Tarjeta";
@@ -39,5 +39,6 @@ namespace StockVentas
             string total = tblTotal.Rows[0][0].ToString();
             txtTotal.Text = "$ " + total;
         }
+
     }
 }

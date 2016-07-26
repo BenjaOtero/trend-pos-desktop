@@ -36,7 +36,6 @@ namespace StockVentas
             this.MaximizeBox = false;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             dsForaneos = BL.VentasBLL.CrearDatasetForaneos();
-
             tblLocales = dsForaneos.Tables[3];
             tblFormasPago = dsForaneos.Tables[2];
             DataView viewLocales = new DataView(tblLocales);

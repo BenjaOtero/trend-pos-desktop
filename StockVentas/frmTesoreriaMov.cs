@@ -20,7 +20,6 @@ namespace StockVentas
         DataView viewLocal;
         DataView viewPc; 
         DataRowView rowView;
-        public int idLocal;
         public int idPc;
         public string PK = string.Empty;
         private int? codigoError = null;
@@ -39,23 +38,6 @@ namespace StockVentas
             this.MaximizeBox = false;
             this.KeyPreview = true;
             dateTimePicker1.TabStop = false;
-            lstPc.TabStop = false;
-            lstLocales.TabStop = false;
-            tblLocales = BL.LocalesBLL.CrearDataset();
-            viewLocal = new DataView(tblLocales);
-            viewLocal.RowFilter = "IdLocalLOC = '13'";  // Local 13 es Jesus Maria
-            lstLocales.ValueMember = "IdLocalLOC";
-            lstLocales.DisplayMember = "NombreLOC";
-            lstLocales.DataSource = viewLocal;
-            tblPcs = BL.PcsBLL.CrearDataset();
-            string local = lstLocales.SelectedValue.ToString();
-            viewPc = new DataView(tblPcs);
-            viewPc.RowFilter = "IdPC = '1'"; // Pc 1 es caja1 de Jesus Maria
-            viewPc.Sort = "Detalle ASC";
-            lstPc.ValueMember = "IdPC";
-            lstPc.DisplayMember = "Detalle";
-            lstPc.DataSource = viewPc;
-
             txtImporte.Text = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:C2}", txtImporte);
             dsTesoreriaMov = BL.TesoreriaMovimientosBLL.CrearDataset();
             tblTesoreriaMov = dsTesoreriaMov.Tables[0];
@@ -66,25 +48,24 @@ namespace StockVentas
                 int clave = rand.Next(1, 2000000000);
                 lblClave.Text = clave.ToString();
                 lblClave.ForeColor = System.Drawing.Color.DarkRed;
+                tblPcs = BL.PcsBLL.CrearDataset();
                 viewTesoreria.RowStateFilter = DataViewRowState.Added;
                 rowView = viewTesoreria.AddNew();
                 rowView["IdMovTESM"] = clave.ToString();
                 rowView["FechaTESM"] = DateTime.Today;
-                rowView["IdPcTESM"] = 1;
+                rowView["IdPcTESM"] = tblPcs.Rows[0]["IdPC"];
                 rowView.EndEdit();                
             }
             else
             {
-                lstLocales.SelectedValue = idLocal;
-                lstPc.SelectedValue = idPc;
                 lblClave.Text = PK;
                 lblClave.ForeColor = System.Drawing.Color.DarkRed;
                 viewTesoreria.RowFilter = "IdMovTESM = '" + PK + "'";
                 rowView = viewTesoreria[0];
                 txtDetalle.Focus();
             }
-           dateTimePicker1.DataBindings.Add("Text", rowView, "FechaTESM", false, DataSourceUpdateMode.OnPropertyChanged);
-            lstPc.DataBindings.Add("SelectedValue", rowView, "IdPcTESM", false, DataSourceUpdateMode.OnPropertyChanged);
+            dateTimePicker1.DataBindings.Add("Text", rowView, "FechaTESM", false, DataSourceUpdateMode.OnPropertyChanged);
+          //  lstPc.DataBindings.Add("SelectedValue", rowView, "IdPcTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             txtDetalle.DataBindings.Add("Text", rowView, "DetalleTESM", false, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.DataBindings.Add("Text", rowView, "ImporteTESM", true, DataSourceUpdateMode.OnPropertyChanged);
             txtImporte.KeyPress += new KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);

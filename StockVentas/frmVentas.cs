@@ -211,7 +211,7 @@ namespace StockVentas
                 rowView = viewVentas.AddNew();
                 rowView["IdVentaVEN"] = clave.ToString();
                 rowView["FechaVEN"] = DateTime.Now;
-                rowView["IdPCVEN"] = 1;
+                rowView["IdPCVEN"] = (int)tblPcs.Rows[0]["IdPC"];
                 rowView.EndEdit();
             }
             else // editar registros
@@ -371,7 +371,6 @@ namespace StockVentas
                 row["IdDVEN"] = clave;
                 row["IdVentaDVEN"] = lblNro.Text;
                 int intPc = Convert.ToInt32(cmbLocal.SelectedValue.ToString());
-                viewLocal.RowFilter = "IdPc = " + intPc;
                 int intLocal = Convert.ToInt32(viewLocal[0][1].ToString());
                 row["IdLocalDVEN"] = intLocal;
                 row["IdArticuloDVEN"] = txtArticulo.Text;
@@ -547,7 +546,6 @@ namespace StockVentas
                     dtTemp.Rows.Add(fila);
                 }
                 viewLocal = new DataView(dtTemp);
-                viewLocal.RowFilter = "IdPC = 1";
                 cmbLocal.ValueMember = "IdPC";
                 cmbLocal.DisplayMember = "NombreLOC";
                 cmbLocal.DropDownStyle = ComboBoxStyle.DropDownList;

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvVentas = new System.Windows.Forms.DataGridView();
-            this.lblFecha = new System.Windows.Forms.Label();
             this.lblLocal = new System.Windows.Forms.Label();
             this.dgvTesoreria = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +49,7 @@
             this.lblTarjeta = new System.Windows.Forms.Label();
             this.lblEfectivo = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtFecha = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTesoreria)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -65,27 +65,17 @@
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentas.Location = new System.Drawing.Point(12, 46);
             this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.ReadOnly = true;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVentas.Size = new System.Drawing.Size(992, 283);
             this.dgvVentas.TabIndex = 0;
-            // 
-            // lblFecha
-            // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFecha.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblFecha.Location = new System.Drawing.Point(13, 13);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(47, 15);
-            this.lblFecha.TabIndex = 1;
-            this.lblFecha.Text = "label1";
             // 
             // lblLocal
             // 
             this.lblLocal.AutoSize = true;
             this.lblLocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLocal.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblLocal.Location = new System.Drawing.Point(880, 13);
+            this.lblLocal.Location = new System.Drawing.Point(12, 13);
             this.lblLocal.Name = "lblLocal";
             this.lblLocal.Size = new System.Drawing.Size(47, 15);
             this.lblLocal.TabIndex = 1;
@@ -286,16 +276,23 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Ventas en efectivo";
             // 
+            // txtFecha
+            // 
+            this.txtFecha.Location = new System.Drawing.Point(660, 8);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(331, 20);
+            this.txtFecha.TabIndex = 4;
+            // 
             // frmArqueoCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1016, 596);
+            this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTesoreria);
             this.Controls.Add(this.lblLocal);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.dgvVentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -316,7 +313,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvVentas;
-        private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblLocal;
         private System.Windows.Forms.DataGridView dgvTesoreria;
         private System.Windows.Forms.Label label3;
@@ -337,5 +333,6 @@
         private System.Windows.Forms.Label lblCajaInicial;
         private System.Windows.Forms.Label lblTarjeta;
         private System.Windows.Forms.Label lblEfectivo;
+        private System.Windows.Forms.TextBox txtFecha;
     }
 }

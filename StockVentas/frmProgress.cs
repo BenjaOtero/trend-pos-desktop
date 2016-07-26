@@ -202,9 +202,6 @@ namespace StockVentas
                     case "frmArticulos":
                         BL.ArticulosBLL.CrearDataset();
                         break;
-                    case "frmStock":
-                        dtEstatico = BL.StockBLL.CrearDataset(locales, proveedor, articulo, descripcion, ref codigoError);
-                        break;
                     case "frmVentasPesosCons":
                         dsVentasPesosCons = BL.VentasBLL.CrearDatasetVentasPesos(forma, strFechaDesde, strFechaHasta, locales, ref codigoError);
                         break;

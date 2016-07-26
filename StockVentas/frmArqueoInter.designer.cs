@@ -94,6 +94,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmArqueoInter";
             this.Text = "Arqueo de caja";
+            this.Load += new System.EventHandler(this.frmArqueoInter_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

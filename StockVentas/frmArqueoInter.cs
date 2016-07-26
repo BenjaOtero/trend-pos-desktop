@@ -16,9 +16,14 @@ namespace StockVentas
 
         public frmArqueoInter()
         {
-            InitializeComponent();
+            InitializeComponent();            
             this.MaximizeBox = false;
             dateTimeFecha.Value = DateTime.Today;
+        }
+
+        private void frmArqueoInter_Load(object sender, EventArgs e)
+        {
+            this.Location = new Point(50, 50);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
