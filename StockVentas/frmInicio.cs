@@ -19,7 +19,6 @@ using MySql.Data.MySqlClient;
 
 namespace StockVentas
 {
-
     public partial class frmInicio : Form
     {
         frmInicio instanciaInicio;

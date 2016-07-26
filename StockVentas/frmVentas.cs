@@ -106,14 +106,16 @@ namespace StockVentas
             txtPrecio.BackColor = Color.White;
             tblFormasPago = dsForaneos.Tables[2];
             tblFormasPago.TableName = "FormasPago";
+            DataView viewForma = new DataView(tblFormasPago);
+            viewForma.RowFilter = "IdFormaPagoFOR <>'99'";
             cmbForma.ValueMember = "IdFormaPagoFOR";
             cmbForma.DisplayMember = "DescripcionFOR";
             cmbForma.DropDownStyle = ComboBoxStyle.DropDown;
-            cmbForma.DataSource = tblFormasPago;
+            cmbForma.DataSource = viewForma;
             cmbForma.SelectedValue = -1;
             cmbForma.BackColor = Color.White;
             AutoCompleteStringCollection formasColection = new AutoCompleteStringCollection();
-            foreach (DataRow row in tblFormasPago.Rows)
+            foreach (DataRowView row in viewForma)
             {
                 formasColection.Add(Convert.ToString(row["DescripcionFOR"]));
             }
@@ -526,8 +528,6 @@ namespace StockVentas
                 var query =
                         from local in tblLocales.AsEnumerable()
                         from pc in tblPcs.AsEnumerable()
-                        where (local.Field<Int32>("IdLocalLOC") == pc.Field<Int32>("IdLocalPC"))
-                            && (pc.Field<string>("Detalle") == "Caja1")
                         select new
                         {
                             Local = local.Field<string>("NombreLOC"),

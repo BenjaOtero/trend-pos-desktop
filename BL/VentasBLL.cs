@@ -93,9 +93,9 @@ namespace BL
             return dt;
         }
 
-        public static DataSet GetLotesTarjetas(int idPc)
+        public static DataSet GetLotesTarjetas()
         {
-            DataSet dt = DAL.VentasDAL.GetLotesTarjetas(idPc);
+            DataSet dt = DAL.VentasDAL.GetLotesTarjetas();
             return dt;
         }
     }

@@ -162,12 +162,11 @@ namespace DAL
             SqlConnection1.Close();
         }
 
-        public static DataSet GetLotesTarjetas(int idPc)
+        public static DataSet GetLotesTarjetas()
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
             MySqlCommand SqlSelectCommand1 = new MySqlCommand("Ventas_Lotes_Tarjetas", SqlConnection1);
-            SqlSelectCommand1.Parameters.AddWithValue("p_pc", idPc);
             SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
             SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
             DataSet dt = new DataSet();
