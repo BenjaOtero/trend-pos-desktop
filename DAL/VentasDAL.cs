@@ -50,7 +50,7 @@ namespace DAL
 
         public static DataSet CrearDatasetVentasPesos(int forma, string desde, string hasta, string locales)
         {
-            MySqlConnection SqlConnection1 = DALBase.GetRemoteConnection();
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
             MySqlCommand SqlSelectCommand1 = new MySqlCommand("VentasPesosCons_Listar", SqlConnection1);
             SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
@@ -68,7 +68,7 @@ namespace DAL
         public static DataTable GetVentasPesosDiarias(string desde, string hasta, int local, string forma)
         {
 
-            MySqlConnection SqlConnection1 = DALBase.GetRemoteConnection();
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
             MySqlCommand SqlSelectCommand1 = new MySqlCommand("Ventas_Diarias", SqlConnection1);
             SqlDataAdapter1.SelectCommand = SqlSelectCommand1;

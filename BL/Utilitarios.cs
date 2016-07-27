@@ -300,11 +300,22 @@ namespace BL
 
         public static void ActualizarBD()
         {
-            if (DownloadFileFTP())
+            try
             {
-                BL.DatosPosBLL.DeleteAll();
-                RestaurarDatos();
-            }            
+                if (DownloadFileFTP())
+                {
+                    BL.DatosPosBLL.DeleteAll();
+                    RestaurarDatos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            { 
+                //ActualizarBD();
+            }
         }
 
         private static bool DownloadFileFTP()
@@ -327,13 +338,7 @@ namespace BL
             using (WebClient request = new WebClient())
             {
                 request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                byte[] fileData = request.DownloadData(ftpfullpath);
-
-                using (FileStream file = File.Create(inputfilepath))
-                {
-                    file.Write(fileData, 0, fileData.Length);
-                    file.Close();
-                }
+                request.DownloadFile(ftpfullpath, inputfilepath);
                 descargado = true;
             }
             return descargado;
@@ -375,9 +380,26 @@ namespace BL
 
         private static void RestaurarDatos_Exited(object sender, System.EventArgs e)
         {
-          //  if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
+            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
           //  if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
           //  if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
+        }
+
+        private static bool SeActualizaronDatos()
+        {
+            bool seActualizaron = true;
+            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
+            int records;
+            foreach (DataTable tbl in ds.Tables)
+            {
+                records = (int)tbl.Rows[0][0];
+                if (records == 0)
+                {
+                    seActualizaron = false;
+                    break;
+                }
+            }
+            return seActualizaron;
         }
     }
 

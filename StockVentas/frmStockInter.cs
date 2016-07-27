@@ -28,6 +28,7 @@ namespace StockVentas
 
         private void frmStockMovInter_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             tblLocales = BL.LocalesBLL.CrearDataset();
             intLocal = (int)tblLocales.Rows[0]["IdLocalLOC"];
         }

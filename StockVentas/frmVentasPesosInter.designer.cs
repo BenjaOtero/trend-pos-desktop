@@ -67,14 +67,14 @@
             // 
             // dateTimeDesde
             // 
-            this.dateTimeDesde.Location = new System.Drawing.Point(93, 222);
+            this.dateTimeDesde.Location = new System.Drawing.Point(93, 224);
             this.dateTimeDesde.Name = "dateTimeDesde";
             this.dateTimeDesde.Size = new System.Drawing.Size(231, 20);
             this.dateTimeDesde.TabIndex = 10;
             // 
             // dateTimeHasta
             // 
-            this.dateTimeHasta.Location = new System.Drawing.Point(93, 251);
+            this.dateTimeHasta.Location = new System.Drawing.Point(93, 253);
             this.dateTimeHasta.Name = "dateTimeHasta";
             this.dateTimeHasta.Size = new System.Drawing.Size(231, 20);
             this.dateTimeHasta.TabIndex = 11;
@@ -83,7 +83,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label2.Location = new System.Drawing.Point(6, 224);
+            this.label2.Location = new System.Drawing.Point(6, 228);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 12;
@@ -93,7 +93,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(6, 253);
+            this.label3.Location = new System.Drawing.Point(6, 257);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 13;
@@ -141,7 +141,7 @@
             // 
             this.groupBox1.Controls.Add(this.btnSalir);
             this.groupBox1.Controls.Add(this.btnAceptar);
-            this.groupBox1.Location = new System.Drawing.Point(9, 317);
+            this.groupBox1.Location = new System.Drawing.Point(9, 312);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(315, 62);
             this.groupBox1.TabIndex = 6;
@@ -171,7 +171,7 @@
             // cmbForma
             // 
             this.cmbForma.FormattingEnabled = true;
-            this.cmbForma.Location = new System.Drawing.Point(93, 287);
+            this.cmbForma.Location = new System.Drawing.Point(93, 283);
             this.cmbForma.Name = "cmbForma";
             this.cmbForma.Size = new System.Drawing.Size(231, 21);
             this.cmbForma.TabIndex = 14;
@@ -180,7 +180,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.Location = new System.Drawing.Point(6, 289);
+            this.label4.Location = new System.Drawing.Point(6, 287);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 13;
@@ -188,8 +188,10 @@
             // 
             // frmVentasPesosInter
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(333, 386);
             this.Controls.Add(this.cmbForma);
             this.Controls.Add(this.lstLocales);

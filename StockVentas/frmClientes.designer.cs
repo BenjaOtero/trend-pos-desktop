@@ -451,6 +451,7 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSalir.Location = new System.Drawing.Point(20, 217);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(160, 26);
@@ -630,6 +631,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(639, 557);
             this.ControlBox = false;
             this.Controls.Add(this.cmbCondicion);

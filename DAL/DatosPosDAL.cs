@@ -79,6 +79,19 @@ namespace DAL
             return tblFecha;
         }
 
+        public static DataSet ControlarUpdate()
+        {            
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_ControlarUpdate", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataSet ds = new DataSet();
+            SqlDataAdapter1.Fill(ds);
+            SqlConnection1.Close();
+            return ds;
+        }
+
         public static void InsertFechaSubidos(string fechaSubida, DataTable tblFecha)
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();

@@ -67,6 +67,7 @@
             this.mantenimientoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ventasToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -302,7 +303,8 @@
             this.arqueoDeCajaToolStripMenuItem2,
             this.artículosToolStripMenuItem,
             this.lotesTarjetasToolStripMenuItem,
-            this.toolStripMenuItem20});
+            this.toolStripMenuItem20,
+            this.ventasToolStripMenuItem2});
             this.toolStripMenuItem19.Name = "toolStripMenuItem19";
             this.toolStripMenuItem19.Size = new System.Drawing.Size(62, 20);
             this.toolStripMenuItem19.Text = "Informes";
@@ -310,28 +312,28 @@
             // arqueoDeCajaToolStripMenuItem2
             // 
             this.arqueoDeCajaToolStripMenuItem2.Name = "arqueoDeCajaToolStripMenuItem2";
-            this.arqueoDeCajaToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.arqueoDeCajaToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.arqueoDeCajaToolStripMenuItem2.Text = "Arqueo de caja";
             this.arqueoDeCajaToolStripMenuItem2.Click += new System.EventHandler(this.arqueoDeCajaToolStripMenuItem1_Click);
             // 
             // artículosToolStripMenuItem
             // 
             this.artículosToolStripMenuItem.Name = "artículosToolStripMenuItem";
-            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.artículosToolStripMenuItem.Text = "Artículos";
             this.artículosToolStripMenuItem.Click += new System.EventHandler(this.btnArticulos_Click);
             // 
             // lotesTarjetasToolStripMenuItem
             // 
             this.lotesTarjetasToolStripMenuItem.Name = "lotesTarjetasToolStripMenuItem";
-            this.lotesTarjetasToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.lotesTarjetasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lotesTarjetasToolStripMenuItem.Text = "Lotes tarjetas";
             this.lotesTarjetasToolStripMenuItem.Click += new System.EventHandler(this.lotesTarjetasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem20
             // 
             this.toolStripMenuItem20.Name = "toolStripMenuItem20";
-            this.toolStripMenuItem20.Size = new System.Drawing.Size(147, 22);
+            this.toolStripMenuItem20.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem20.Text = "Stock";
             this.toolStripMenuItem20.Click += new System.EventHandler(this.stockDeArtículosToolStripMenuItem_Click);
             // 
@@ -346,7 +348,7 @@
             // actualizarDatosToolStripMenuItem
             // 
             this.actualizarDatosToolStripMenuItem.Name = "actualizarDatosToolStripMenuItem";
-            this.actualizarDatosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.actualizarDatosToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.actualizarDatosToolStripMenuItem.Text = "Actualizar datos";
             this.actualizarDatosToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosToolStripMenuItem_Click);
             // 
@@ -356,6 +358,13 @@
             this.salirToolStripMenuItem1.Size = new System.Drawing.Size(39, 20);
             this.salirToolStripMenuItem1.Text = "Salir";
             this.salirToolStripMenuItem1.Click += new System.EventHandler(this.salirToolStripMenuItem1_Click);
+            // 
+            // ventasToolStripMenuItem2
+            // 
+            this.ventasToolStripMenuItem2.Name = "ventasToolStripMenuItem2";
+            this.ventasToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.ventasToolStripMenuItem2.Text = "Ventas";
+            this.ventasToolStripMenuItem2.Click += new System.EventHandler(this.ventasToolStripMenuItem2_Click);
             // 
             // frmPrincipal
             // 
@@ -421,6 +430,7 @@
         private System.Windows.Forms.ToolStripMenuItem arqueoDeCajaToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem2;
     }
 }
 

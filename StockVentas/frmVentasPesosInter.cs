@@ -30,6 +30,7 @@ namespace StockVentas
 
         private void frmVentasPesosInter_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -48,10 +49,19 @@ namespace StockVentas
             cmbForma.ValueMember = "IdFormaPagoFOR";
             cmbForma.DisplayMember = "DescripcionFOR";
             cmbForma.SelectedValue = 99;
+            AutoCompleteStringCollection formasColection = new AutoCompleteStringCollection();
+            foreach (DataRow row in tblFormasPago.Rows)
+            {
+                formasColection.Add(Convert.ToString(row["DescripcionFOR"]));
+            }
+            cmbForma.AutoCompleteCustomSource = formasColection;
+            cmbForma.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbForma.AutoCompleteSource = AutoCompleteSource.CustomSource;
             lstLocales.SelectionMode = SelectionMode.MultiSimple;
-            lstLocales.SelectedIndex = -1;
+            lstLocales.SelectedIndex = 0;
             DateTime baseDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dateTimeDesde.Value = baseDate;
+            cmbForma.Validating += new System.ComponentModel.CancelEventHandler(BL.Utilitarios.ValidarComboBox);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

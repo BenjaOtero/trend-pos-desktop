@@ -24,6 +24,7 @@ namespace StockVentas
 
         private void frmVentasPesosCons_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;

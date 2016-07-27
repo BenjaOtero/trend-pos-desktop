@@ -30,9 +30,6 @@ namespace StockVentas
             this.Text = "Ventas diarias en pesos";
             this.CenterToScreen();
             this.MaximizeBox = false;
-            lblLocal.Text = "Local: " + local;
-            lblDesde.Text = "Desde: " + desde;
-            lblHasta.Text = "Hasta: " + hasta;
             dgvVentas.DataSource = tblVentasPesosDiarias;
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "C2";
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
