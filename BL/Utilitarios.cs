@@ -302,6 +302,7 @@ namespace BL
         {
             try
             {
+                Backup();
                 if (DownloadFileFTP())
                 {
                     BL.DatosPosBLL.DeleteAll();
@@ -313,8 +314,12 @@ namespace BL
                 MessageBox.Show(ex.ToString());
             }
             finally
-            { 
-                //ActualizarBD();
+            {
+                if (!SeActualizaronDatos())
+                {
+                    //RestaurarBD(); 
+                    //ActualizarBD();
+                }                
             }
         }
 
@@ -392,7 +397,7 @@ namespace BL
             int records;
             foreach (DataTable tbl in ds.Tables)
             {
-                records = (int)tbl.Rows[0][0];
+                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
                 if (records == 0)
                 {
                     seActualizaron = false;
@@ -400,6 +405,38 @@ namespace BL
                 }
             }
             return seActualizaron;
+        }
+
+        private static void Backup()
+        {
+            string archivo = @"C:\Windows\Temp\backup.sql";
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Backup");
+            //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
+            sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt pos_desktop > " + archivo);
+            //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(Backup_Exited);
+            process.Start();
+            process.WaitForExit();
+        }
+
+        private static void Backup_Exited(object sender, System.EventArgs e)
+        {
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
     }
 
