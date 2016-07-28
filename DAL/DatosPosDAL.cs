@@ -115,6 +115,11 @@ namespace DAL
             SqlDeleteCommand1.ExecuteNonQuery();
             SqlConnection1.Close();
         }
+
+        public static void BorrarBD()
+        {
+            
+        }
     }
 
 }

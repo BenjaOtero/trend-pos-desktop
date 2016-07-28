@@ -317,10 +317,15 @@ namespace BL
             {
                 if (!SeActualizaronDatos())
                 {
-                    //RestaurarBD(); 
-                    //ActualizarBD();
+                    RestaurarBD(); 
+                    ActualizarBD();
                 }                
             }
+        }
+
+        private static void RestaurarBD()
+        {
+            DAL.DatosPosDAL.BorrarBD();
         }
 
         private static bool DownloadFileFTP()
@@ -437,6 +442,40 @@ namespace BL
         private static void Backup_Exited(object sender, System.EventArgs e)
         {
             if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        }
+
+        private static void RestaurarDatosBD()
+        {
+            // gzip -d n:\2147483647_datos.sql.gz
+            // mysql -u ncsoftwa_re -p8953#AFjn pos < n:\2147483647_datos.sql  
+            /*
+             * crear archivo bat
+             * escribir archivo bat con sentencias
+             * ejecutar bat
+             * borrar bat
+             */
+            if (File.Exists(@"C:\Windows\Temp\datos.sql")) File.Delete(@"C:\Windows\Temp\datos.sql");
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Mysql");
+            sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\datos.sql.gz\"");
+            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\datos.sql\"");
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(RestaurarDatos_Exited);
+            process.Start();
+            process.WaitForExit();
         }
     }
 
