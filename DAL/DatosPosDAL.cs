@@ -116,9 +116,16 @@ namespace DAL
             SqlConnection1.Close();
         }
 
-        public static void BorrarBD()
+        public static void BorrarCrearBD()
         {
-            
+            SqlConnection1 = DALBase.GetConnection();
+            SqlConnection1.Open();
+            SqlDataAdapter1 = new MySqlDataAdapter();
+            SqlDeleteCommand1 = new MySqlCommand("DatosPos_BorrarCrearBD", SqlConnection1);
+            SqlDataAdapter1.DeleteCommand = SqlDeleteCommand1;
+            SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
+            SqlDeleteCommand1.ExecuteNonQuery();
+            SqlConnection1.Close();            
         }
     }
 

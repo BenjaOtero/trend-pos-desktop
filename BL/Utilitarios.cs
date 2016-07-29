@@ -303,20 +303,16 @@ namespace BL
             try
             {
                 Backup();
-                if (DownloadFileFTP())
+                if (DownloadFileFTP())  //tratar errores en DownloadFileFTP()
                 {
                     BL.DatosPosBLL.DeleteAll();
                     RestaurarDatos();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
             finally
             {
                 if (!SeActualizaronDatos())
-                {
+                {                    
                     RestaurarBD(); 
                     ActualizarBD();
                 }                
@@ -325,7 +321,8 @@ namespace BL
 
         private static void RestaurarBD()
         {
-            DAL.DatosPosDAL.BorrarBD();
+            DAL.DatosPosDAL.BorrarCrearBD();
+            RestaurarDatosBD();
         }
 
         private static bool DownloadFileFTP()
@@ -421,7 +418,7 @@ namespace BL
             string path = Application.StartupPath;
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Backup");
+            sb.AppendLine(@"cd " + path + @"\Mysql");
             //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
             sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt pos_desktop > " + archivo);
             //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
@@ -441,7 +438,7 @@ namespace BL
 
         private static void Backup_Exited(object sender, System.EventArgs e)
         {
-            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        //    if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
 
         private static void RestaurarDatosBD()
@@ -454,7 +451,7 @@ namespace BL
              * ejecutar bat
              * borrar bat
              */
-            if (File.Exists(@"C:\Windows\Temp\datos.sql")) File.Delete(@"C:\Windows\Temp\datos.sql");
+            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
             sw.Close();
             StringBuilder sb = new StringBuilder();
@@ -462,8 +459,7 @@ namespace BL
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\datos.sql.gz\"");
-            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\datos.sql\"");
+            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\backup.sql\"");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {
                 outfile.Write(sb.ToString());
@@ -473,10 +469,16 @@ namespace BL
             process.StartInfo.CreateNoWindow = false;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(RestaurarDatos_Exited);
+            process.Exited += new EventHandler(RestaurarDatosBD_Exited);
             process.Start();
             process.WaitForExit();
         }
+
+        private static void RestaurarDatosBD_Exited(object sender, System.EventArgs e)
+        {
+            //    if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        }
+
     }
 
 }

@@ -12,8 +12,9 @@ MySQL - 5.5.0-m2-community : Database - pos_desktop
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`pos_desktop` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `pos_desktop`;
 
 /*Table structure for table `alicuotasiva` */
 
@@ -136,7 +137,7 @@ CREATE TABLE `exportar_fondo_caja` (
 
 LOCK TABLES `exportar_fondo_caja` WRITE;
 
-insert  into `exportar_fondo_caja`(`IdFondoFONP`,`FechaFONP`,`IdPcFONP`,`ImporteFONP`) values (691641656,'2016-07-27 00:00:00',1,0);
+insert  into `exportar_fondo_caja`(`IdFondoFONP`,`FechaFONP`,`IdPcFONP`,`ImporteFONP`) values (431477105,'2016-07-29 00:00:00',1,50);
 
 UNLOCK TABLES;
 
@@ -156,6 +157,8 @@ CREATE TABLE `exportar_tesoreria_movimientos` (
 
 LOCK TABLES `exportar_tesoreria_movimientos` WRITE;
 
+insert  into `exportar_tesoreria_movimientos`(`IdMovTESM`,`FechaTESM`,`IdPcTESM`,`DetalleTESM`,`ImporteTESM`) values (166333691,'2016-07-29 00:00:00',1,'cambio',150);
+
 UNLOCK TABLES;
 
 /*Table structure for table `exportar_ventas` */
@@ -173,7 +176,7 @@ CREATE TABLE `exportar_ventas` (
 
 LOCK TABLES `exportar_ventas` WRITE;
 
-insert  into `exportar_ventas`(`IdVentaVEN`,`IdPCVEN`,`FechaVEN`,`IdClienteVEN`) values (477607568,1,'2016-07-27 10:39:31',1);
+insert  into `exportar_ventas`(`IdVentaVEN`,`IdPCVEN`,`FechaVEN`,`IdClienteVEN`) values (866103056,1,'2016-07-29 09:48:25',1);
 
 UNLOCK TABLES;
 
@@ -204,7 +207,7 @@ CREATE TABLE `exportar_ventas_detalle` (
 
 LOCK TABLES `exportar_ventas_detalle` WRITE;
 
-insert  into `exportar_ventas_detalle`(`IdDVEN`,`IdVentaDVEN`,`IdLocalDVEN`,`IdArticuloDVEN`,`DescripcionDVEN`,`CantidadDVEN`,`PrecioPublicoDVEN`,`PrecioCostoDVEN`,`PrecioMayorDVEN`,`IdFormaPagoDVEN`,`NroCuponDVEN`,`NroFacturaDVEN`,`IdEmpleadoDVEN`,`LiquidadoDVEN`,`EsperaDVEN`,`DevolucionDVEN`) values (1674146216,477607568,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0);
+insert  into `exportar_ventas_detalle`(`IdDVEN`,`IdVentaDVEN`,`IdLocalDVEN`,`IdArticuloDVEN`,`DescripcionDVEN`,`CantidadDVEN`,`PrecioPublicoDVEN`,`PrecioCostoDVEN`,`PrecioMayorDVEN`,`IdFormaPagoDVEN`,`NroCuponDVEN`,`NroFacturaDVEN`,`IdEmpleadoDVEN`,`LiquidadoDVEN`,`EsperaDVEN`,`DevolucionDVEN`) values (1770345839,866103056,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0);
 
 UNLOCK TABLES;
 
@@ -226,7 +229,7 @@ CREATE TABLE `fondocaja` (
 
 LOCK TABLES `fondocaja` WRITE;
 
-insert  into `fondocaja`(`IdFondoFONP`,`FechaFONP`,`IdPcFONP`,`ImporteFONP`) values (1598060619,'2015-10-19 00:00:00',1,0),(1720372201,'2016-07-14 00:00:00',1,0),(178775679,'2016-07-15 00:00:00',1,0),(1071508768,'2016-07-25 00:00:00',1,0),(913060190,'2016-07-26 00:00:00',1,0),(691641656,'2016-07-27 00:00:00',1,0);
+insert  into `fondocaja`(`IdFondoFONP`,`FechaFONP`,`IdPcFONP`,`ImporteFONP`) values (1598060619,'2015-10-19 00:00:00',1,0),(1720372201,'2016-07-14 00:00:00',1,0),(178775679,'2016-07-15 00:00:00',1,0),(1071508768,'2016-07-25 00:00:00',1,0),(913060190,'2016-07-26 00:00:00',1,0),(691641656,'2016-07-27 00:00:00',1,0),(1185514980,'2016-07-28 00:00:00',1,0),(431477105,'2016-07-29 00:00:00',1,50);
 
 UNLOCK TABLES;
 
@@ -281,7 +284,7 @@ CREATE TABLE `locales` (
   PRIMARY KEY (`IdLocalLOC`),
   UNIQUE KEY `NombreLOC` (`NombreLOC`),
   KEY `IdLocalLOC` (`IdLocalLOC`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `locales` */
 
@@ -379,7 +382,7 @@ CREATE TABLE `tesoreriamovimientos` (
 
 LOCK TABLES `tesoreriamovimientos` WRITE;
 
-insert  into `tesoreriamovimientos`(`IdMovTESM`,`FechaTESM`,`IdPcTESM`,`DetalleTESM`,`ImporteTESM`) values (2019937,'2015-11-04 00:00:00',3,'vicky 350',0),(127497858,'2016-02-04 00:00:00',3,'gastos protector tension  electrico',-519),(145566872,'2015-12-04 00:00:00',3,'gastos -345 dif calco s',-345),(148931598,'2015-12-07 00:00:00',3,'viky 0470471101 0411970000pagado',0),(187536300,'2015-11-14 00:00:00',3,'retiro-1050',-1050),(188828601,'2015-12-26 00:00:00',3,'sobro 200',200),(205689421,'2016-01-30 00:00:00',3,'DIA/MARIANA',-189),(219336467,'2015-12-29 00:00:00',3,'gastos libreria -10',-10),(223913224,'2016-02-11 00:00:00',3,'mil liqui 30-1-1600/1-2-2300/5-2-445/6-2-2050',0),(245816199,'2015-12-05 00:00:00',3,'retiro 1300',-1300),(303510713,'2015-12-12 00:00:00',3,'retiro -500',-500),(345584175,'2015-11-27 00:00:00',3,'dia/mariana',-189),(358395058,'2016-02-11 00:00:00',3,'0412330000descontar vicky pagada',0),(358782477,'2015-12-07 00:00:00',3,'gastos vidriera caja sab 5/12 -550',0),(372252048,'2015-12-26 00:00:00',3,'dia/mariana',-189),(412786171,'2016-01-18 00:00:00',3,'dina entreg 23-12/ 100 2-12/100 11-12 /50',0),(439725314,'2016-02-22 00:00:00',3,'armado de vidriera -600',-600),(470737547,'2016-02-20 00:00:00',3,'dia/mariana',-189),(481421181,'2016-07-25 00:00:00',1,'Prueba curdate',2000),(486862168,'2015-10-29 00:00:00',3,'gastos escoba-30',-30),(516691186,'2016-01-22 00:00:00',3,'diferenc alq -206',-206),(526512880,'2015-12-22 00:00:00',3,'diferencia de alquiler-106',-106),(526607889,'2015-12-24 00:00:00',3,'sobro  50',50),(526773813,'2015-11-21 00:00:00',3,'retiro-1000',-1000),(558890719,'2015-12-21 00:00:00',3,'belen -234',-234),(588245684,'2015-10-22 00:00:00',3,'gasto -100 x vidriera',-100),(596049545,'2016-01-16 00:00:00',3,'sobro 10',10),(600552764,'2016-01-05 00:00:00',3,'pago de telefono -458.2',-459),(615838132,'2016-01-07 00:00:00',3,'se utilizo -570 para talonario de fac cja 6/1',0),(652938393,'2015-11-06 00:00:00',3,'dia/mariana',-189),(666037713,'2016-01-11 00:00:00',3,'gastos vidriera -600',-600),(669990349,'2015-12-17 00:00:00',3,'folios -15',-15),(683260643,'2015-10-28 00:00:00',3,'diferencia de una remera art 035230',0),(696277400,'2015-12-22 00:00:00',3,'belen 2 hr mañana -94',-94),(702486863,'2016-02-11 00:00:00',3,'0353430500 adri pagada ',0),(723815023,'2015-11-23 00:00:00',3,'gastos vidriera cja dia sab 22/11 -500',0),(732748022,'2015-12-04 00:00:00',3,'se utilizo -600 cja dia27/11 ',0),(753438732,'2016-01-08 00:00:00',3,'vicky cambio vestido4122 x 0300333500',130),(781330752,'2016-01-09 00:00:00',3,'diferncia de mi liquida -1081',-1081),(839748038,'2016-01-11 00:00:00',3,'gastos celofan-64',-64),(849132540,'2016-01-28 00:00:00',3,'gastos de carteleria -245',-245),(892848629,'2016-02-10 00:00:00',3,'gastos tel-501',-501),(902403872,'2015-12-29 00:00:00',3,'libreria -7',-7),(918220130,'2015-11-02 00:00:00',3,'gasto remis  nano',-25),(932204405,'2016-01-16 00:00:00',3,'retire-1800',-1800),(937768607,'2016-02-02 00:00:00',3,'se realizo vidriera -600',-600),(976005583,'2016-01-19 00:00:00',3,'4 quini caro -80',-80),(983467163,'2016-02-09 00:00:00',3,'dia lilii soto3/2hs',-165),(989862807,'2016-01-16 00:00:00',3,'dia/mariana',-189),(1018399341,'2015-12-05 00:00:00',3,'dia/mariana',-189),(1028424799,'2016-01-18 00:00:00',3,'ADRI CAMBIO 045027000 X041086000',30),(1084212014,'2015-12-18 00:00:00',3,'gastos cartel-24-',-24),(1087539646,'2016-02-06 00:00:00',3,'retire lili-2050',-2050),(1105879599,'2016-01-22 00:00:00',3,'alquiler -2806 caja mier 20-1 -900 /jue21-1 -1700',0),(1116655482,'2015-12-24 00:00:00',3,'belen mañana 4 hs -188',-188),(1122521449,'2016-02-22 00:00:00',3,'se pago bolsas-4000pedro',0),(1125642974,'2016-01-14 00:00:00',3,'gastos libreria -90 raid',-90),(1191368598,'2015-10-22 00:00:00',3,'se utilizo cja dia 21 /10  para vidriera -450',0),(1191952534,'2015-12-31 00:00:00',3,'belen -141',-141),(1242090693,'2015-12-15 00:00:00',3,'quini caro -100',-100),(1248648936,'2016-01-30 00:00:00',3,'RETIRO LILI-1400',-1400),(1249445480,'2015-11-04 00:00:00',3,'caro gasto chocolate-74.60',-75),(1259944244,'2015-12-10 00:00:00',3,'diferncia liq -85',-85),(1273404459,'2016-02-09 00:00:00',3,'inicio caja 268',268),(1307018228,'2016-01-18 00:00:00',3,'gasto d cubre caño  -150',-150),(1307551644,'2015-11-14 00:00:00',3,'marcador -20',-20),(1310770373,'2016-01-13 00:00:00',3,'caja inicial119',119),(1330095342,'2015-10-21 00:00:00',3,'perchas -37',-37),(1335628716,'2016-01-14 00:00:00',3,'dia/mariana',-189),(1350377492,'2016-01-23 00:00:00',3,'dia /mariana',-189),(1352659764,'2015-10-27 00:00:00',3,'gasto cerradura cjn  copia de llave -120',-120),(1368681332,'2015-12-05 00:00:00',3,'desodante  piso -8',-8),(1385057529,'2015-12-12 00:00:00',3,'DIA/MARIANA',-189),(1388571758,'2016-02-20 00:00:00',3,'caja inicial ',26),(1406024794,'2015-10-30 00:00:00',3,'utilice p etiq cja 23/10-147 cja 29/10-600',0),(1407657500,'2015-11-16 00:00:00',3,'gastos bolsas -117.75',-117),(1429577408,'2015-11-25 00:00:00',3,'diferencia alq -6',-6),(1437162299,'2015-12-19 00:00:00',3,'DIA/MARIANA',-189),(1460911665,'2015-11-11 00:00:00',3,'diferencia de mi liquid -1227',-1227),(1467554814,'2015-11-14 00:00:00',3,'quini caro -80',-80),(1483302352,'2015-12-19 00:00:00',3,'retire -1600-',-1600),(1511682969,'2015-12-15 00:00:00',3,'fragancia -206',-206),(1522660654,'2015-11-21 00:00:00',3,'dia/mariana',-189),(1563211944,'2015-12-22 00:00:00',3,'se utilizo cja dia sab 19/12 -2700alquiler',0),(1566582286,'2016-01-18 00:00:00',3,'VICKY 0470453500 PAGADO',0),(1606696948,'2015-12-03 00:00:00',3,'gastos de tel -470',-470),(1610469019,'2016-01-20 00:00:00',3,'autorizo benja -3910 de sistema alarma ',0),(1614039619,'2015-11-12 00:00:00',3,'gasto telefono -475',-475),(1637610198,'2015-12-23 00:00:00',3,'belen 9 hs ',-423),(1652993335,'2015-12-26 00:00:00',3,'retire -3900',-3900),(1666551318,'2015-12-18 00:00:00',3,'gastos cinta p moño -30',-30),(1704260397,'2016-02-06 00:00:00',3,'dia/mariana',-189),(1717947393,'2015-11-04 00:00:00',3,'vicky lleva 03523923 y 0411812100 entrega 100',0),(1745772706,'2015-10-30 00:00:00',3,'diferencia etiq-3',-3),(1766776083,'2015-12-23 00:00:00',3,'vicky 0470401100 /045033010',0),(1776374270,'2015-11-28 00:00:00',3,'-434 de cja inicial',-434),(1821515977,'2015-12-29 00:00:00',3,'gastos de 2 fgcias -220',-220),(1824228378,'2015-12-10 00:00:00',3,'mi liqui cja 9/12 -1200cja lun30/11 -1200tot -2400',0),(1839141532,'2016-01-09 00:00:00',3,'benja -200',-200),(1855108275,'2015-12-23 00:00:00',3,'sobran 165',0),(1860618962,'2015-11-04 00:00:00',3,'caja 3/11/-550 gastos vidriera',0),(1871025808,'2015-10-20 00:00:00',3,'gasto aerosol -40',-40),(1921620852,'2016-02-12 00:00:00',3,'caro 4 quini 6 -80',-80),(1960141446,'2015-11-23 00:00:00',3,'diferncia armado de nvidriera -50',-50);
+insert  into `tesoreriamovimientos`(`IdMovTESM`,`FechaTESM`,`IdPcTESM`,`DetalleTESM`,`ImporteTESM`) values (2019937,'2015-11-04 00:00:00',3,'vicky 350',0),(127497858,'2016-02-04 00:00:00',3,'gastos protector tension  electrico',-519),(145566872,'2015-12-04 00:00:00',3,'gastos -345 dif calco s',-345),(148931598,'2015-12-07 00:00:00',3,'viky 0470471101 0411970000pagado',0),(166333691,'2016-07-29 00:00:00',1,'cambio',150),(187536300,'2015-11-14 00:00:00',3,'retiro-1050',-1050),(188828601,'2015-12-26 00:00:00',3,'sobro 200',200),(205689421,'2016-01-30 00:00:00',3,'DIA/MARIANA',-189),(219336467,'2015-12-29 00:00:00',3,'gastos libreria -10',-10),(223913224,'2016-02-11 00:00:00',3,'mil liqui 30-1-1600/1-2-2300/5-2-445/6-2-2050',0),(245816199,'2015-12-05 00:00:00',3,'retiro 1300',-1300),(303510713,'2015-12-12 00:00:00',3,'retiro -500',-500),(345584175,'2015-11-27 00:00:00',3,'dia/mariana',-189),(358395058,'2016-02-11 00:00:00',3,'0412330000descontar vicky pagada',0),(358782477,'2015-12-07 00:00:00',3,'gastos vidriera caja sab 5/12 -550',0),(372252048,'2015-12-26 00:00:00',3,'dia/mariana',-189),(412786171,'2016-01-18 00:00:00',3,'dina entreg 23-12/ 100 2-12/100 11-12 /50',0),(439725314,'2016-02-22 00:00:00',3,'armado de vidriera -600',-600),(470737547,'2016-02-20 00:00:00',3,'dia/mariana',-189),(481421181,'2016-07-25 00:00:00',1,'Prueba curdate',2000),(486862168,'2015-10-29 00:00:00',3,'gastos escoba-30',-30),(516691186,'2016-01-22 00:00:00',3,'diferenc alq -206',-206),(526512880,'2015-12-22 00:00:00',3,'diferencia de alquiler-106',-106),(526607889,'2015-12-24 00:00:00',3,'sobro  50',50),(526773813,'2015-11-21 00:00:00',3,'retiro-1000',-1000),(558890719,'2015-12-21 00:00:00',3,'belen -234',-234),(588245684,'2015-10-22 00:00:00',3,'gasto -100 x vidriera',-100),(596049545,'2016-01-16 00:00:00',3,'sobro 10',10),(600552764,'2016-01-05 00:00:00',3,'pago de telefono -458.2',-459),(615838132,'2016-01-07 00:00:00',3,'se utilizo -570 para talonario de fac cja 6/1',0),(652938393,'2015-11-06 00:00:00',3,'dia/mariana',-189),(666037713,'2016-01-11 00:00:00',3,'gastos vidriera -600',-600),(669990349,'2015-12-17 00:00:00',3,'folios -15',-15),(683260643,'2015-10-28 00:00:00',3,'diferencia de una remera art 035230',0),(696277400,'2015-12-22 00:00:00',3,'belen 2 hr mañana -94',-94),(702486863,'2016-02-11 00:00:00',3,'0353430500 adri pagada ',0),(723815023,'2015-11-23 00:00:00',3,'gastos vidriera cja dia sab 22/11 -500',0),(732748022,'2015-12-04 00:00:00',3,'se utilizo -600 cja dia27/11 ',0),(753438732,'2016-01-08 00:00:00',3,'vicky cambio vestido4122 x 0300333500',130),(781330752,'2016-01-09 00:00:00',3,'diferncia de mi liquida -1081',-1081),(839748038,'2016-01-11 00:00:00',3,'gastos celofan-64',-64),(849132540,'2016-01-28 00:00:00',3,'gastos de carteleria -245',-245),(892848629,'2016-02-10 00:00:00',3,'gastos tel-501',-501),(902403872,'2015-12-29 00:00:00',3,'libreria -7',-7),(918220130,'2015-11-02 00:00:00',3,'gasto remis  nano',-25),(932204405,'2016-01-16 00:00:00',3,'retire-1800',-1800),(937768607,'2016-02-02 00:00:00',3,'se realizo vidriera -600',-600),(976005583,'2016-01-19 00:00:00',3,'4 quini caro -80',-80),(983467163,'2016-02-09 00:00:00',3,'dia lilii soto3/2hs',-165),(989862807,'2016-01-16 00:00:00',3,'dia/mariana',-189),(1018399341,'2015-12-05 00:00:00',3,'dia/mariana',-189),(1028424799,'2016-01-18 00:00:00',3,'ADRI CAMBIO 045027000 X041086000',30),(1084212014,'2015-12-18 00:00:00',3,'gastos cartel-24-',-24),(1087539646,'2016-02-06 00:00:00',3,'retire lili-2050',-2050),(1105879599,'2016-01-22 00:00:00',3,'alquiler -2806 caja mier 20-1 -900 /jue21-1 -1700',0),(1116655482,'2015-12-24 00:00:00',3,'belen mañana 4 hs -188',-188),(1122521449,'2016-02-22 00:00:00',3,'se pago bolsas-4000pedro',0),(1125642974,'2016-01-14 00:00:00',3,'gastos libreria -90 raid',-90),(1191368598,'2015-10-22 00:00:00',3,'se utilizo cja dia 21 /10  para vidriera -450',0),(1191952534,'2015-12-31 00:00:00',3,'belen -141',-141),(1242090693,'2015-12-15 00:00:00',3,'quini caro -100',-100),(1248648936,'2016-01-30 00:00:00',3,'RETIRO LILI-1400',-1400),(1249445480,'2015-11-04 00:00:00',3,'caro gasto chocolate-74.60',-75),(1259944244,'2015-12-10 00:00:00',3,'diferncia liq -85',-85),(1273404459,'2016-02-09 00:00:00',3,'inicio caja 268',268),(1307018228,'2016-01-18 00:00:00',3,'gasto d cubre caño  -150',-150),(1307551644,'2015-11-14 00:00:00',3,'marcador -20',-20),(1310770373,'2016-01-13 00:00:00',3,'caja inicial119',119),(1330095342,'2015-10-21 00:00:00',3,'perchas -37',-37),(1335628716,'2016-01-14 00:00:00',3,'dia/mariana',-189),(1350377492,'2016-01-23 00:00:00',3,'dia /mariana',-189),(1352659764,'2015-10-27 00:00:00',3,'gasto cerradura cjn  copia de llave -120',-120),(1368681332,'2015-12-05 00:00:00',3,'desodante  piso -8',-8),(1385057529,'2015-12-12 00:00:00',3,'DIA/MARIANA',-189),(1388571758,'2016-02-20 00:00:00',3,'caja inicial ',26),(1406024794,'2015-10-30 00:00:00',3,'utilice p etiq cja 23/10-147 cja 29/10-600',0),(1407657500,'2015-11-16 00:00:00',3,'gastos bolsas -117.75',-117),(1429577408,'2015-11-25 00:00:00',3,'diferencia alq -6',-6),(1437162299,'2015-12-19 00:00:00',3,'DIA/MARIANA',-189),(1460911665,'2015-11-11 00:00:00',3,'diferencia de mi liquid -1227',-1227),(1467554814,'2015-11-14 00:00:00',3,'quini caro -80',-80),(1483302352,'2015-12-19 00:00:00',3,'retire -1600-',-1600),(1511682969,'2015-12-15 00:00:00',3,'fragancia -206',-206),(1522660654,'2015-11-21 00:00:00',3,'dia/mariana',-189),(1563211944,'2015-12-22 00:00:00',3,'se utilizo cja dia sab 19/12 -2700alquiler',0),(1566582286,'2016-01-18 00:00:00',3,'VICKY 0470453500 PAGADO',0),(1606696948,'2015-12-03 00:00:00',3,'gastos de tel -470',-470),(1610469019,'2016-01-20 00:00:00',3,'autorizo benja -3910 de sistema alarma ',0),(1614039619,'2015-11-12 00:00:00',3,'gasto telefono -475',-475),(1637610198,'2015-12-23 00:00:00',3,'belen 9 hs ',-423),(1652993335,'2015-12-26 00:00:00',3,'retire -3900',-3900),(1666551318,'2015-12-18 00:00:00',3,'gastos cinta p moño -30',-30),(1704260397,'2016-02-06 00:00:00',3,'dia/mariana',-189),(1717947393,'2015-11-04 00:00:00',3,'vicky lleva 03523923 y 0411812100 entrega 100',0),(1745772706,'2015-10-30 00:00:00',3,'diferencia etiq-3',-3),(1766776083,'2015-12-23 00:00:00',3,'vicky 0470401100 /045033010',0),(1776374270,'2015-11-28 00:00:00',3,'-434 de cja inicial',-434),(1821515977,'2015-12-29 00:00:00',3,'gastos de 2 fgcias -220',-220),(1824228378,'2015-12-10 00:00:00',3,'mi liqui cja 9/12 -1200cja lun30/11 -1200tot -2400',0),(1839141532,'2016-01-09 00:00:00',3,'benja -200',-200),(1855108275,'2015-12-23 00:00:00',3,'sobran 165',0),(1860618962,'2015-11-04 00:00:00',3,'caja 3/11/-550 gastos vidriera',0),(1871025808,'2015-10-20 00:00:00',3,'gasto aerosol -40',-40),(1921620852,'2016-02-12 00:00:00',3,'caro 4 quini 6 -80',-80),(1960141446,'2015-11-23 00:00:00',3,'diferncia armado de nvidriera -50',-50);
 
 UNLOCK TABLES;
 
@@ -402,7 +405,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 
-insert  into `ventas`(`IdVentaVEN`,`IdPCVEN`,`FechaVEN`,`IdClienteVEN`) values (323337848,1,'2016-07-26 13:24:40',1),(477607568,1,'2016-07-27 10:39:31',1),(1041242980,1,'2016-07-26 13:24:04',1),(1648483986,1,'2016-07-26 19:56:32',1);
+insert  into `ventas`(`IdVentaVEN`,`IdPCVEN`,`FechaVEN`,`IdClienteVEN`) values (323337848,1,'2016-07-26 13:24:40',1),(477607568,1,'2016-07-27 10:39:31',1),(866103056,1,'2016-07-29 09:48:25',1),(1041242980,1,'2016-07-26 13:24:04',1),(1648483986,1,'2016-07-26 19:56:32',1);
 
 UNLOCK TABLES;
 
@@ -437,20 +440,9 @@ CREATE TABLE `ventasdetalle` (
 
 LOCK TABLES `ventasdetalle` WRITE;
 
-insert  into `ventasdetalle`(`IdDVEN`,`IdVentaDVEN`,`IdLocalDVEN`,`IdArticuloDVEN`,`DescripcionDVEN`,`CantidadDVEN`,`PrecioPublicoDVEN`,`PrecioCostoDVEN`,`PrecioMayorDVEN`,`IdFormaPagoDVEN`,`NroCuponDVEN`,`NroFacturaDVEN`,`IdEmpleadoDVEN`,`LiquidadoDVEN`,`EsperaDVEN`,`DevolucionDVEN`) values (491880981,323337848,13,'0410010500',NULL,1,4000,115,0,9,NULL,NULL,NULL,NULL,NULL,0),(536562154,1648483986,14,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(942183790,1041242980,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(1132214833,323337848,13,'0280010536',NULL,1,2000,253,0,2,NULL,NULL,NULL,NULL,NULL,0),(1234184577,323337848,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(1674146216,477607568,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0);
+insert  into `ventasdetalle`(`IdDVEN`,`IdVentaDVEN`,`IdLocalDVEN`,`IdArticuloDVEN`,`DescripcionDVEN`,`CantidadDVEN`,`PrecioPublicoDVEN`,`PrecioCostoDVEN`,`PrecioMayorDVEN`,`IdFormaPagoDVEN`,`NroCuponDVEN`,`NroFacturaDVEN`,`IdEmpleadoDVEN`,`LiquidadoDVEN`,`EsperaDVEN`,`DevolucionDVEN`) values (491880981,323337848,13,'0410010500',NULL,1,4000,115,0,9,NULL,NULL,NULL,NULL,NULL,0),(536562154,1648483986,14,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(942183790,1041242980,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(1132214833,323337848,13,'0280010536',NULL,1,2000,253,0,2,NULL,NULL,NULL,NULL,NULL,0),(1234184577,323337848,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(1674146216,477607568,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0),(1770345839,866103056,13,'0350011100',NULL,1,150,56,0,1,NULL,NULL,NULL,NULL,NULL,0);
 
 UNLOCK TABLES;
-
-/*!50106 set global event_scheduler = 1*/;
-
-/* Event structure for event `mantenimiento` */
-
-/*!50106 DROP EVENT IF EXISTS `mantenimiento`*/;
-
-DELIMITER $$
-
-/*!50106 CREATE DEFINER=`root`@`localhost` EVENT `mantenimiento` ON SCHEDULE EVERY 1 HOUR STARTS '2014-11-06 23:00:00' ON COMPLETION PRESERVE ENABLE DO CALL	DatosPos_Mantener() */$$
-DELIMITER ;
 
 /* Procedure structure for procedure `AlicuotasIva_Insertar` */
 
@@ -901,6 +893,52 @@ DELETE FROM FormasPago;
 delete from alicuotasiva;
 DELETE FROM generos;
 DELETE FROM razonsocial;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `DatosPos_BorrarCrearBD` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `DatosPos_BorrarCrearBD` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`ncsoftwa_re`@`%` PROCEDURE `DatosPos_BorrarCrearBD`()
+BEGIN
+DROP DATABASE IF EXISTS `pos_desktop`;
+CREATE DATABASE pos_desktop
+  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `DatosPos_ControlarUpdate` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `DatosPos_ControlarUpdate` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`ncsoftwa_re`@`%` PROCEDURE `DatosPos_ControlarUpdate`()
+BEGIN
+select count(*) FROM `alicuotasiva`;
+SELECT COUNT(*) FROM articulos;
+SELECT COUNT(*) FROM `clientes`;
+SELECT COUNT(*) FROM `formaspago`;
+SELECT COUNT(*) FROM `generos`;
+SELECT COUNT(*) FROM `razonsocial`;
+SELECT COUNT(*) FROM stock;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `DatosPos_DbBorrarCrear` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `DatosPos_DbBorrarCrear` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`ncsoftwa_re`@`%` PROCEDURE `DatosPos_DbBorrarCrear`()
+BEGIN
+DROP DATABASE IF EXISTS `pos_desktop`;
+CREATE DATABASE pos_desktop
+  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 END */$$
 DELIMITER ;
 

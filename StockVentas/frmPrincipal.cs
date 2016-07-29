@@ -19,6 +19,7 @@ namespace StockVentas
         frmInicio instanciaInicio;
         public frmProgress progreso;
         string idRazonSocial;
+        int n = 0;
 
         public frmPrincipal(frmInicio instanciaInicio)
         {
@@ -118,6 +119,7 @@ namespace StockVentas
         {
             Cursor.Current = Cursors.WaitCursor;
             BL.Utilitarios.ActualizarBD();
+            n++;
             Cursor.Current = Cursors.Arrow;
         }
 
