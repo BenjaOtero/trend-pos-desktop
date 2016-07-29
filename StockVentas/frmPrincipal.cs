@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Net;
 using System.IO;
+using System.Timers;
 
 namespace StockVentas
 {
@@ -20,6 +21,7 @@ namespace StockVentas
         public frmProgress progreso;
         string idRazonSocial;
         int n = 0;
+        System.Timers.Timer aTimer = new System.Timers.Timer();
 
         public frmPrincipal(frmInicio instanciaInicio)
         {
@@ -117,10 +119,13 @@ namespace StockVentas
 
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
+          /*  Cursor.Current = Cursors.WaitCursor;
             BL.Utilitarios.ActualizarBD();
-            n++;
-            Cursor.Current = Cursors.Arrow;
+            Cursor.Current = Cursors.Arrow;*/
+            aTimer = new System.Timers.Timer(1000);
+            aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
+            aTimer.Enabled = true;
+
         }
 
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -138,6 +143,17 @@ namespace StockVentas
             instanciaInicio.cerrando = true;
             instanciaInicio.Visible = true;
         }
+
+        private void ProbarActualizar(object source, ElapsedEventArgs e)
+        {
+            if (n > 1000) MessageBox.Show(n.ToString());
+            aTimer.Enabled = false;
+            BL.Utilitarios.ActualizarBD();
+            n++;
+            aTimer.Enabled = true;
+            aTimer.Interval = 1000;
+        }
+
 
     }
 }

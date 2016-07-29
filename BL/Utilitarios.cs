@@ -302,11 +302,13 @@ namespace BL
         {
             try
             {
-                Backup();
-                if (DownloadFileFTP())  //tratar errores en DownloadFileFTP()
+                if (Backup())
                 {
-                    BL.DatosPosBLL.DeleteAll();
-                    RestaurarDatos();
+                    if (DownloadFileFTP())  //tratar errores en DownloadFileFTP()
+                    {
+                        BL.DatosPosBLL.DeleteAll();
+                        RestaurarDatos();
+                    }
                 }
             }
             finally
@@ -409,8 +411,9 @@ namespace BL
             return seActualizaron;
         }
 
-        private static void Backup()
+        private static bool Backup()
         {
+            bool bckp = false;
             string archivo = @"C:\Windows\Temp\backup.sql";
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
             sw.Close();
@@ -434,6 +437,9 @@ namespace BL
             process.Exited += new EventHandler(Backup_Exited);
             process.Start();
             process.WaitForExit();
+            FileInfo f = new FileInfo(archivo);
+            if (f.Length != 0) bckp = true;
+            return bckp;
         }
 
         private static void Backup_Exited(object sender, System.EventArgs e)
