@@ -122,6 +122,7 @@ namespace StockVentas
           /*  Cursor.Current = Cursors.WaitCursor;
             BL.Utilitarios.ActualizarBD();
             Cursor.Current = Cursors.Arrow;*/
+
             aTimer = new System.Timers.Timer(1000);
             aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
             aTimer.Enabled = true;
@@ -146,12 +147,17 @@ namespace StockVentas
 
         private void ProbarActualizar(object source, ElapsedEventArgs e)
         {
-            if (n > 1000) MessageBox.Show(n.ToString());
+            if (n > 2000)
+            {
+                MessageBox.Show(n.ToString());
+                aTimer.Enabled = false;
+                return;
+            }               
             aTimer.Enabled = false;
             BL.Utilitarios.ActualizarBD();
             n++;
             aTimer.Enabled = true;
-            aTimer.Interval = 1000;
+            aTimer.Interval = 2000;
         }
 
 

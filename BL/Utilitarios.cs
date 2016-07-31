@@ -414,37 +414,45 @@ namespace BL
         private static bool Backup()
         {
             bool bckp = false;
-            string archivo = @"C:\Windows\Temp\backup.sql";
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Mysql");
-            //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
-            sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt pos_desktop > " + archivo);
-            //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+            try
             {
-                outfile.Write(sb.ToString());
+                string archivo = @"C:\Windows\Temp\backup.sql";
+                System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
+                sw.Close();
+                StringBuilder sb = new StringBuilder();
+                string path = Application.StartupPath;
+                string unidad = path.Substring(0, 2);
+                sb.AppendLine(unidad);
+                sb.AppendLine(@"cd " + path + @"\Mysql");
+                //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
+                sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt pos_desktop > " + archivo);
+                //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
+                using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+                {
+                    outfile.Write(sb.ToString());
+                }
+                Process process = new Process();
+                process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
+                process.StartInfo.CreateNoWindow = false;
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+                process.Exited += new EventHandler(Backup_Exited);
+                process.Start();
+                process.WaitForExit();
+                FileInfo f = new FileInfo(archivo);
+                if (f.Length != 0) bckp = true;
             }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(Backup_Exited);
-            process.Start();
-            process.WaitForExit();
-            FileInfo f = new FileInfo(archivo);
-            if (f.Length != 0) bckp = true;
+            catch (Exception ex)
+            {
+                // IOException (backup.bat está siendo utilizado por otro proceso
+                MessageBox.Show(ex.ToString());
+            }
             return bckp;
         }
 
         private static void Backup_Exited(object sender, System.EventArgs e)
         {
-        //    if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
 
         private static void RestaurarDatosBD()
