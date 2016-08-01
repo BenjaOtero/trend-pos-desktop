@@ -65,62 +65,6 @@ namespace BL
             }
         }
 
-        public static DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
-        {
-            // find primary key columns 
-            //(i.e. everything but pivot column and pivot value)
-            DataTable temp = dt.Copy();
-            temp.Columns.Remove(pivotColumn.ColumnName);
-            temp.Columns.Remove(pivotValue.ColumnName);
-            string[] pkColumnNames = temp.Columns.Cast<DataColumn>()
-                .Select(c => c.ColumnName)
-                .ToArray();
-
-            // prep results table
-            DataTable result = temp.DefaultView.ToTable(true, pkColumnNames).Copy();
-            result.PrimaryKey = result.Columns.Cast<DataColumn>().ToArray();
-
-            dt.AsEnumerable()
-                .Select(r => r[pivotColumn.ColumnName].ToString())
-                .Distinct().ToList()
-                .ForEach(c => result.Columns.Add(c, pivotColumn.DataType));
-
-            // load it
-            foreach (DataRow row in dt.Rows)
-            {
-                // find row to update
-                DataRow aggRow = result.Rows.Find(
-                    pkColumnNames
-                        .Select(c => row[c])
-                        .ToArray());
-                // the aggregate used here is LATEST 
-                // adjust the next line if you want (SUM, MAX, etc...)
-                aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
-            }
-
-            return result;
-        }
-
-        public static bool HayInternet()
-        {
-            bool conexion = false;
-            Ping Pings = new Ping();
-            int timeout = 3000;
-            try
-            {
-                if (Pings.Send("ns21a.cyberneticos.com", timeout).Status == IPStatus.Success)
-                {
-                    conexion = true;
-                }
-                conexion = true;
-            }
-            catch (PingException)
-            {
-                conexion = true;
-            }
-            return conexion;
-        }
-
         public static void SelTextoTextBox(object sender, EventArgs e)
         {
             try
@@ -227,6 +171,25 @@ namespace BL
             if (File.Exists(@"c:\windows\temp\" + idRazonSocial)) File.Delete(@"c:\windows\temp\" + idRazonSocial);
         }
 
+        public static bool HayInternet()
+        {
+            bool conexion = false;
+            Ping Pings = new Ping();
+            int timeout = 3000;
+            try
+            {
+                if (Pings.Send("ns21a.cyberneticos.com", timeout).Status == IPStatus.Success)
+                {
+                    conexion = true;
+                }
+            }
+            catch (PingException)
+            {
+                conexion = false;
+            }
+            return conexion;
+        }
+
         public static void UploadDatosPos(string nombreLocal, string nombreServidor)
         {
             string ftpServerIP;
@@ -238,7 +201,7 @@ namespace BL
               ftpPassword = "8953#AFjn";*/
 
             // FTP local
-            ftpServerIP = "127.0.0.1:22";
+            ftpServerIP = "127.0.0.1:22/datos";
             ftpUserID = "Benja";
             ftpPassword = "8953#AFjn";
 
@@ -298,199 +261,41 @@ namespace BL
             }
         }
 
-        public static void ActualizarBD()
-        {
-            try
-            {
-                if (Backup())
-                {
-                    if (DownloadFileFTP())  //tratar errores en DownloadFileFTP()
-                    {
-                        BL.DatosPosBLL.DeleteAll();
-                        RestaurarDatos();
-                    }
-                }
-            }
-            finally
-            {
-                if (!SeActualizaronDatos())
-                {                    
-                    RestaurarBD(); 
-                    ActualizarBD();
-                }                
-            }
-        }
-
-        private static void RestaurarBD()
-        {
-            DAL.DatosPosDAL.BorrarCrearBD();
-            RestaurarDatosBD();
-        }
-
-        private static bool DownloadFileFTP()
+        public static bool DownloadFileFTP(string hilo)
         {
             bool descargado = false;
-            /* 
-             string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
-             string ftphost = "trendsistemas.com";
-             string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
-             string ftpPassword = "8953#AFjn";
-             string ftpUserID = "benja@trendsistemas.com";
-             */
-
-            string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
-            string ftphost = "127.0.0.1:22";
-            string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
-            string ftpPassword = "8953#AFjn";
-            string ftpUserID = "Benja";
-            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-            using (WebClient request = new WebClient())
-            {
-                request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                request.DownloadFile(ftpfullpath, inputfilepath);
-                descargado = true;
-            }
-            return descargado;
-        }
-
-        private static void RestaurarDatos()
-        {
-            // gzip -d n:\2147483647_datos.sql.gz
-            // mysql -u ncsoftwa_re -p8953#AFjn pos < n:\2147483647_datos.sql  
-            /*
-             * crear archivo bat
-             * escribir archivo bat con sentencias
-             * ejecutar bat
-             * borrar bat
-             */
-            if (File.Exists(@"C:\Windows\Temp\datos.sql")) File.Delete(@"C:\Windows\Temp\datos.sql");
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\datos.sql.gz\"");
-            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\datos.sql\"");
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
-            {
-                outfile.Write(sb.ToString());
-            }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(RestaurarDatos_Exited);
-            process.Start();
-            process.WaitForExit();
-        }
-
-        private static void RestaurarDatos_Exited(object sender, System.EventArgs e)
-        {
-            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
-          //  if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
-          //  if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
-        }
-
-        private static bool SeActualizaronDatos()
-        {
-            bool seActualizaron = true;
-            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
-            int records;
-            foreach (DataTable tbl in ds.Tables)
-            {
-                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
-                if (records == 0)
-                {
-                    seActualizaron = false;
-                    break;
-                }
-            }
-            return seActualizaron;
-        }
-
-        private static bool Backup()
-        {
-            bool bckp = false;
             try
             {
-                string archivo = @"C:\Windows\Temp\backup.sql";
-                System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
-                sw.Close();
-                StringBuilder sb = new StringBuilder();
-                string path = Application.StartupPath;
-                string unidad = path.Substring(0, 2);
-                sb.AppendLine(unidad);
-                sb.AppendLine(@"cd " + path + @"\Mysql");
-                //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
-                sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt pos_desktop > " + archivo);
-                //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
-                using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+                 /* 
+                 string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
+                 string ftphost = "trendsistemas.com";
+                 string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
+                 string ftpPassword = "8953#AFjn";
+                 string ftpUserID = "benja@trendsistemas.com";
+                 */
+
+                string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
+                string ftphost = "127.0.0.1:22/datos";
+                string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
+                string ftpPassword = "8953#AFjn";
+                string ftpUserID = "Benja";
+                string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+                using (WebClient request = new WebClient())
                 {
-                    outfile.Write(sb.ToString());
+                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                    request.DownloadFile(ftpfullpath, inputfilepath);
+                    descargado = true;
                 }
-                Process process = new Process();
-                process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
-                process.StartInfo.CreateNoWindow = false;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-                process.Exited += new EventHandler(Backup_Exited);
-                process.Start();
-                process.WaitForExit();
-                FileInfo f = new FileInfo(archivo);
-                if (f.Length != 0) bckp = true;
             }
-            catch (Exception ex)
+            catch (WebException)
             {
-                // IOException (backup.bat está siendo utilizado por otro proceso
-                MessageBox.Show(ex.ToString());
+                if(hilo != "frmInicio")
+                {
+                    MessageBox.Show("No se pudo conectar con el servidor FTP. No se actualizaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
             }
-            return bckp;
-        }
 
-        private static void Backup_Exited(object sender, System.EventArgs e)
-        {
-            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
-        }
-
-        private static void RestaurarDatosBD()
-        {
-            // gzip -d n:\2147483647_datos.sql.gz
-            // mysql -u ncsoftwa_re -p8953#AFjn pos < n:\2147483647_datos.sql  
-            /*
-             * crear archivo bat
-             * escribir archivo bat con sentencias
-             * ejecutar bat
-             * borrar bat
-             */
-            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\backup.sql\"");
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
-            {
-                outfile.Write(sb.ToString());
-            }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(RestaurarDatosBD_Exited);
-            process.Start();
-            process.WaitForExit();
-        }
-
-        private static void RestaurarDatosBD_Exited(object sender, System.EventArgs e)
-        {
-            //    if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+            return descargado;
         }
 
     }

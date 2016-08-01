@@ -119,13 +119,13 @@ namespace StockVentas
 
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          /*  Cursor.Current = Cursors.WaitCursor;
-            BL.Utilitarios.ActualizarBD();
-            Cursor.Current = Cursors.Arrow;*/
+              Cursor.Current = Cursors.WaitCursor;
+              BL.DatosPosBLL.ActualizarBD("frmPrincipal");
+              Cursor.Current = Cursors.Arrow;
 
-            aTimer = new System.Timers.Timer(1000);
-            aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
-            aTimer.Enabled = true;
+            /* aTimer = new System.Timers.Timer(1000);
+             aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
+             aTimer.Enabled = true;*/
 
         }
 
@@ -154,7 +154,8 @@ namespace StockVentas
                 return;
             }               
             aTimer.Enabled = false;
-            BL.Utilitarios.ActualizarBD();
+        //    BL.Utilitarios.ActualizarBD();
+            BL.DatosPosBLL.ActualizarBD("frmPrincipal");
             n++;
             aTimer.Enabled = true;
             aTimer.Interval = 2000;

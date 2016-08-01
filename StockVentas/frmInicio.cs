@@ -78,7 +78,7 @@ namespace StockVentas
                 try
                 {
                                       
-                    BL.Utilitarios.ActualizarBD();
+                    BL.DatosPosBLL.ActualizarBD("frmInicio");
                     try
                     {
                         AgregarFondoCaja();
