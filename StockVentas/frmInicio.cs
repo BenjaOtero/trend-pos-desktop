@@ -292,11 +292,11 @@ namespace StockVentas
             e.Cancel = true;
             this.Visible = true;
             label1.Text = "Exportando datos. . .";
-            backgroundWorker1.RunWorkerAsync();
+            bckDataExport.RunWorkerAsync();
 
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void bckDataExport_DoWork(object sender, DoWorkEventArgs e)
         {
             string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
             string pc = BL.PcsBLL.GetId().ToString();
@@ -306,8 +306,8 @@ namespace StockVentas
 
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+        private void bckDataExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {            
             seExportaronDatos = true;
             Application.Exit();
         }

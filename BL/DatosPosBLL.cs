@@ -28,6 +28,8 @@ namespace BL
             DAL.DatosPosDAL.ExportAll();
         }
 
+        // ACTUALIAR DATOS
+
         public static void DeleteAll()
         {
             DAL.DatosPosDAL.DeleteAll();
@@ -206,5 +208,7 @@ namespace BL
             }
             return seActualizaron;
         }
+
+        // END ACTUALIAR DATOS
     }
 }
