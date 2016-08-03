@@ -185,7 +185,7 @@ namespace StockVentas
             }
             if (actualizaDatos == true)
             {
-                actualizarDatos();
+              //  actualizarDatos();
             }
             else
             {
@@ -266,26 +266,6 @@ namespace StockVentas
             }
 
         }
-
-        /*------------------------- Actualizar datos ------------------------------*/
-        public void actualizarDatos()
-        {
-            BackgroundWorker bckWrk = new BackgroundWorker();
-            bckWrk.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bckWrk_DoWork);
-            bckWrk.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bckWrk_RunWorkerCompleted);
-            bckWrk.RunWorkerAsync();
-        }
-
-        private void bckWrk_DoWork(object sender, DoWorkEventArgs e)
-        {
-            frmInicio frm = new frmInicio();
-        }
-
-        private void bckWrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            this.Close();
-        }
-        /*------------------------- Fin Actualizar datos ------------------------------*/
 
     }
 }
