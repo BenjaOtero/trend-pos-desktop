@@ -88,30 +88,6 @@ namespace StockVentas
             this.accion = accion;
         }
 
-        // Constructor para frmVentas y frmStockMov
-        public frmProgress(DataSet dt, string origen, string accion, DataRowView rowView)
-            : this()
-        {
-      //      instancia = this;
-            this.dt = dt;
-            this.origen = origen;
-            this.accion = accion;
-            this.rowView = rowView;
-        }
-
-        // Constructor para frmStockMovInforme
-        public frmProgress(string strFechaDesde, string strFechaHasta, int idLocal, string tipo, string opcMov, string origen, string accion)
-            : this()
-        {
-            this.strFechaDesde = strFechaDesde;
-            this.strFechaHasta = strFechaHasta;
-            this.idLocal = idLocal;
-            this.tipo = tipo;
-            this.opcMov = opcMov;
-            this.origen = origen;
-            this.accion = accion;
-        }
-
         // Constructor para frmVentasPesosCons
         public frmProgress(int forma, string strFechaDesde, string strFechaHasta, string locales, string origen, string accion)
             : this()
@@ -134,46 +110,6 @@ namespace StockVentas
             this.formaPago = forma;
             this.origen = origen;
             this.accion = accion;
-        }
-
-        // Constructor para frmArqueoCajaAdmin
-        public frmProgress(string strFechaDesde, string strFechaHasta, int idPc, string origen, string accion)
-            : this()
-        {
-            this.strFechaDesde = strFechaDesde;
-            this.strFechaHasta = strFechaHasta;
-            this.idPc = idPc;
-            this.origen = origen;
-            this.accion = accion;
-        }
-
-        // Constructor para frmArqueoCajaAdmin (borrar ventas y movimientos de tesoreria)
-        public frmProgress(int PK, string origen, string accion, ref int? codigoError)
-            : this()
-        {
-            this.PK = PK;
-            this.origen = origen;
-            this.accion = accion;
-            this.codigoError = codigoError;
-        }
-
-        //Constructor frmStockInter
-        public frmProgress(string origen, string accion, string locales, int proveedor, string articulo, string descripcion)
-            : this()
-        {
-            this.origen = origen;
-            this.accion = accion;
-            this.locales = locales;
-            this.proveedor = proveedor;
-            this.articulo = articulo;
-            this.descripcion = descripcion;
-        }
-
-        //Constructor para actualizar datos
-        public frmProgress(bool actualizar)
-            : this()
-        {
-            this.actualizaDatos = actualizar;
         }
 
         private void frmProgress_Shown(object sender, EventArgs e)
