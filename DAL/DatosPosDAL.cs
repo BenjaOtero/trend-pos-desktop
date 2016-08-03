@@ -37,12 +37,13 @@ namespace DAL
             return SqlDataAdapter1;
         }
 
-        public static void ExportAll()
+        public static void ExportAll(string fecha)
         {
             SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
             SqlDataAdapter1 = new MySqlDataAdapter();
             MySqlCommand SqlCommand = new MySqlCommand("DatosPos_Exportar", SqlConnection1);
+            SqlCommand.Parameters.AddWithValue("p_fecha", fecha);
             SqlDataAdapter1.InsertCommand = SqlCommand;
             SqlCommand.CommandType = CommandType.StoredProcedure;
             SqlCommand.ExecuteNonQuery();

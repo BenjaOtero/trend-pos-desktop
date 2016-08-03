@@ -301,7 +301,7 @@ namespace StockVentas
             string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
             string pc = BL.PcsBLL.GetId().ToString();
             idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fechaExport + ".sql.gz";
-            BL.DatosPosBLL.ExportAll();
+            BL.DatosPosBLL.ExportAll(fechaExport);
             Utilitarios.ExportarDatos(idRazonSocial);
 
         }

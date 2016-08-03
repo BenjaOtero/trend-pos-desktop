@@ -161,6 +161,13 @@ namespace StockVentas
             aTimer.Interval = 2000;
         }
 
+        private void exportarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmExportarMovimientos newMDIChild = new frmExportarMovimientos();
+            newMDIChild.MdiParent = this;
+            newMDIChild.Show();
+        }
+
 
     }
 }

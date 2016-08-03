@@ -23,9 +23,9 @@ namespace BL
             return ds;
         }
 
-        public static void ExportAll()
+        public static void ExportAll(string fecha)
         {
-            DAL.DatosPosDAL.ExportAll();
+            DAL.DatosPosDAL.ExportAll(fecha);
         }
 
         // ACTUALIAR DATOS

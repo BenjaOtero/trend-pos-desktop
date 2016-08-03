@@ -534,3 +534,4 @@ C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\GenerateResource.read.1.tlo
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.cache
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.compiled
+C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmExportarMovimientos.resources
