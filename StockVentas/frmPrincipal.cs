@@ -12,6 +12,8 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using System.Timers;
+using System.Configuration;
+
 
 namespace StockVentas
 {
@@ -119,13 +121,13 @@ namespace StockVentas
 
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-              Cursor.Current = Cursors.WaitCursor;
-              BL.DatosPosBLL.ActualizarBD("frmPrincipal");
-              Cursor.Current = Cursors.Arrow;
+            /* Cursor.Current = Cursors.WaitCursor;
+             BL.DatosPosBLL.ActualizarBD("frmPrincipal");
+             Cursor.Current = Cursors.Arrow;*/
 
-            /* aTimer = new System.Timers.Timer(1000);
-             aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
-             aTimer.Enabled = true;*/
+            aTimer = new System.Timers.Timer(1000);
+            aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
+            aTimer.Enabled = true;
 
         }
 
@@ -147,18 +149,88 @@ namespace StockVentas
 
         private void ProbarActualizar(object source, ElapsedEventArgs e)
         {
-            if (n > 2000)
+            if (n > 5000)
             {
                 MessageBox.Show(n.ToString());
                 aTimer.Enabled = false;
+                aTimer.Interval = 0;
                 return;
             }               
             aTimer.Enabled = false;
-        //    BL.Utilitarios.ActualizarBD();
-            BL.DatosPosBLL.ActualizarBD("frmPrincipal");
+
+            if (File.Exists("c:\\Windows\\Temp\\1663670023_datos.sql.xz")) File.Delete("c:\\Windows\\Temp\\1663670023_datos.sql.xz");
+            if (File.Exists("c:\\Windows\\Temp\\1663670023_datos.sql")) File.Delete("c:\\Windows\\Temp\\1663670023_datos.sql");
+
+                 // COMPRIMO ARCHIVO
+            Process processComprimir = new Process();
+            processComprimir.StartInfo.FileName = "c:\\Windows\\Temp\\comprimir.bat";
+            processComprimir.StartInfo.CreateNoWindow = false;
+            processComprimir.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            processComprimir.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            processComprimir.Start();
+            processComprimir.WaitForExit();            
+
+                 // SUBO ARCHIVO
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://127.0.0.1:22/datos/1663670023_datos.sql.xz");
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+
+            // This example assumes the FTP site uses anonymous logon.
+            request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+
+            // Copy the contents of the file to the request stream.
+            StreamReader sourceStream = new StreamReader(@"n:\1663670023_datos.sql.xz");
+            byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+            sourceStream.Close();
+            request.ContentLength = fileContents.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(fileContents, 0, fileContents.Length);
+            requestStream.Close();
+
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            response.Close();
+
+                // DESCARGO ARCHIVO
+
+                
+              // BORRO DATOS
+            BL.DatosPosBLL.DeleteAll();
+
+              //RESTAURO DATOS
+            Process processRestaurar = new Process();
+            processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
+            processRestaurar.StartInfo.CreateNoWindow = false;
+            processRestaurar.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            processRestaurar.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            processRestaurar.Start();
+            processRestaurar.WaitForExit();
+
+              // CONTROLO ACTUALIZACION
+            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
+            int records;
+            foreach (DataTable tbl in ds.Tables)
+            {
+                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
+                if (records == 0)
+                {
+                    MessageBox.Show("Que cagada ! ! !");
+                    aTimer.Enabled = false;
+                    aTimer.Interval = 0;
+                    return;
+                }
+            }
+
             n++;
             aTimer.Enabled = true;
-            aTimer.Interval = 2000;
+            aTimer.Interval = 1500;
         }
 
         private void exportarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)

@@ -143,7 +143,7 @@ namespace BL
 
         private static void RestaurarDatos_Exited(object sender, System.EventArgs e)
         {
-            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
+         //   if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
             //  if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
             //  if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
         }

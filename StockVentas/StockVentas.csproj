@@ -324,6 +324,10 @@
       <Project>{A327571E-28F3-4864-845C-488A7608E86A}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{222C512A-A0E8-4332-88BC-BA7C3C2A4E2F}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\delete16.png" />
