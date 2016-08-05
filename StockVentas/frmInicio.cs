@@ -76,9 +76,8 @@ namespace StockVentas
                 }
                 label1.Text = "Actualizando base de datos . . .";
                 try
-                {
-                                      
-                //    BL.DatosPosBLL.ActualizarBD("frmInicio");
+                {                                      
+                    BL.DatosPosBLL.ActualizarBD("frmInicio");
                     try
                     {
                         AgregarFondoCaja();

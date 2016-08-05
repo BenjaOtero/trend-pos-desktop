@@ -15,6 +15,7 @@ using System.Threading;
 using System.Diagnostics;
 
 
+
 namespace BL
 {
     public class Utilitarios
@@ -261,22 +262,14 @@ namespace BL
             }
         }
 
-        public static bool DownloadFileFTP(string hilo)
+        public static bool DownloadFileFTP(string hilo, string coco)
         {
             bool descargado = false;
             try
             {
-                 /* 
-                 string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
-                 string ftphost = "trendsistemas.com";
-                 string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
-                 string ftpPassword = "8953#AFjn";
-                 string ftpUserID = "benja@trendsistemas.com";
-                 */
-
-                string inputfilepath = @"C:\Windows\Temp\datos.sql.gz";
+                string inputfilepath = @"C:\Windows\Temp\datos.sql.xz";
                 string ftphost = "127.0.0.1:22/datos";
-                string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.gz";
+                string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.xz";
                 string ftpPassword = "8953#AFjn";
                 string ftpUserID = "Benja";
                 string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
@@ -294,10 +287,49 @@ namespace BL
                     MessageBox.Show("No se pudo conectar con el servidor FTP. No se actualizaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }                
             }
-
             return descargado;
         }
 
+        public static bool DownloadFileFTP(string hilo)
+        {
+            bool descargado = false;
+
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
+            string inputfilepath = @"C:\Windows\Temp\datos.sql.xz";
+
+                string ftphost = ftpServerIP + "/datos";
+                string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.xz";
+                string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+
+            FtpWebRequest objRequest = (FtpWebRequest)FtpWebRequest.Create(ftpfullpath);
+            NetworkCredential objCredential = new NetworkCredential(ftpUserID, ftpPassword);
+            objRequest.Credentials = objCredential;
+            objRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            FtpWebResponse objResponse = (FtpWebResponse)objRequest.GetResponse();
+            byte[] buffer = new byte[32768];
+            using (Stream input = objResponse.GetResponseStream())
+            {
+                if (File.Exists(inputfilepath)) File.Delete(inputfilepath);
+                using (FileStream output = new FileStream(inputfilepath, FileMode.CreateNew))
+                {
+                    int bytesRead;
+                    while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, bytesRead);
+                    }
+                }
+                descargado = true;
+            }
+            return descargado;
+        }
     }
 
-}
+    }
+
+

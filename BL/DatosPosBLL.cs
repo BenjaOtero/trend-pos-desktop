@@ -16,6 +16,7 @@ namespace BL
 {
     public class DatosPosBLL
     {
+        static int intentos = 0;
 
         public static DataSet GetAll()
         {
@@ -27,40 +28,31 @@ namespace BL
         {
             DAL.DatosPosDAL.ExportAll(fecha);
         }
-
+        //
         // ACTUALIAR DATOS
-
-        public static void DeleteAll()
-        {
-            DAL.DatosPosDAL.DeleteAll();
-        }
-
+        //
         public static void ActualizarBD(string hilo)
         {
-            try
+            if (Backup())
             {
-                if (Utilitarios.HayInternet())
+                if (Utilitarios.DownloadFileFTP(hilo))  //tratar errores en DownloadFileFTP()
                 {
-                    if (Backup())
+                    DAL.DatosPosDAL.DeleteAll();
+                    RestaurarDatos();
+                    if (!SeActualizaronDatos())
                     {
-                        if (Utilitarios.DownloadFileFTP(hilo))  //tratar errores en DownloadFileFTP()
+                        if (intentos < 5)
                         {
-                            DeleteAll();
-                            RestaurarDatos();
+                            intentos++;
+                            RestaurarBD();
+                            ActualizarBD(hilo);
                         }
+                        else
+                        {
+                            RestaurarBD();
+                            intentos = 0;
+                        }                        
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Verifique la conexión a internet. No se actualizaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            finally
-            {
-                if (!SeActualizaronDatos())
-                {
-                    RestaurarBD();
-                    ActualizarBD(hilo);
                 }
             }
         }
@@ -125,7 +117,7 @@ namespace BL
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\datos.sql.gz\"");
+            sb.AppendLine("xz -d \"C:\\Windows\\Temp\\datos.sql.xz\"");
             sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn pos_desktop < \"C:\\Windows\\Temp\\datos.sql\"");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {

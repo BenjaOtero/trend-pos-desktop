@@ -150,8 +150,19 @@ namespace StockVentas
             {                
                 switch (origen)
                 {
-                    case "frmArqueoCajaAdmin_borrarTesoreria":
-                    //    BL.TesoreriaMovimientosBLL.BorrarByPK(PK, ref codigoError);
+                    case "ActualizarDatos":
+                        if (Utilitarios.HayInternet())
+                        {
+                            BL.DatosPosBLL.ActualizarBD("frmProgress");
+                        }
+                        else
+                        {
+                            this.Invoke((Action)delegate
+                            {
+                                MessageBox.Show("Verifique la conexión a internet. No se actualizaron datos.", "Trend", 
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            });                            
+                        }
                         break;
                  /*   case "frmArqueoCajaAdmin_borrarVenta":
                         BL.VentasBLL.BorrarByPK(PK, ref codigoError);
@@ -201,6 +212,11 @@ namespace StockVentas
                 this.Close();
             }
 
+        }
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
 
     }

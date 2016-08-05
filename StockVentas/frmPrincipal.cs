@@ -124,13 +124,12 @@ namespace StockVentas
 
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /* Cursor.Current = Cursors.WaitCursor;
-             BL.DatosPosBLL.ActualizarBD("frmPrincipal");
-             Cursor.Current = Cursors.Arrow;*/
+            frmProgress frm = new frmProgress("ActualizarDatos", "grabar");
+            frm.ShowDialog();
 
-            tmrUpload = new System.Timers.Timer(1000);
+          /*  tmrUpload = new System.Timers.Timer(1000);
             tmrUpload.Elapsed += new ElapsedEventHandler(ProbarUpload);
-            tmrUpload.Enabled = true;
+            tmrUpload.Enabled = true;*/
 
         }
 
@@ -188,25 +187,29 @@ namespace StockVentas
 
             System.Threading.Thread.Sleep(1500);
 
-            // DESCARGO ARCHIVO
-            string inputfilepath = @"C:\Windows\Temp\1663670023_datos.sql.xz";
-            string ftphost = "127.0.0.1:22/datos";
-            string ftpfilepath = @"/1663670023_datos.sql.xz";
-            ftpPassword = "8953#AFjn";
-            ftpUserID = "Benja";
-            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-            using (WebClient req = new WebClient())
-            {
-                req.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                req.DownloadFile(ftpfullpath, inputfilepath);
-            }
 
-            //n:\1663670023_datos.sql.xz
+            FtpWebRequest objRequest = (FtpWebRequest)FtpWebRequest.Create("ftp://127.0.0.1:22/datos/1663670023_datos.sql.xz");
+            NetworkCredential objCredential = new NetworkCredential(ftpUserID, ftpPassword);
+            objRequest.Credentials = objCredential;
+            objRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            FtpWebResponse objResponse = (FtpWebResponse)objRequest.GetResponse();
+            byte[] buffer = new byte[32768];
+            using (Stream input = objResponse.GetResponseStream())
+            {
+                using (FileStream output = new FileStream(@"C:\Windows\Temp\1663670023_datos.sql.xz", FileMode.CreateNew))
+                {
+                    int bytesRead;
+                    while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, bytesRead);
+                    }
+                }
+            }
 
             if (FileCompare(@"n:\1663670023_datos.sql.xz", @"C:\Windows\Temp\1663670023_datos.sql.xz"))
             {
                 // BORRO DATOS
-                BL.DatosPosBLL.DeleteAll();
+            //    BL.DatosPosBLL.DeleteAll();
 
                 //RESTAURO DATOS
                 Process processRestaurar = new Process();
