@@ -69,7 +69,6 @@
             this.actualizarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarMovimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.descargarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -350,8 +349,7 @@
             // 
             this.mantenimientoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actualizarDatosToolStripMenuItem,
-            this.exportarMovimientosToolStripMenuItem,
-            this.descargarToolStripMenuItem});
+            this.exportarMovimientosToolStripMenuItem});
             this.mantenimientoToolStripMenuItem1.Name = "mantenimientoToolStripMenuItem1";
             this.mantenimientoToolStripMenuItem1.Size = new System.Drawing.Size(89, 20);
             this.mantenimientoToolStripMenuItem1.Text = "Mantenimiento";
@@ -376,13 +374,6 @@
             this.salirToolStripMenuItem1.Size = new System.Drawing.Size(39, 20);
             this.salirToolStripMenuItem1.Text = "Salir";
             this.salirToolStripMenuItem1.Click += new System.EventHandler(this.salirToolStripMenuItem1_Click);
-            // 
-            // descargarToolStripMenuItem
-            // 
-            this.descargarToolStripMenuItem.Name = "descargarToolStripMenuItem";
-            this.descargarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.descargarToolStripMenuItem.Text = "Descargar";
-            this.descargarToolStripMenuItem.Click += new System.EventHandler(this.descargarToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -450,7 +441,6 @@
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem exportarMovimientosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem descargarToolStripMenuItem;
     }
 }
 

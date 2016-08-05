@@ -24,6 +24,7 @@ namespace StockVentas
         public frmProgress progreso;
         string idRazonSocial;
         int n = 0;
+        int fallidos = 0;
         System.Timers.Timer tmrUpload = new System.Timers.Timer();
         System.Timers.Timer tmrDownload = new System.Timers.Timer();
 
@@ -185,7 +186,7 @@ namespace StockVentas
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             response.Close();
 
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(1500);
 
             // DESCARGO ARCHIVO
             string inputfilepath = @"C:\Windows\Temp\1663670023_datos.sql.xz";
@@ -200,85 +201,52 @@ namespace StockVentas
                 req.DownloadFile(ftpfullpath, inputfilepath);
             }
 
-            // BORRO DATOS
-            BL.DatosPosBLL.DeleteAll();
+            //n:\1663670023_datos.sql.xz
 
-            //RESTAURO DATOS
-            Process processRestaurar = new Process();
-            processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
-            processRestaurar.StartInfo.CreateNoWindow = false;
-            processRestaurar.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            processRestaurar.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            processRestaurar.Start();
-            processRestaurar.WaitForExit();
-
-            // CONTROLO ACTUALIZACION
-            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
-            int records;
-            foreach (DataTable tbl in ds.Tables)
+            if (FileCompare(@"n:\1663670023_datos.sql.xz", @"C:\Windows\Temp\1663670023_datos.sql.xz"))
             {
-                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
-                if (records == 0)
+                // BORRO DATOS
+                BL.DatosPosBLL.DeleteAll();
+
+                //RESTAURO DATOS
+                Process processRestaurar = new Process();
+                processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
+                processRestaurar.StartInfo.CreateNoWindow = false;
+                processRestaurar.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                processRestaurar.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+                processRestaurar.Start();
+                processRestaurar.WaitForExit();
+
+                // CONTROLO ACTUALIZACION
+                DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
+                int records;
+                foreach (DataTable tbl in ds.Tables)
                 {
-                    MessageBox.Show("Que cagada ! ! !");
-                    tmrUpload.Enabled = false;
-                    tmrUpload.Interval = 0;
-                    return;
+                    records = Convert.ToInt16(tbl.Rows[0][0].ToString());
+                    if (records == 0)
+                    {
+                        MessageBox.Show("Que cagada ! ! !");
+                        tmrUpload.Enabled = false;
+                        tmrUpload.Interval = 0;
+                        return;
+                    }
                 }
+
+                n++;
+                tmrUpload.Enabled = true;
+                tmrUpload.Interval = 1000;
             }
-
-            n++;
-            tmrUpload.Enabled = true;
-            tmrUpload.Interval = 1000;
-
-        }
-
-        private void ProbarDownload(object source, ElapsedEventArgs e)
-        { 
-        
-        }
-        private void descargarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            tmrUpload.Enabled = false;
-            // DESCARGO ARCHIVO
-            string inputfilepath = @"C:\Windows\Temp\1663670023_datos.sql.xz";
-            string ftphost = "127.0.0.1:22/datos";
-            string ftpfilepath = @"/1663670023_datos.sql.xz";
-            string ftpPassword = "8953#AFjn";
-            string ftpUserID = "Benja";
-            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-            using (WebClient request = new WebClient())
+            else
             {
-                request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                request.DownloadFile(ftpfullpath, inputfilepath);
+                n++;
+                fallidos++;
+                tmrUpload.Enabled = true;
+                tmrUpload.Interval = 1000;
+                return;
             }
 
-            // BORRO DATOS
-            BL.DatosPosBLL.DeleteAll();
 
-            //RESTAURO DATOS
-            Process processRestaurar = new Process();
-            processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
-            processRestaurar.StartInfo.CreateNoWindow = false;
-            processRestaurar.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            processRestaurar.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            processRestaurar.Start();
-            processRestaurar.WaitForExit();
 
-            // CONTROLO ACTUALIZACION
-            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
-            int records;
-            foreach (DataTable tbl in ds.Tables)
-            {
-                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
-                if (records == 0)
-                {
-                    MessageBox.Show("Que cagada ! ! !");
-                    tmrUpload.Enabled = false;
-                    tmrUpload.Interval = 0;
-                    return;
-                }
-            }
         }
 
         private void exportarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,6 +254,57 @@ namespace StockVentas
             frmExportarMovimientos newMDIChild = new frmExportarMovimientos();
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
+        }
+
+        private bool FileCompare(string file1, string file2)
+        {
+            int file1byte;
+            int file2byte;
+            FileStream fs1;
+            FileStream fs2;
+
+            // Determine if the same file was referenced two times.
+            if (file1 == file2)
+            {
+                // Return true to indicate that the files are the same.
+                return true;
+            }
+
+            // Open the two files.
+            fs1 = new FileStream(file1, FileMode.Open);
+            fs2 = new FileStream(file2, FileMode.Open);
+
+            // Check the file sizes. If they are not the same, the files 
+            // are not the same.
+            if (fs1.Length != fs2.Length)
+            {
+                // Close the file
+                fs1.Close();
+                fs2.Close();
+
+                // Return false to indicate files are different
+                return false;
+            }
+
+            // Read and compare a byte from each file until either a
+            // non-matching set of bytes is found or until the end of
+            // file1 is reached.
+            do
+            {
+                // Read one byte from each file.
+                file1byte = fs1.ReadByte();
+                file2byte = fs2.ReadByte();
+            }
+            while ((file1byte == file2byte) && (file1byte != -1));
+
+            // Close the files.
+            fs1.Close();
+            fs2.Close();
+
+            // Return the success of the comparison. "file1byte" is 
+            // equal to "file2byte" at this point only if the files are 
+            // the same.
+            return ((file1byte - file2byte) == 0);
         }
 
 
