@@ -13,6 +13,7 @@ using System.Net;
 using System.IO;
 using System.Timers;
 using System.Configuration;
+using System.IO.Compression;
 
 
 namespace StockVentas
@@ -23,7 +24,8 @@ namespace StockVentas
         public frmProgress progreso;
         string idRazonSocial;
         int n = 0;
-        System.Timers.Timer aTimer = new System.Timers.Timer();
+        System.Timers.Timer tmrUpload = new System.Timers.Timer();
+        System.Timers.Timer tmrDownload = new System.Timers.Timer();
 
         public frmPrincipal(frmInicio instanciaInicio)
         {
@@ -125,9 +127,9 @@ namespace StockVentas
              BL.DatosPosBLL.ActualizarBD("frmPrincipal");
              Cursor.Current = Cursors.Arrow;*/
 
-            aTimer = new System.Timers.Timer(1000);
-            aTimer.Elapsed += new ElapsedEventHandler(ProbarActualizar);
-            aTimer.Enabled = true;
+            tmrUpload = new System.Timers.Timer(1000);
+            tmrUpload.Elapsed += new ElapsedEventHandler(ProbarUpload);
+            tmrUpload.Enabled = true;
 
         }
 
@@ -147,16 +149,9 @@ namespace StockVentas
             instanciaInicio.Visible = true;
         }
 
-        private void ProbarActualizar(object source, ElapsedEventArgs e)
+        private void ProbarUpload(object source, ElapsedEventArgs e)
         {
-            if (n > 5000)
-            {
-                MessageBox.Show(n.ToString());
-                aTimer.Enabled = false;
-                aTimer.Interval = 0;
-                return;
-            }               
-            aTimer.Enabled = false;
+            tmrUpload.Enabled = false;
 
             if (File.Exists("c:\\Windows\\Temp\\1663670023_datos.sql.xz")) File.Delete("c:\\Windows\\Temp\\1663670023_datos.sql.xz");
             if (File.Exists("c:\\Windows\\Temp\\1663670023_datos.sql")) File.Delete("c:\\Windows\\Temp\\1663670023_datos.sql");
@@ -178,33 +173,37 @@ namespace StockVentas
             string ftpServerIP = substrings[0];
             string ftpUserID = substrings[1];
             string ftpPassword = substrings[2];
-
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://127.0.0.1:22/datos/1663670023_datos.sql.xz");
             request.Method = WebRequestMethods.Ftp.UploadFile;
-
-            // This example assumes the FTP site uses anonymous logon.
             request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
 
-            // Copy the contents of the file to the request stream.
-            StreamReader sourceStream = new StreamReader(@"n:\1663670023_datos.sql.xz");
-            byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-            sourceStream.Close();
+            byte[] fileContents = File.ReadAllBytes(@"n:\1663670023_datos.sql.xz");
             request.ContentLength = fileContents.Length;
-
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(fileContents, 0, fileContents.Length);
             requestStream.Close();
-
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             response.Close();
 
-                // DESCARGO ARCHIVO
+            System.Threading.Thread.Sleep(3000);
 
-                
-              // BORRO DATOS
+            // DESCARGO ARCHIVO
+            string inputfilepath = @"C:\Windows\Temp\1663670023_datos.sql.xz";
+            string ftphost = "127.0.0.1:22/datos";
+            string ftpfilepath = @"/1663670023_datos.sql.xz";
+            ftpPassword = "8953#AFjn";
+            ftpUserID = "Benja";
+            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+            using (WebClient req = new WebClient())
+            {
+                req.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                req.DownloadFile(ftpfullpath, inputfilepath);
+            }
+
+            // BORRO DATOS
             BL.DatosPosBLL.DeleteAll();
 
-              //RESTAURO DATOS
+            //RESTAURO DATOS
             Process processRestaurar = new Process();
             processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
             processRestaurar.StartInfo.CreateNoWindow = false;
@@ -213,7 +212,7 @@ namespace StockVentas
             processRestaurar.Start();
             processRestaurar.WaitForExit();
 
-              // CONTROLO ACTUALIZACION
+            // CONTROLO ACTUALIZACION
             DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
             int records;
             foreach (DataTable tbl in ds.Tables)
@@ -222,15 +221,64 @@ namespace StockVentas
                 if (records == 0)
                 {
                     MessageBox.Show("Que cagada ! ! !");
-                    aTimer.Enabled = false;
-                    aTimer.Interval = 0;
+                    tmrUpload.Enabled = false;
+                    tmrUpload.Interval = 0;
                     return;
                 }
             }
 
             n++;
-            aTimer.Enabled = true;
-            aTimer.Interval = 1500;
+            tmrUpload.Enabled = true;
+            tmrUpload.Interval = 1000;
+
+        }
+
+        private void ProbarDownload(object source, ElapsedEventArgs e)
+        { 
+        
+        }
+        private void descargarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tmrUpload.Enabled = false;
+            // DESCARGO ARCHIVO
+            string inputfilepath = @"C:\Windows\Temp\1663670023_datos.sql.xz";
+            string ftphost = "127.0.0.1:22/datos";
+            string ftpfilepath = @"/1663670023_datos.sql.xz";
+            string ftpPassword = "8953#AFjn";
+            string ftpUserID = "Benja";
+            string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+            using (WebClient request = new WebClient())
+            {
+                request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                request.DownloadFile(ftpfullpath, inputfilepath);
+            }
+
+            // BORRO DATOS
+            BL.DatosPosBLL.DeleteAll();
+
+            //RESTAURO DATOS
+            Process processRestaurar = new Process();
+            processRestaurar.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
+            processRestaurar.StartInfo.CreateNoWindow = false;
+            processRestaurar.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            processRestaurar.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            processRestaurar.Start();
+            processRestaurar.WaitForExit();
+
+            // CONTROLO ACTUALIZACION
+            DataSet ds = DAL.DatosPosDAL.ControlarUpdate();
+            int records;
+            foreach (DataTable tbl in ds.Tables)
+            {
+                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
+                if (records == 0)
+                {
+                    MessageBox.Show("Que cagada ! ! !");
+                    tmrUpload.Enabled = false;
+                    tmrUpload.Interval = 0;
+                    return;
+                }
+            }
         }
 
         private void exportarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -239,6 +287,10 @@ namespace StockVentas
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
         }
+
+
+
+
 
 
     }

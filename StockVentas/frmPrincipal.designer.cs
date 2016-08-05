@@ -67,8 +67,9 @@
             this.ventasToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarMovimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.descargarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -349,7 +350,8 @@
             // 
             this.mantenimientoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actualizarDatosToolStripMenuItem,
-            this.exportarMovimientosToolStripMenuItem});
+            this.exportarMovimientosToolStripMenuItem,
+            this.descargarToolStripMenuItem});
             this.mantenimientoToolStripMenuItem1.Name = "mantenimientoToolStripMenuItem1";
             this.mantenimientoToolStripMenuItem1.Size = new System.Drawing.Size(89, 20);
             this.mantenimientoToolStripMenuItem1.Text = "Mantenimiento";
@@ -361,6 +363,13 @@
             this.actualizarDatosToolStripMenuItem.Text = "Actualizar datos";
             this.actualizarDatosToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosToolStripMenuItem_Click);
             // 
+            // exportarMovimientosToolStripMenuItem
+            // 
+            this.exportarMovimientosToolStripMenuItem.Name = "exportarMovimientosToolStripMenuItem";
+            this.exportarMovimientosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.exportarMovimientosToolStripMenuItem.Text = "Exportar movimientos";
+            this.exportarMovimientosToolStripMenuItem.Click += new System.EventHandler(this.exportarMovimientosToolStripMenuItem_Click);
+            // 
             // salirToolStripMenuItem1
             // 
             this.salirToolStripMenuItem1.Name = "salirToolStripMenuItem1";
@@ -368,12 +377,12 @@
             this.salirToolStripMenuItem1.Text = "Salir";
             this.salirToolStripMenuItem1.Click += new System.EventHandler(this.salirToolStripMenuItem1_Click);
             // 
-            // exportarMovimientosToolStripMenuItem
+            // descargarToolStripMenuItem
             // 
-            this.exportarMovimientosToolStripMenuItem.Name = "exportarMovimientosToolStripMenuItem";
-            this.exportarMovimientosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.exportarMovimientosToolStripMenuItem.Text = "Exportar movimientos";
-            this.exportarMovimientosToolStripMenuItem.Click += new System.EventHandler(this.exportarMovimientosToolStripMenuItem_Click);
+            this.descargarToolStripMenuItem.Name = "descargarToolStripMenuItem";
+            this.descargarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.descargarToolStripMenuItem.Text = "Descargar";
+            this.descargarToolStripMenuItem.Click += new System.EventHandler(this.descargarToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -441,6 +450,7 @@
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem exportarMovimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem descargarToolStripMenuItem;
     }
 }
 
