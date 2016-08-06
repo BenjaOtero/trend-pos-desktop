@@ -187,7 +187,7 @@ namespace StockVentas
 
             System.Threading.Thread.Sleep(1500);
 
-
+            // DESCARGO ARCHIVO
             FtpWebRequest objRequest = (FtpWebRequest)FtpWebRequest.Create("ftp://127.0.0.1:22/datos/1663670023_datos.sql.xz");
             NetworkCredential objCredential = new NetworkCredential(ftpUserID, ftpPassword);
             objRequest.Credentials = objCredential;
@@ -231,7 +231,6 @@ namespace StockVentas
                         MessageBox.Show("Que cagada ! ! !");
                         tmrUpload.Enabled = false;
                         tmrUpload.Interval = 0;
-                        return;
                     }
                 }
 
