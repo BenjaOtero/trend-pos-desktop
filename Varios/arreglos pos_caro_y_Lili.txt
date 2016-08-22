@@ -1,0 +1,24 @@
+	Normalizar tablas
+- exportar articulos, clientes, razonsocial, stock pos_desktop Y luego importarlos a las bases de la lili Y caro
+- cambiar campo en la tabla fondocaja FechaFONP a tipo DATE de la lili Y caro			
+- en la tabla locales dejar un LOCAL unicamente(el de la caro Y el de la lili respectivamente)	
+- resolver pcs
+
+	Borrar de las bases de la lili Y caro:
+-views
+-stored procs
+-Functions
+-Triggers
+
+	Importar de pos_desktop a las bases de la lili Y caro
+-views
+-stored procs
+-Functions
+-Triggers
+
+	no olvidar
+-en frmVentas poner precioPublicoART en vez de PrecioMayorART según corresponda
+
+
+
+	

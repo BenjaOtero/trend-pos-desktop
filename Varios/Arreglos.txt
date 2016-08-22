@@ -4,6 +4,7 @@
 -en frmVentas poner precioPublicoART en vez de PrecioMayorART
 -probar y refactorizar exportar datos pos
 -Exportar datos desde menú mantenimiento seleccionando el dia a exportar.
+-interceptar posible error servidor mysql caido
 
 
 

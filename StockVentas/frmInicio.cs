@@ -16,6 +16,7 @@ using System.Timers;
 using BL;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using DAL;
 
 namespace StockVentas
 {
@@ -297,12 +298,18 @@ namespace StockVentas
 
         private void bckDataExport_DoWork(object sender, DoWorkEventArgs e)
         {
-            string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
-            string pc = BL.PcsBLL.GetId().ToString();
-            idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fechaExport + ".sql.gz";
-            BL.DatosPosBLL.ExportAll(fechaExport);
-            Utilitarios.ExportarDatos(idRazonSocial);
-
+            try
+            {
+                string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
+                string pc = BL.PcsBLL.GetId().ToString();
+                idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fechaExport + ".sql.xz";
+                DatosPosBLL.ExportAll(fechaExport);
+                DatosPosBLL.ExportarDatos(idRazonSocial);
+            }
+            catch (ServidorMysqlInaccesibleException)
+            {
+                return;
+            }
         }
 
         private void bckDataExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

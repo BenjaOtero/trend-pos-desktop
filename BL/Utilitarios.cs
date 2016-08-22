@@ -14,8 +14,6 @@ using System.Net;
 using System.Threading;
 using System.Diagnostics;
 
-
-
 namespace BL
 {
     public class Utilitarios
@@ -140,38 +138,6 @@ namespace BL
             }
         }
 
-        public static void ExportarDatos(string idRazonSocial)
-        {
-            Utilitarios.idRazonSocial = idRazonSocial;
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\export.bat"); // creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt pos_desktop exportar_fondo_caja exportar_tesoreria_movimientos exportar_ventas exportar_ventas_detalle | gzip > c:\windows\temp\" + idRazonSocial);
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\export.bat", true)) // escribo el archivo .bat
-            {
-                outfile.Write(sb.ToString());
-            }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\export.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(ExportarDatos_Exited);
-            process.Start();
-            process.WaitForExit();
-        }
-
-        private static void ExportarDatos_Exited(object sender, System.EventArgs e)
-        {
-            UploadDatosPos(@"c:\windows\temp\" + idRazonSocial, idRazonSocial);
-            if (File.Exists("c:\\Windows\\Temp\\export.bat")) File.Delete("c:\\Windows\\Temp\\export.bat");
-            if (File.Exists(@"c:\windows\temp\" + idRazonSocial)) File.Delete(@"c:\windows\temp\" + idRazonSocial);
-        }
-
         public static bool HayInternet()
         {
             bool conexion = false;
@@ -262,34 +228,6 @@ namespace BL
             }
         }
 
-        public static bool DownloadFileFTP(string hilo, string coco)
-        {
-            bool descargado = false;
-            try
-            {
-                string inputfilepath = @"C:\Windows\Temp\datos.sql.xz";
-                string ftphost = "127.0.0.1:22/datos";
-                string ftpfilepath = @"/" + BL.RazonSocialBLL.GetId().ToString() + "_datos.sql.xz";
-                string ftpPassword = "8953#AFjn";
-                string ftpUserID = "Benja";
-                string ftpfullpath = "ftp://" + ftphost + ftpfilepath;
-                using (WebClient request = new WebClient())
-                {
-                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                    request.DownloadFile(ftpfullpath, inputfilepath);
-                    descargado = true;
-                }
-            }
-            catch (WebException)
-            {
-                if(hilo != "frmInicio")
-                {
-                    MessageBox.Show("No se pudo conectar con el servidor FTP. No se actualizaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }                
-            }
-            return descargado;
-        }
-
         public static bool DownloadFileFTP(string hilo)
         {
             bool descargado = false;
@@ -328,8 +266,15 @@ namespace BL
             }
             return descargado;
         }
-    }
+
+        public static bool ValidarServicioMysql()
+        {
+            bool funcionando = DAL.DALBase.ValidarServicioMysql();
+            return funcionando;
+        }
 
     }
+
+}
 
 

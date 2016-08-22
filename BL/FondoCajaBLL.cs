@@ -36,7 +36,6 @@ namespace BL
             try
             {
                 MySqlConnection SqlConnection1 = DALBase.GetConnection();
-                SqlConnection1.Open();
                 DAL.FondoCajaDAL.GrabarDB(dt, SqlConnection1);
                 SqlConnection1.Close();
             }

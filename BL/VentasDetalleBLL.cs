@@ -26,7 +26,6 @@ namespace BL
             try
             {
                 MySqlConnection SqlConnection1 = DALBase.GetConnection();
-                SqlConnection1.Open();
                 tr = SqlConnection1.BeginTransaction();
                 DAL.VentasDetalleDAL.GrabarDB(dt, SqlConnection1, tr);
                 tr.Commit();
