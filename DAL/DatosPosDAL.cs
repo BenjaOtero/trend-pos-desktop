@@ -84,6 +84,19 @@ namespace DAL
             SqlConnection1.Close();
         }
 
+        public static DataTable ControlarExport()
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetDumpPosConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_ControlarExport", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataTable tbl = new DataTable();
+            SqlDataAdapter1.Fill(tbl);
+            SqlConnection1.Close();
+            return tbl;
+        }
+
         public static void BorrarCrearBD()
         {
             SqlConnection1 = DALBase.GetConnection();

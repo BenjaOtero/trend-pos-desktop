@@ -300,11 +300,9 @@ namespace StockVentas
         {
             try
             {
-                string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");
-                string pc = BL.PcsBLL.GetId().ToString();
-                idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fechaExport + ".sql.xz";
+                string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");                
                 DatosPosBLL.ExportAll(fechaExport);
-                DatosPosBLL.ExportarDatos(idRazonSocial);
+                DatosPosBLL.ExportarDatos(fechaExport);
             }
             catch (ServidorMysqlInaccesibleException)
             {

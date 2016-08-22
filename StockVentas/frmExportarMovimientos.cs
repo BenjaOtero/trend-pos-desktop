@@ -31,10 +31,8 @@ namespace StockVentas
                 {
                     string strFecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                     Cursor.Current = Cursors.WaitCursor;
-                    string pc = BL.PcsBLL.GetId().ToString();
-                    string idRazonSocial = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + strFecha + ".sql.gz";
                     DatosPosBLL.ExportAll(strFecha);
-                    DatosPosBLL.ExportarDatos(idRazonSocial);
+                    DatosPosBLL.ExportarDatos(strFecha);
                 }
                 catch (WebException)
                 {

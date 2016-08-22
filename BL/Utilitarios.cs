@@ -228,6 +228,90 @@ namespace BL
             }
         }
 
+        public static void UploadFromFile(string nombreLocal, string nombreServidor)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //  string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + nombreServidor);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+            byte[] fileContents = File.ReadAllBytes(nombreLocal);
+            request.ContentLength = fileContents.Length;
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(fileContents, 0, fileContents.Length);
+            requestStream.Close();
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            response.Close();
+        }
+
+        public static void DownloadFile(string nombreLocal, string nombreServidor)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + nombreServidor);
+            request.Method = WebRequestMethods.Ftp.DownloadFile;
+            request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+            FtpWebResponse objResponse = (FtpWebResponse)request.GetResponse();
+            byte[] buffer = new byte[32768];
+            using (Stream input = objResponse.GetResponseStream())
+            {
+                if (File.Exists(nombreLocal)) File.Delete(nombreLocal);
+                using (FileStream output = new FileStream(nombreLocal, FileMode.CreateNew))
+                {
+                    int bytesRead;
+                    while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, bytesRead);
+                    }
+                }
+            }
+            objResponse.Close();
+        }
+
+
+        public static bool FileCompare(string file1, string file2)
+        {
+            int file1byte;
+            int file2byte;
+            FileStream fs1;
+            FileStream fs2;
+            if (file1 == file2)
+            {
+                return true;
+            }
+            fs1 = new FileStream(file1, FileMode.Open);
+            fs2 = new FileStream(file2, FileMode.Open);
+            if (fs1.Length != fs2.Length)
+            {
+                fs1.Close();
+                fs2.Close();
+                return false;
+            }
+            do
+            {
+                // Read one byte from each file.
+                file1byte = fs1.ReadByte();
+                file2byte = fs2.ReadByte();
+            }
+            while ((file1byte == file2byte) && (file1byte != -1));
+            fs1.Close();
+            fs2.Close();
+            // Return the success of the comparison. "file1byte" is 
+            // equal to "file2byte" at this point only if the files are 
+            // the same.
+            return ((file1byte - file2byte) == 0);
+        }
+
         public static bool DownloadFileFTP(string hilo)
         {
             bool descargado = false;
