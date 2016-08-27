@@ -301,7 +301,6 @@ namespace StockVentas
             try
             {
                 string fechaExport = DateTime.Today.ToString("yyyy-MM-dd");                
-                DatosPosBLL.ExportAll(fechaExport);
                 DatosPosBLL.ExportarDatos(fechaExport);
             }
             catch (ServidorMysqlInaccesibleException)

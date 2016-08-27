@@ -37,6 +37,7 @@ namespace BL
 
         public static void ExportarDatos(string fecha)
         {
+            DAL.DatosPosDAL.ExportAll(fecha);
             DumpBD(fecha);
             if (ComprobarDump())
             {
@@ -66,7 +67,7 @@ namespace BL
         {
             idRazonSocial = BL.RazonSocialBLL.GetId().ToString();
             string pc = BL.PcsBLL.GetId().ToString();
-            strFile = BL.RazonSocialBLL.GetId().ToString() + "_pc" + pc + "_" + fecha + ".sql.zip";
+            strFile = idRazonSocial + "_pc" + pc + "_" + fecha + ".sql.xz";
             if (File.Exists("c:\\Windows\\Temp\\export.bat")) File.Delete("c:\\Windows\\Temp\\export.bat");
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\export.bat"); // creo el archivo .bat
             sw.Close();
@@ -77,7 +78,7 @@ namespace BL
             sb.AppendLine(@"cd " + path + @"\Mysql");
             string sql = @"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ";
             sql += @"pos_desktop exportar_fondo_caja exportar_tesoreria_movimientos exportar_ventas ";
-            sql += @"exportar_ventas_detalle | gzip > c:\windows\temp\" + strFile;
+            sql += @"exportar_ventas_detalle | xz > c:\windows\temp\" + strFile;
             sb.AppendLine(sql);
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\export.bat", true)) // escribo el archivo .bat
             {
@@ -103,8 +104,8 @@ namespace BL
             // copio el archivo para ejecutar el dump desde la copia porque al descomprimirlo se borra y no lo puedo subir
             if (File.Exists(@"c:\windows\temp\data\" + strFile)) File.Delete(@"c:\windows\temp\data\" + strFile);
             File.Copy(@"c:\windows\temp\" + strFile, @"c:\windows\temp\data\" + strFile);
-            string restaurar = strFile.Substring(0, strFile.Length - 3);
-            if (File.Exists("C:\\Windows\\Temp\\data\\" + restaurar)) File.Delete("C:\\Windows\\Temp\\data\\" + restaurar);
+            string descomprimido = strFile.Substring(0, strFile.Length - 3);
+            if (File.Exists("C:\\Windows\\Temp\\data\\" + descomprimido)) File.Delete("C:\\Windows\\Temp\\data\\" + descomprimido);
             if (File.Exists(@"C:\Windows\Temp\restore.bat")) File.Delete(@"C:\Windows\Temp\restore.bat");
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
             sw.Close();
@@ -114,7 +115,7 @@ namespace BL
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
             sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\data\\" + strFile + "\"");
-            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_pos < \"C:\\Windows\\Temp\\data\\" + restaurar + "\"");
+            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_pos < \"C:\\Windows\\Temp\\data\\" + descomprimido + "\"");
             //  sb.AppendLine("pause");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {

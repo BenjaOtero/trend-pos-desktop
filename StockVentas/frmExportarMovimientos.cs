@@ -31,7 +31,6 @@ namespace StockVentas
                 {
                     string strFecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                     Cursor.Current = Cursors.WaitCursor;
-                    DatosPosBLL.ExportAll(strFecha);
                     DatosPosBLL.ExportarDatos(strFecha);
                 }
                 catch (WebException)
