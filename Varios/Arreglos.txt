@@ -5,6 +5,7 @@
 -probar y refactorizar exportar datos pos
 -Exportar datos desde menú mantenimiento seleccionando el dia a exportar.
 -interceptar posible error servidor mysql caido
+-informe ventasDetalle no muestra movimientos al ser cargadas las ventas desde admin
 
 
 
