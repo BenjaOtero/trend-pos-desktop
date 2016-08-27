@@ -28,12 +28,13 @@ namespace BL
             return ds;
         }
 
+
+        // EXPORTAR DATOS POS
+
         public static void ExportAll(string fecha)
         {
             DAL.DatosPosDAL.ExportAll(fecha);
         }
-
-        // EXPORTAR DATOS POS
 
         public static void ExportarDatos(string fecha)
         {
@@ -114,7 +115,7 @@ namespace BL
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Mysql");
-            sb.AppendLine("gzip -d \"C:\\Windows\\Temp\\data\\" + strFile + "\"");
+            sb.AppendLine("xz -d \"C:\\Windows\\Temp\\data\\" + strFile + "\"");
             sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_pos < \"C:\\Windows\\Temp\\data\\" + descomprimido + "\"");
             //  sb.AppendLine("pause");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
