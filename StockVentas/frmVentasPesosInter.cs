@@ -71,6 +71,12 @@ namespace StockVentas
             MessageBox.Show("Debe seleccionar un local.", "Trend",MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                string mensaje = "No se pudo establecer la conexión con el servidor de base de datos.";
+                MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (rdTotales.Checked)
             {
                 strLocales = string.Empty;

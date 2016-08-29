@@ -1,11 +1,12 @@
 -ayuda
 -Mente al desinstalar POS si desinstalo Mysqlserver y borro archivos de bd
 -Mente instalacion (crear pc?) modificar el codigo donde hace referencia al nro de pc.
+
+
+
+
 -en frmVentas poner precioPublicoART en vez de PrecioMayorART
--probar y refactorizar exportar datos pos
--Exportar datos desde menú mantenimiento seleccionando el dia a exportar.
--interceptar posible error servidor mysql caido
-al instalar restaurar dump_pos
+-al instalar restaurar dump_pos
 
 
 

@@ -18,6 +18,14 @@ namespace StockVentas
 
         private void frmVentasLotesTarjetas_Load(object sender, EventArgs e)
         {
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                string mensaje = "No se pudo establecer la conexión con el servidor de base de datos."
+                                    + '\r' + "No se actualizaron los datos.";
+                MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

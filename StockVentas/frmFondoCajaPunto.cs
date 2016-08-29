@@ -67,6 +67,13 @@ namespace StockVentas
             if (txtImporte.Text == "") return;
             rowView.EndEdit();
             Cursor.Current = Cursors.WaitCursor;
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                MessageBox.Show("No se pudo conectar con el servidor de base de datos."
+                + '\r' + "No se grabaron los datos.", "Trend Sistemas",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             BL.FondoCajaBLL.GrabarDB(dsFondoCaja, ref codigoError, false);
             Cursor.Current = Cursors.Arrow;
             Close();
@@ -80,41 +87,6 @@ namespace StockVentas
         private void frmFondoCajaPunto_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) this.Close();
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtImporte_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
     }

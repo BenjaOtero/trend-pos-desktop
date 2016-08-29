@@ -28,15 +28,10 @@ namespace BL
             return ds;
         }
 
-
         // EXPORTAR DATOS POS
 
-        public static void ExportAll(string fecha)
-        {
-            DAL.DatosPosDAL.ExportAll(fecha);
-        }
-
         public static void ExportarDatos(string fecha)
+
         {
             DAL.DatosPosDAL.ExportAll(fecha);
             DumpBD(fecha);
@@ -60,6 +55,34 @@ namespace BL
                 {
                     intentosDump++;
                     ExportarDatos(fecha);
+                }
+            }
+        }
+
+        public static void ExportarDatos(string fecha, string timer)
+        {
+            DAL.DatosPosDAL.ExportAll(fecha);
+            DumpBD(fecha);
+            if (ComprobarDump())
+            {
+            Reintentar:
+                Utilitarios.UploadFromFile(@"c:\windows\temp\" + strFile, "/datos/" + strFile);
+                Utilitarios.DownloadFile(@"c:\windows\temp\tmp_" + strFile, "/datos/" + strFile);
+                if (!Utilitarios.FileCompare(@"c:\windows\temp\tmp_" + strFile, @"c:\windows\temp\" + strFile))
+                {
+                    if (intentosUpload < 5)
+                    {
+                        intentosUpload++;
+                        goto Reintentar;
+                    }
+                }
+            }
+            else
+            {
+                if (intentosDump < 5)
+                {
+                    intentosDump++;
+                    ExportarDatos(fecha, timer);
                 }
             }
         }
@@ -144,6 +167,7 @@ namespace BL
         {
             if (Backup())
             {
+            reintentar:
                 if (Utilitarios.DownloadFileFTP(hilo))  //tratar errores en DownloadFileFTP()
                 {
                     DAL.DatosPosDAL.DeleteAll();
@@ -154,7 +178,7 @@ namespace BL
                         {
                             intentos++;
                             RestaurarBD();
-                            ActualizarBD(hilo);
+                            goto reintentar;
                         }
                         else
                         {

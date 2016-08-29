@@ -28,6 +28,12 @@ namespace StockVentas
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                string mensaje = "No se pudo establecer la conexión con el servidor de base de datos.";
+                MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             frmArqueoCaja arqueo = new frmArqueoCaja(dateTimeFecha);
             arqueo.Show();
         }

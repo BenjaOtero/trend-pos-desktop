@@ -184,6 +184,13 @@ namespace StockVentas
             bindingSource1.EndEdit();
             if (tblClientes.GetChanges() != null)
             {
+                if (!BL.Utilitarios.ValidarServicioMysql())
+                {
+                    string mensaje = "No se pudo establecer la conexión con el servidor de base de datos."
+                                        + '\r' + "No se actualizaron los datos.";
+                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 BL.ClientesBLL.GrabarDB(dsClientes, tblFallidas, ref codigoError, false);
             }
             bindingSource1.RemoveFilter();

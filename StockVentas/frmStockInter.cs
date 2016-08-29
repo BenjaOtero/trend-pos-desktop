@@ -38,6 +38,12 @@ namespace StockVentas
             DataTable tblStock;
             try
             {
+                if (!BL.Utilitarios.ValidarServicioMysql())
+                {
+                    string mensaje = "No se pudo establecer la conexión con el servidor de base de datos.";
+                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 parametro = txtParametros.Text;
                 tblStock = BL.StockBLL.GetStock(intLocal, parametro);
             }

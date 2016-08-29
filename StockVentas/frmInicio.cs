@@ -30,13 +30,20 @@ namespace StockVentas
         public DataSet ds;
         public bool cerrando = false;
         private int? codigoError = null;
-        string idRazonSocial;
         bool seExportaronDatos = false;
+        private static System.Timers.Timer aTimer;
+        static BackgroundWorker bckExportarTimer;
 
         public frmInicio()
         {
             InitializeComponent();
-            instanciaInicio = this;  
+            instanciaInicio = this;
+            bckExportarTimer = new BackgroundWorker();
+            bckExportarTimer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bckExportarTimer_DoWork);
+            bckExportarTimer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bckExportarTimer_RunWorkerCompleted);
+            aTimer = new System.Timers.Timer(600000);
+            aTimer.Elapsed += new ElapsedEventHandler(ExportarAlTimer);
+            aTimer.Enabled = true;
         }
 
         private void frmInicio_Shown(object sender, EventArgs e)
@@ -68,105 +75,65 @@ namespace StockVentas
 
         private void bckIniciarComponetes_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (BL.Utilitarios.HayInternet())
+            if (!ExisteServicioMySQL())
             {
-                if (!ExisteServicioMySQL())
+                label1.Text = "Configurando servidor de base de datos . . .";
+                ConfigurarMySQL();
+            }
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                this.Invoke((Action)delegate
                 {
-                    label1.Text = "Configurando servidor de base de datos . . .";
-                    ConfigurarMySQL();
-                }
-                label1.Text = "Actualizando base de datos . . .";
+                    string mensaje = "No se pudo establecer la conexión con el servidor de base de datos.";
+                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
+
+                System.Environment.Exit(1);
+            }
+            label1.Text = "Actualizando base de datos . . .";
+            try
+            {                                      
+                BL.DatosPosBLL.ActualizarBD("frmInicio");
                 try
-                {                                      
-                    BL.DatosPosBLL.ActualizarBD("frmInicio");
-                    try
-                    {
-                        AgregarFondoCaja();
-                    }
-                    catch (Exception)
-                    {
-                        //invoca al hilo principal através de un delegado
-                        this.Invoke((Action)delegate
-                        {
-                            string mensajeFondo = "No se inicializó el fondo de caja.";
-                            MessageBox.Show(this, mensajeFondo, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        });
-                    }
-                }
-                catch (MySqlException ex)
                 {
-                    if (ex.Number == 1049) // no existe la base de datos
-                    {
-                        ConfigurarMySQL();
-                      //  ds = BL.Utilitarios.ActualizarBD(); 
-                    }
-                }
-                catch (WebException)
-                {
-                    //invoca al hilo principal através de un delegado
-                    this.Invoke((Action)delegate
-                    {
-                        string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
-                        MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
+                    AgregarFondoCaja();
                 }
                 catch (Exception)
                 {
                     //invoca al hilo principal através de un delegado
                     this.Invoke((Action)delegate
                     {
-                        string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
-                        MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Application.Exit();
+                        string mensajeFondo = "No se inicializó el fondo de caja.";
+                        MessageBox.Show(this, mensajeFondo, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     });
                 }
             }
-            else
+            catch (MySqlException ex)
             {
-                if (!ExisteServicioMySQL())
+                if (ex.Number == 1049) // no existe la base de datos
                 {
-                    if (this.InvokeRequired) //si da true es porque estoy en un subproceso distinto al hilo principal
-                    {
-                        string mensaje = "No se puede iniciar la aplicación sin internet.";
-                        //invoca al hilo principal através de un delegado
-                        this.Invoke((Action)delegate
-                        {
-                            MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            Application.Exit();
-                        });
-                    }
+                    ConfigurarMySQL();
+                    //  ds = BL.Utilitarios.ActualizarBD(); 
                 }
-                else
+            }
+            catch (WebException)
+            {
+                //invoca al hilo principal através de un delegado
+                this.Invoke((Action)delegate
                 {
-                    if (this.InvokeRequired) //si da true es porque estoy en un subproceso distinto al hilo principal
-                    {
-                        string mensaje = "No hay conexión a internet. ¿Desea trabajar sin conexión?";
-                        //invoca al hilo principal através de un delegado
-                        this.Invoke((Action)delegate
-                        {
-                            if (MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.No)
-                            {
-                                Application.Exit();
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    AgregarFondoCaja();
-                                }
-                                catch (Exception)
-                                {
-                                    //invoca al hilo principal através de un delegado
-                                    this.Invoke((Action)delegate
-                                    {
-                                        string mensajeFondo = "No se inicializó el fondo de caja.";
-                                        MessageBox.Show(this, mensajeFondo, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    });
-                                } 
-                            }
-                        });
-                    }
-                }
+                    string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
+                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
+            }
+            catch (Exception)
+            {
+                //invoca al hilo principal através de un delegado
+                this.Invoke((Action)delegate
+                {
+                    string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
+                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                });
             }
         }
 
@@ -314,6 +281,37 @@ namespace StockVentas
             seExportaronDatos = true;
             Application.Exit();
         }
+
+        // Exportar movimientos cada 10 minutos
+
+        private static void ExportarAlTimer(object source, ElapsedEventArgs e)
+        {
+            aTimer.Enabled = false;
+            bckExportarTimer.RunWorkerAsync();
+        }
+
+        public void bckExportarTimer_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (BL.Utilitarios.ValidarServicioMysql())
+            {
+                try
+                {
+                    BL.DatosPosBLL.ExportarDatos(DateTime.Today.ToString("yyyy-MM-dd"), "timer");
+                }
+                catch (WebException)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void bckExportarTimer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            aTimer.Enabled = true;
+            aTimer.Interval = 600000;
+        }
+
+        //-------------- Fin exportar ---------------------//
 
     }
 }

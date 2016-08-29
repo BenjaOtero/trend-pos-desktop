@@ -207,7 +207,7 @@ namespace StockVentas
                 }
                 lblNro.Text = clave.ToString();
                 viewVentas.RowStateFilter = DataViewRowState.Added;
-                viewDetalle.RowStateFilter = DataViewRowState.Added;
+          //      viewDetalle.RowStateFilter = DataViewRowState.Added;
                 rowView = viewVentas.AddNew();
                 rowView["IdVentaVEN"] = clave.ToString();
                 rowView["FechaVEN"] = DateTime.Now;
@@ -420,6 +420,19 @@ namespace StockVentas
                 txtArticulo.Focus();
                 lblTotal.Text = "$" + CalcularTotal().ToString();
               //  SetStateForm(FormState.insercion);
+            }
+            if (tblVentasDetalle.GetChanges() != null)
+            {
+                if (BL.Utilitarios.ValidarServicioMysql())
+                {
+                    BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, false);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo conectar con el servidor de base de datos."
+                    + '\r' + "No se grabaron los datos.", "Trend Sistemas",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             dgvDatos.CellEnter -= new DataGridViewCellEventHandler(dgvDatos_CellEnter);
             SetStateForm(FormState.insercion);

@@ -96,6 +96,13 @@ namespace StockVentas
             rowView.EndEdit();
             if (tblTesoreriaMov.GetChanges() != null)
             {
+                if (!BL.Utilitarios.ValidarServicioMysql())
+                {
+                    MessageBox.Show("No se pudo conectar con el servidor de base de datos."
+                    + '\r' + "No se grabaron los datos.", "Trend Sistemas",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 Cursor.Current = Cursors.WaitCursor;
                 BL.TesoreriaMovimientosBLL.GrabarDB(dsTesoreriaMov, ref codigoError, false);
                 this.DialogResult = DialogResult.OK;

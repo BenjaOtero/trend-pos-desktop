@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Fecha";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label4
             // 
@@ -64,7 +63,6 @@
             this.label4.Size = new System.Drawing.Size(49, 15);
             this.label4.TabIndex = 2;
             this.label4.Text = "Importe";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtImporte
             // 
@@ -72,7 +70,6 @@
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(176, 20);
             this.txtImporte.TabIndex = 1;
-            this.txtImporte.TextChanged += new System.EventHandler(this.txtImporte_TextChanged);
             // 
             // groupBox1
             // 
@@ -114,7 +111,6 @@
             this.lblClave.Size = new System.Drawing.Size(40, 13);
             this.lblClave.TabIndex = 7;
             this.lblClave.Text = "auto()";
-            this.lblClave.Click += new System.EventHandler(this.lblClave_Click);
             // 
             // label5
             // 
@@ -126,7 +122,6 @@
             this.label5.Size = new System.Drawing.Size(49, 15);
             this.label5.TabIndex = 6;
             this.label5.Text = "Nº Mov.";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // groupBox2
             // 
@@ -141,7 +136,6 @@
             this.groupBox2.Size = new System.Drawing.Size(256, 100);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // lblFecha
             // 
@@ -153,7 +147,6 @@
             this.lblFecha.Size = new System.Drawing.Size(39, 13);
             this.lblFecha.TabIndex = 7;
             this.lblFecha.Text = "fecha";
-            this.lblFecha.Click += new System.EventHandler(this.lblClave_Click);
             // 
             // frmFondoCajaPunto
             // 

@@ -124,13 +124,15 @@ namespace StockVentas
 
         private void actualizarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!BL.Utilitarios.ValidarServicioMysql())
+            {
+                string mensaje = "No se pudo establecer la conexión con el servidor de base de datos."
+                                    + '\r' + "No se actualizaron los datos.";
+                MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             frmProgress frm = new frmProgress("ActualizarDatos", "grabar");
             frm.ShowDialog();
-
-          /*  tmrUpload = new System.Timers.Timer(1000);
-            tmrUpload.Elapsed += new ElapsedEventHandler(ProbarUpload);
-            tmrUpload.Enabled = true;*/
-
         }
 
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
