@@ -31,7 +31,6 @@ namespace BL
         // EXPORTAR DATOS POS
 
         public static void ExportarDatos(string fecha)
-
         {
             DAL.DatosPosDAL.ExportAll(fecha);
             DumpBD(fecha);

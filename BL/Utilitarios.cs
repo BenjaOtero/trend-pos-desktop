@@ -230,8 +230,8 @@ namespace BL
 
         public static void UploadFromFile(string nombreLocal, string nombreServidor)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            //  string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];
@@ -251,8 +251,8 @@ namespace BL
 
         public static void DownloadFile(string nombreLocal, string nombreServidor)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];
@@ -277,7 +277,6 @@ namespace BL
             }
             objResponse.Close();
         }
-
 
         public static bool FileCompare(string file1, string file2)
         {
@@ -316,8 +315,8 @@ namespace BL
         {
             bool descargado = false;
 
-            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];
