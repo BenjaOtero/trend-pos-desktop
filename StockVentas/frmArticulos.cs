@@ -45,7 +45,8 @@ namespace StockVentas
             gvwDatos.Columns["DescripcionART"].HeaderText = "Descripción";
             gvwDatos.Columns["PrecioCostoART"].DefaultCellStyle.Format = "c";
             gvwDatos.Columns["PrecioCostoART"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            gvwDatos.Columns["PrecioMayorART"].HeaderText = "Precio";
+            gvwDatos.Columns["PrecioPublicoART"].HeaderText = "Precio";
+            //gvwDatos.Columns["PrecioMayorART"].HeaderText = "Precio";  Para Jesus Maria
             gvwDatos.Columns["PrecioMayorART"].DefaultCellStyle.Format = "c";
             gvwDatos.Columns["PrecioMayorART"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             gvwDatos.Columns["DescripcionWebART"].Visible = false;
@@ -55,7 +56,8 @@ namespace StockVentas
             gvwDatos.Columns["TalleART"].Visible = false;
             gvwDatos.Columns["IdProveedorART"].Visible = false;
             gvwDatos.Columns["PrecioCostoART"].Visible = false;
-            gvwDatos.Columns["PrecioPublicoART"].Visible = false;
+        //    gvwDatos.Columns["PrecioPublicoART"].Visible = false;     para Makro
+            gvwDatos.Columns["PrecioMayorART"].Visible = false;       //    Para Jesus Maria
             gvwDatos.Columns["DescripcionWebART"].Visible = false;
             gvwDatos.Columns["FechaART"].Visible = false;
             gvwDatos.Columns["ImagenART"].Visible = false;

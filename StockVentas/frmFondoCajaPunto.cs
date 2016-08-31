@@ -32,8 +32,9 @@ namespace StockVentas
             this.Icon = ico;
             lblClave.ForeColor = System.Drawing.Color.DarkRed;
             lblFecha.Text = DateTime.Today.ToLongDateString();
+            int pc = BL.PcsBLL.GetId();
             fecha = DateTime.Today.ToString("yyyy-MM-dd");
-            dsFondoCaja = BL.FondoCajaBLL.CrearDataset(fecha, 1);
+            dsFondoCaja = BL.FondoCajaBLL.CrearDataset(fecha, pc);  // poner el nro de pc desde tabla pcs
             tblFondoCaja = dsFondoCaja.Tables[1];
             viewFondoCaja = new DataView(tblFondoCaja);         
             if (viewFondoCaja.Count == 0)

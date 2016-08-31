@@ -299,7 +299,8 @@ namespace StockVentas
                 {
                     txtCantidad.Text = "1";
                 }
-                txtPrecio.Text = filaActual["PrecioMayorART"].ToString();
+            //    txtPrecio.Text = filaActual["PrecioPublicoART"].ToString();   // para Makro
+                txtPrecio.Text = filaActual["PrecioMayorART"].ToString();  // Para Jesus Maria
                 cmbForma.SelectedValue = "1";
                 txtCosto.Text = filaActual["PrecioCostoART"].ToString();
                 articuloOld = txtArticulo.Text;
@@ -425,6 +426,7 @@ namespace StockVentas
             {
                 if (BL.Utilitarios.ValidarServicioMysql())
                 {
+                    rowView.EndEdit();
                     BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError, false);
                 }
                 else

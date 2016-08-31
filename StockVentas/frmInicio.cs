@@ -214,10 +214,11 @@ namespace StockVentas
                 viewFondoCaja.RowStateFilter = DataViewRowState.Added;
                 Random rand = new Random();
                 int clave = rand.Next(1, 2000000000);
+                int pc = BL.PcsBLL.GetId();
                 DataRowView rowView = viewFondoCaja.AddNew();
                 rowView["IdFondoFONP"] = clave;
                 rowView["FechaFONP"] = DateTime.Today;
-                rowView["IdPcFONP"] = 1; // Jesus Maria
+                rowView["IdPcFONP"] = pc; 
                 rowView["ImporteFONP"] = 0;
                 rowView.EndEdit();
             }
