@@ -125,12 +125,12 @@ namespace StockVentas
                     MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //invoca al hilo principal através de un delegado
                 this.Invoke((Action)delegate
                 {
-                    string mensaje = "No se pudieron actualizar los datos. Verifique la conexión a internet.";
+                    string mensaje = ex.Message;
                     MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 });

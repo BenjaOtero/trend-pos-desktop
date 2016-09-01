@@ -3,13 +3,11 @@
 -Mente instalacion (crear pc?) modificar el codigo donde hace referencia al nro de pc.
 
 
-
-
--en frmVentas poner precioPublicoART en vez de PrecioMayorART
 -al instalar restaurar dump_pos
 -despues de actualizar base de datos borrar archivo en el servidor ftp remoto
 -buscar bucle indefinido en actualizar o exportar datos.
-- arreglar linea 220 frmInicio rowView["IdPcFONP"] = 3; // Jesus Maria (buscar la pc desde la tabla pc)
+-probar en windows xp con usuario estandar (no administrador) porque no permite escribir en c:\windows\temp
+-probar los datagridview de frmVentas, etc que no sean editables
 
 
 
