@@ -8,6 +8,7 @@
 -buscar bucle indefinido en actualizar o exportar datos.
 -probar en windows xp con usuario estandar (no administrador) porque no permite escribir en c:\windows\temp
 -probar los datagridview de frmVentas, etc que no sean editables
+- configuracion regional mediante código (separador de miles debe ser coma)
 
 
 
