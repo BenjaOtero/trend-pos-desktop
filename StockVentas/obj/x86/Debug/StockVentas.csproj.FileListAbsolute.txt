@@ -535,3 +535,6 @@ C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\GenerateResource.write.1.tl
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.cache
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.compiled
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmExportarMovimientos.resources
+C:\Trend\trend-pos-desktop\StockVentas\bin\Debug\StockVentas.exe.config
+C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.exe
+C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.pdb
