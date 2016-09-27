@@ -196,7 +196,6 @@
     <Compile Include="frmVentasPesosInter.designer.cs">
       <DependentUpon>frmVentasPesosInter.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewFolder1\Class1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reloj.cs">
