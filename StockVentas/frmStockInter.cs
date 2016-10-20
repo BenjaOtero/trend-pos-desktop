@@ -18,8 +18,7 @@ namespace StockVentas
         DataTable tblStock;
         DataTable tblLocales;
         DataTable dtCruzada;        
-        int intLocal;
-        string parametro;
+        int proveedor = 0;
 
         public frmStockInter()
         {
@@ -28,31 +27,67 @@ namespace StockVentas
 
         private void frmStockMovInter_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(50, 50);
             tblLocales = BL.LocalesBLL.CrearDataset();
-            intLocal = (int)tblLocales.Rows[0]["IdLocalLOC"];
+            DataView viewLocales = new DataView(tblLocales);
+            viewLocales = new DataView(tblLocales);
+            viewLocales.RowFilter = "IdLocalLOC <>'1' AND IdLocalLOC <>'2'";
+            lstLocales.DataSource = viewLocales;
+            lstLocales.DisplayMember = "NombreLOC";
+            lstLocales.ValueMember = "IdLocalLOC";
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            DataTable tblStock;
-            try
+            string whereLocales = null;
+            string articulo = "";
+            string descripcion = "";
+            Cursor.Current = Cursors.WaitCursor;
+            string idLocal;
+            foreach (DataRowView filaLocal in lstLocales.SelectedItems)
             {
-                if (!BL.Utilitarios.ValidarServicioMysql())
+                idLocal = filaLocal.Row[0].ToString();
+                whereLocales += "IdLocalSTK LIKE '" + idLocal + "' OR ";
+            }
+            whereLocales = whereLocales.Substring(0, whereLocales.Length - 4);
+            if (rdArticulo.Checked == true)
+            {
+                articulo = txtParametros.Text;    
+            }
+            else
+            {
+                descripcion = txtParametros.Text;
+            }
+            string origen = "frmStock";
+            string accion = "cargar";
+            frmProgress newMDIChild = new frmProgress(origen, accion, whereLocales, proveedor, articulo, descripcion);
+            newMDIChild.ShowDialog();
+            tblStock = frmProgress.dtEstatico.Tables[0];
+            if (rdPantalla.Checked == true)
+            {
+                try
                 {
-                    string mensaje = "No se pudo establecer la conexión con el servidor de base de datos.";
-                    MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DataColumn columnaPivot = tblStock.Columns["NombreLOC"];
+                    DataColumn valorPivot = tblStock.Columns["Cantidad"];
+                    dtCruzada = BL.Utilitarios.Pivot(tblStock, columnaPivot, valorPivot);
+                }
+                catch
+                {
+                    if (whereLocales == null)
+                    {
+                        MessageBox.Show("Debe seleccionar un local.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron artículos coincidentes", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }                    
                     return;
                 }
-                parametro = txtParametros.Text;
-                tblStock = BL.StockBLL.GetStock(intLocal, parametro);
             }
-            catch
-            {
-                MessageBox.Show("No se encontraron artículos coincidentes", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);                 
-                return;
+            else
+            { 
+            
             }
-            frmStockInforme stockInforme = new frmStockInforme(tblStock);
+            frmStockInforme stockInforme = new frmStockInforme(dtCruzada);
             stockInforme.ShowDialog();
             Cursor.Current = Cursors.Arrow;
         }

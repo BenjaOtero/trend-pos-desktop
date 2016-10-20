@@ -14,18 +14,12 @@ namespace StockVentas
         public frmStockInforme(DataTable datos)
         {
             InitializeComponent();
-            bindingSource1.DataSource = datos;
-            bindingNavigator1.BindingSource = bindingSource1;
-            dgvDatos.DataSource = bindingSource1;
-            dgvDatos.Columns["IdArticuloSTK"].HeaderText = "Artículo";
-            dgvDatos.Columns["DescripcionART"].HeaderText = "Descripción";
-            dgvDatos.Columns["CantidadSTK"].HeaderText = "Cantidad";
+            dgvDatos.DataSource = datos;
         }
 
         private void frmStockInforme_Load(object sender, EventArgs e)
-        {            
-            this.CenterToScreen();
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
-
     }
 }

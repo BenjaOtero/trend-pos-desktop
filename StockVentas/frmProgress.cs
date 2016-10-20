@@ -88,6 +88,18 @@ namespace StockVentas
             this.accion = accion;
         }
 
+        //Constructor frmStockInter
+        public frmProgress(string origen, string accion, string locales, int proveedor, string articulo, string descripcion)
+            : this()
+        {
+            this.origen = origen;
+            this.accion = accion;
+            this.locales = locales;
+            this.proveedor = proveedor;
+            this.articulo = articulo;
+            this.descripcion = descripcion;
+        }
+
         // Constructor para frmVentasPesosCons
         public frmProgress(int forma, string strFechaDesde, string strFechaHasta, string locales, string origen, string accion)
             : this()
@@ -137,6 +149,9 @@ namespace StockVentas
                 {
                     case "frmArticulos":
                         BL.ArticulosBLL.CrearDataset();
+                        break;
+                    case "frmStock":
+                        dtEstatico = BL.StockBLL.CrearDataset(locales, proveedor, articulo, descripcion, ref codigoError);
                         break;
                     case "frmVentasPesosCons":
                         dsVentasPesosCons = BL.VentasBLL.CrearDatasetVentasPesos(forma, strFechaDesde, strFechaHasta, locales, ref codigoError);

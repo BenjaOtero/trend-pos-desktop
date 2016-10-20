@@ -101,5 +101,5 @@ C:\Trend\Pos-desktop\trunk\DAL\bin\Debug\DAL.dll
 C:\Trend\Pos-desktop\trunk\DAL\bin\Debug\DAL.pdb
 C:\Trend\Pos-desktop\trunk\DAL\obj\Debug\DAL.dll
 C:\Trend\Pos-desktop\trunk\DAL\obj\Debug\DAL.pdb
-C:\Trend\Pos-desktop\trunk\DAL\bin\Debug\MySql.Data.dll
 C:\Trend\Pos-desktop\trunk\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Trend\Pos-desktop\trunk\DAL\bin\Debug\MySql.Data.dll
