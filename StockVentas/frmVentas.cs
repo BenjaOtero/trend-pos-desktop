@@ -537,67 +537,15 @@ namespace StockVentas
 
         public void CargarComboLocales()
         {
-            if (PK == "") //registro nuevo
-            {
-                var query =
-                        from local in tblLocales.AsEnumerable()
-                        from pc in tblPcs.AsEnumerable()
-                        select new
-                        {
-                            Local = local.Field<string>("NombreLOC"),
-                            IdPc = pc.Field<Int32>("IdPC"),
-                            IdLocal = local.Field<Int32>("IdLocalLOC")
-                        };
-                DataTable dtTemp = new DataTable();
-                dtTemp.Columns.Add("IdPC", typeof(Int32));
-                dtTemp.Columns.Add("IdLocalLOC", typeof(Int32));
-                dtTemp.Columns.Add("NombreLOC", typeof(string));
-                foreach (var registro in query)
-                {
-                    DataRow fila = dtTemp.NewRow();
-                    fila["IdPC"] = registro.IdPc;
-                    fila["IdLocalLOC"] = registro.IdLocal;
-                    fila["NombreLOC"] = registro.Local;
-                    dtTemp.Rows.Add(fila);
-                }
+
+                DataTable dtTemp = dsForaneos.Tables[6];
                 viewLocal = new DataView(dtTemp);
                 cmbLocal.ValueMember = "IdPC";
                 cmbLocal.DisplayMember = "NombreLOC";
                 cmbLocal.DropDownStyle = ComboBoxStyle.DropDownList;
                 cmbLocal.DataSource = viewLocal;
                 cmbLocal.SelectedIndex = -1;
-            }
-            else
-            {
-                var query =
-                from local in tblLocales.AsEnumerable()
-                from pc in tblPcs.AsEnumerable()
-                where (local.Field<Int32>("IdLocalLOC") == pc.Field<Int32>("IdLocalPC"))
-                    && (pc.Field<int>("IdPC") == idPc)
-                select new
-                {
-                    Local = local.Field<string>("NombreLOC"),
-                    IdPc = pc.Field<Int32>("IdPC"),
-                    IdLocal = local.Field<Int32>("IdLocalLOC")
-                };
-                DataTable dtTemp = new DataTable();
-                dtTemp.Columns.Add("IdPC", typeof(Int32));
-                dtTemp.Columns.Add("IdLocalLOC", typeof(Int32));
-                dtTemp.Columns.Add("NombreLOC", typeof(string));
-                foreach (var registro in query)
-                {
-                    DataRow fila = dtTemp.NewRow();
-                    fila["IdPC"] = registro.IdPc;
-                    fila["IdLocalLOC"] = registro.IdLocal;
-                    fila["NombreLOC"] = registro.Local;
-                    dtTemp.Rows.Add(fila);
-                }
-                viewLocal = new DataView(dtTemp);
-                cmbLocal.ValueMember = "IdPC";
-                cmbLocal.DisplayMember = "NombreLOC";
-                cmbLocal.DropDownStyle = ComboBoxStyle.DropDownList;
-                cmbLocal.DataSource = viewLocal;
-            }
+
         }
 
         public void CargarComboClientes()

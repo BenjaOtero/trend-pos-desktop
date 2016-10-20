@@ -13,7 +13,6 @@ namespace StockVentas
     {
         DataSet dsFondoCaja;
         DataTable tblFondoCaja;
-        DataTable tblLocales;
         DataView viewFondoCaja;
         DataRowView rowView;
         public string PK = string.Empty;

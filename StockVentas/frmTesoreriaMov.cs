@@ -14,11 +14,8 @@ namespace StockVentas
     {
         DataSet dsTesoreriaMov;
         DataTable tblTesoreriaMov;
-        DataTable tblLocales;
         DataTable tblPcs;
         DataView viewTesoreria;
-        DataView viewLocal;
-        DataView viewPc; 
         DataRowView rowView;
         public int idPc;
         public string PK = string.Empty;

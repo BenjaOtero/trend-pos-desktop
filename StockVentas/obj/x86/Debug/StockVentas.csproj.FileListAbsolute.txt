@@ -509,7 +509,6 @@ C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\BL.dll
 C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\DAL.dll
 C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\BL.pdb
 C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\DAL.pdb
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmArqueoCaja.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmArticulos.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmClientes.resources
@@ -530,11 +529,13 @@ C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmVentasPesosI
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.Properties.Resources.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.reloj.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.rptFactura.resources
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\GenerateResource.read.1.tlog
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.cache
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.compiled
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmExportarMovimientos.resources
 C:\Trend\trend-pos-desktop\StockVentas\bin\Debug\StockVentas.exe.config
 C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.exe
 C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.pdb
+C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\MySql.Data.dll
+C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\MySql.Data.Entity.dll
+C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.csprojResolveAssemblyReference.cache
+C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.csproj.GenerateResource.Cache

@@ -104,6 +104,7 @@ C:\Trend\Pos-desktop\trunk\BL\bin\Debug\BL.dll
 C:\Trend\Pos-desktop\trunk\BL\bin\Debug\BL.pdb
 C:\Trend\Pos-desktop\trunk\BL\bin\Debug\DAL.dll
 C:\Trend\Pos-desktop\trunk\BL\bin\Debug\DAL.pdb
-C:\Trend\Pos-desktop\trunk\BL\obj\Debug\ResolveAssemblyReference.cache
 C:\Trend\Pos-desktop\trunk\BL\obj\Debug\BL.dll
 C:\Trend\Pos-desktop\trunk\BL\obj\Debug\BL.pdb
+C:\Trend\Pos-desktop\trunk\BL\bin\Debug\MySql.Data.dll
+C:\Trend\Pos-desktop\trunk\BL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
