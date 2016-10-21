@@ -204,12 +204,6 @@
     <Compile Include="reloj.Designer.cs">
       <DependentUpon>reloj.cs</DependentUpon>
     </Compile>
-    <Compile Include="rptFactura.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="rptFactura.Designer.cs">
-      <DependentUpon>rptFactura.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="bin\Debug\Informes\factura.rdlc" />
     <EmbeddedResource Include="frmArqueoCaja.resx">
       <DependentUpon>frmArqueoCaja.cs</DependentUpon>
@@ -280,9 +274,6 @@
     </Compile>
     <EmbeddedResource Include="reloj.resx">
       <DependentUpon>reloj.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="rptFactura.resx">
-      <DependentUpon>rptFactura.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

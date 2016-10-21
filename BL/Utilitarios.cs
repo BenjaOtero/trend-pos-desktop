@@ -20,7 +20,6 @@ namespace BL
     {
         static Button grabar;
         static DataTable tblTabla;
-        static string idRazonSocial;
 
         public static void SoloNumeros(object sender, KeyPressEventArgs e)
         {

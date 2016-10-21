@@ -21,25 +21,19 @@ namespace StockVentas
         public static DataSet dsArqueo = null;
         public static DataSet dsVentasPesosCons = null;
         public static DataTable tblEstatica = null;
-        private DataRowView rowView = null;
         private string origen = null;
         private string accion = null;
         private string where = null;
         private int? codigoError = null;
         private int idLocal;
-        private int idPc;
-        private int PK;
         private string strFechaDesde;
         private string strFechaHasta;
-        private string opcMov;
-        private string tipo;
         private int forma;
         private string formaPago;
         private string locales;
         private int proveedor;
         private string articulo = null;
         private string descripcion = null;
-        private bool actualizaDatos;
 
 
         public frmProgress()
@@ -131,14 +125,7 @@ namespace StockVentas
                 label1.Text = "Cargando datos...";
                 label1.Left = 108;
             }
-            if (actualizaDatos == true)
-            {
-              //  actualizarDatos();
-            }
-            else
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

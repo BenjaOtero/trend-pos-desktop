@@ -528,14 +528,11 @@ C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmVentasPesosD
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmVentasPesosInter.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.Properties.Resources.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.reloj.resources
-C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.rptFactura.resources
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.frmExportarMovimientos.resources
 C:\Trend\trend-pos-desktop\StockVentas\bin\Debug\StockVentas.exe.config
 C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.exe
 C:\Trend\trend-pos-desktop\StockVentas\obj\x86\Debug\StockVentas.pdb
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.csprojResolveAssemblyReference.cache
 C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\StockVentas.csproj.GenerateResource.Cache
-C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\Microsoft.ReportViewer.Common.dll
-C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\Microsoft.ReportViewer.WinForms.dll
-C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\MySql.Data.dll
-C:\Trend\Pos-desktop\trunk\StockVentas\bin\Debug\MySql.Data.Entity.dll
+C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.cache
+C:\Trend\Pos-desktop\trunk\StockVentas\obj\x86\Debug\RdlCompile.compiled

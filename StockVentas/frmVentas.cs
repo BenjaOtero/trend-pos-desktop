@@ -372,7 +372,7 @@ namespace StockVentas
                 row["IdDVEN"] = clave;
                 row["IdVentaDVEN"] = lblNro.Text;
                 int intPc = Convert.ToInt32(cmbLocal.SelectedValue.ToString());
-                int intLocal = Convert.ToInt32(viewLocal[0][1].ToString());
+                int intLocal = Convert.ToInt32(viewLocal[0][2].ToString());
                 row["IdLocalDVEN"] = intLocal;
                 row["IdArticuloDVEN"] = txtArticulo.Text;
                 row["DescripcionDVEN"] = txtDescripcion.Text;

@@ -22,7 +22,6 @@ namespace StockVentas
     {
         frmInicio instanciaInicio;
         public frmProgress progreso;
-        string idRazonSocial;
         int n = 0;
         int fallidos = 0;
         System.Timers.Timer tmrUpload = new System.Timers.Timer();
