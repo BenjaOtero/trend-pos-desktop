@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_422BA18A0287444DAFCDABC106BE831A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_48458141DDF64955B893D8D2C9C79DAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -143,6 +149,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B94F461DD3364BBDC2319B734A3F93A3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_422BA18A0287444DAFCDABC106BE831A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -729,7 +741,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Trend Sistemas Punto de Venta"
         "ProductCode" = "8:{8FEE6548-F7E9-45FC-BA40-10AD37178F97}"
-        "PackageCode" = "8:{81AAEF06-9FCB-4C17-A6EF-68A79C6BAA35}"
+        "PackageCode" = "8:{BFE83371-3BA5-4720-8261-50CCBF360EAA}"
         "UpgradeCode" = "8:{8E58B441-BBC9-4674-8A2D-D8A038E3CFAE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1299,6 +1311,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{6FCF1DB6-A629-4E6F-AB4C-51CF5B2788A4}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_422BA18A0287444DAFCDABC106BE831A"
+            {
+            "SourcePath" = "8:..\\CustomActions\\obj\\Debug\\CustomActions.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F592B820BF054785B16928693CF9AB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{CBE407EA-0A5F-4F20-96FC-4650A45A6F58}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
