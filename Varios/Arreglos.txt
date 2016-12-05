@@ -10,6 +10,7 @@
 -probar los datagridview de frmVentas, etc que no sean editables
 -ejecutar timer cada diez minutos para descargar por ftp tabla stock de la fecha (si se descargó, detener timer y borrar en ftp))
 - configuracion regional mediante código (separador de miles debe ser coma)
+-backup base de datos (pos_desktop) cada 10 minutos, guardar formato backup_fecha_hora y rutina que borre del disco las viejas
 
 
 
